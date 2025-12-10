@@ -1,0 +1,143 @@
+{
+  "personal": {
+    "name": "Eya",
+    "fullName": "Eya Ben Hmida",
+    "title": "Strategic Marketing & Brand Content Specialist",
+    "tagline": "I help premium brands grow through creative marketing strategies, content storytelling, and influencer collaborations that deliver measurable results.",
+    "email": "eya.b.hmida@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/eya-ben-hmida-a71b5a219/",
+    "roles": [
+      "Marketing Strategist",
+      "Content Creator",
+      "Brand Builder",
+      "Influencer Collaborator",
+      "Creative Director"
+    ]
+  },
+  "about": {
+    "description": "I'm a marketing professional with 3+ years of experience leading end-to-end digital strategies for multiple companies. I create social media strategies, manage content production, collaborate with designers, build editorial calendars, prepare analytics reports, and direct influencer campaigns.",
+    "philosophy": "I combine creativity and strategy to help brands connect with their audience, grow visibility, and strengthen their identity.",
+    "expertise": [
+      "Social Media Strategy (Instagram, TikTok, Facebook, LinkedIn)",
+      "Content Planning & Editorial Calendars",
+      "Influencer Collaboration & Campaign Management",
+      "Creative Direction & Visual Storytelling",
+      "Analytics, Reports & Optimization",
+      "Pitch Decks & Sponsorship Proposals"
+    ]
+  },
+  "services": [
+    {
+      "id": "content-strategy",
+      "title": "Content & Social Strategy",
+      "description": "Build editorial calendars, content pillars, and storytelling frameworks that resonate with your audience.",
+      "icon": "calendar"
+    },
+    {
+      "id": "influencer-strategy",
+      "title": "Influencer & Collaboration Strategy",
+      "description": "Plan and manage influencer partnerships from briefs to posts, ensuring authentic brand representation.",
+      "icon": "users"
+    },
+    {
+      "id": "brand-identity",
+      "title": "Brand Identity & Visual Storytelling",
+      "description": "Ensure cohesive visuals, tone, and premium positioning across all touchpoints.",
+      "icon": "palette"
+    },
+    {
+      "id": "community-growth",
+      "title": "Community Engagement & Growth",
+      "description": "Design campaigns that engage followers and convert them into loyal audiences.",
+      "icon": "trending"
+    }
+  ],
+  "projects": [
+    {
+      "id": "pharmavie",
+      "title": "Pharmavie",
+      "subtitle": "Social Media & Influencer Campaign",
+      "role": "Lead Marketing Strategist + Influencer Collaboration",
+      "challenge": "Brand lacked structured storytelling and influencer campaigns.",
+      "approach": [
+        "Designed influencer strategy targeting niche audiences",
+        "Prepared campaign scripts, content guidelines, and storyboards",
+        "Collaborated with agencies and creators to produce consistent posts and stories"
+      ],
+      "results": [
+        "Followers increased from 20K → 53K",
+        "Multiple high-quality influencer partnerships",
+        "Strengthened brand image and audience connection"
+      ],
+      "featured": true
+    },
+    {
+      "id": "pitstop",
+      "title": "Pitstop Motorsports",
+      "subtitle": "Content & Brand Storytelling",
+      "role": "Marketing Coordinator + Creative Lead",
+      "challenge": "Brand was starting from scratch with no structured content, storytelling, or campaigns.",
+      "approach": [
+        "Defined content pillars and built the full editorial calendar",
+        "Collaborated with creators to produce reels, stories, and posts",
+        "Developed creative briefs, scripts, and visual direction",
+        "Built the social media strategy from the ground up"
+      ],
+      "results": [
+        "Cohesive and premium feed aesthetic across platforms",
+        "Significant engagement growth (saves, shares, comments)"
+      ],
+      "featured": true
+    },
+    {
+      "id": "startup",
+      "title": "Confidential Startup Project",
+      "subtitle": "Brand & Content Strategy",
+      "role": "Marketing Strategist",
+      "challenge": "New brand required a full marketing system: social content, influencer collaborations, and launch strategy.",
+      "approach": [
+        "Developed complete social media strategy and content calendar",
+        "Collaborated with creators to produce stories, reels, and posts",
+        "Built campaign structure and creative briefs for influencer partnerships"
+      ],
+      "results": [
+        "Structured social media presence and engaging content system",
+        "Created foundation for brand visibility and audience growth"
+      ],
+      "featured": true
+    }
+  ],
+  "process": [
+    {
+      "step": 1,
+      "title": "Discover",
+      "description": "Understand brand, audience, and goals"
+    },
+    {
+      "step": 2,
+      "title": "Create Strategy",
+      "description": "Social, content, influencers, tone, visuals"
+    },
+    {
+      "step": 3,
+      "title": "Produce",
+      "description": "Reels, stories, designs, and content with creators"
+    },
+    {
+      "step": 4,
+      "title": "Launch",
+      "description": "Publish campaigns and collaborate with influencers"
+    },
+    {
+      "step": 5,
+      "title": "Optimize",
+      "description": "Analyze results, report insights, and improve performance"
+    }
+  ],
+  "contact": {
+    "heading": "Let's Collaborate",
+    "description": "Let's collaborate to grow your brand and craft campaigns that engage.",
+    "cta": "Work With Me"
+  }
+}
+
