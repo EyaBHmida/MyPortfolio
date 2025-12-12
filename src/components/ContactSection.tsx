@@ -10,7 +10,7 @@ const ContactContainer = styled.section`
   align-items: center;
   justify-content: center;
   padding: ${theme.spacing['5xl']} ${theme.spacing.xl};
-  background: ${theme.colors.backgroundAlt};
+  background: ${theme.colors.surface};
   position: relative;
   overflow: hidden;
   
@@ -23,7 +23,7 @@ const ContactContainer = styled.section`
     height: 50%;
     background: radial-gradient(
       ellipse at 50% 100%,
-      rgba(201, 169, 98, 0.08) 0%,
+      rgba(183, 138, 190, 0.1) 0%,
       transparent 50%
     );
     pointer-events: none;
@@ -43,7 +43,7 @@ const ContactContent = styled.div`
 const SectionLabel = styled(motion.span)`
   display: inline-block;
   font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.accent};
+  color: ${theme.colors.accentLight};
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-bottom: ${theme.spacing.lg};
@@ -52,9 +52,10 @@ const SectionLabel = styled(motion.span)`
 
 const SectionTitle = styled(motion.h2)`
   margin-bottom: ${theme.spacing.xl};
+  color: ${theme.colors.accent};
   
   span {
-    color: ${theme.colors.accent};
+    color: ${theme.colors.accentLight};
   }
 `;
 
@@ -62,6 +63,7 @@ const Description = styled(motion.p)`
   font-size: ${theme.fontSizes.xl};
   line-height: 1.8;
   margin-bottom: ${theme.spacing['3xl']};
+  color: ${theme.colors.textSecondary};
   
   @media (max-width: ${theme.breakpoints.md}) {
     font-size: ${theme.fontSizes.lg};
@@ -81,11 +83,16 @@ const ContactLink = styled(motion.a)`
   align-items: center;
   gap: ${theme.spacing.md};
   font-size: ${theme.fontSizes.lg};
-  color: ${theme.colors.textSecondary};
+  color: ${theme.colors.textMuted};
   transition: all ${theme.transitions.normal};
   
   span {
-    font-size: ${theme.fontSizes['2xl']};
+    font-size: ${theme.fontSizes.sm};
+    color: ${theme.colors.accentLight};
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: ${theme.fontWeights.medium};
+    min-width: 80px;
   }
   
   &:hover {
@@ -100,7 +107,7 @@ const CTAButton = styled(motion.a)`
   gap: ${theme.spacing.md};
   padding: ${theme.spacing.xl} ${theme.spacing['3xl']};
   background: ${theme.colors.accent};
-  color: ${theme.colors.background};
+  color: ${theme.colors.surface};
   font-size: ${theme.fontSizes.md};
   font-weight: ${theme.fontWeights.semibold};
   text-transform: uppercase;
@@ -129,7 +136,8 @@ const CTAButton = styled(motion.a)`
   &:hover {
     transform: translateY(-3px);
     box-shadow: ${theme.shadows.glow};
-    color: ${theme.colors.background};
+    color: ${theme.colors.surface};
+    background: ${theme.colors.accentLight};
     
     &::before {
       left: 100%;
@@ -150,7 +158,7 @@ const FooterText = styled.p`
   color: ${theme.colors.textMuted};
   
   span {
-    color: ${theme.colors.accent};
+    color: ${theme.colors.accentLight};
   }
 `;
 
@@ -196,7 +204,7 @@ export const ContactSection = () => {
             href={`mailto:${personal.email}`}
             whileHover={{ x: 10 }}
           >
-            <span>📧</span>
+            <span>Email</span>
             {personal.email}
           </ContactLink>
           
@@ -206,8 +214,8 @@ export const ContactSection = () => {
             rel="noopener noreferrer"
             whileHover={{ x: 10 }}
           >
-            <span>🔗</span>
-            LinkedIn Profile
+            <span>LinkedIn</span>
+            View Profile
           </ContactLink>
         </ContactLinks>
         
@@ -220,7 +228,7 @@ export const ContactSection = () => {
           whileTap={{ scale: 0.98 }}
         >
           {contactContent.cta}
-          <span>→</span>
+          <span>&#8594;</span>
         </CTAButton>
       </ContactContent>
       
@@ -230,10 +238,9 @@ export const ContactSection = () => {
         transition={{ duration: 0.6, delay: 0.6 }}
       >
         <FooterText>
-          © {new Date().getFullYear()} <span>{personal.fullName}</span>. All rights reserved.
+          &copy; {new Date().getFullYear()} <span>{personal.fullName}</span>. All rights reserved.
         </FooterText>
       </Footer>
     </ContactContainer>
   );
 };
-

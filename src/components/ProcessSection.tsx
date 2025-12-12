@@ -9,6 +9,7 @@ const ProcessContainer = styled.section`
   display: flex;
   align-items: center;
   padding: ${theme.spacing['5xl']} ${theme.spacing.xl};
+  background: ${theme.colors.background};
   position: relative;
   overflow: hidden;
   
@@ -31,7 +32,7 @@ const SectionHeader = styled.div`
 const SectionLabel = styled(motion.span)`
   display: inline-block;
   font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.accent};
+  color: ${theme.colors.accentLight};
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-bottom: ${theme.spacing.lg};
@@ -39,8 +40,10 @@ const SectionLabel = styled(motion.span)`
 `;
 
 const SectionTitle = styled(motion.h2)`
+  color: ${theme.colors.accent};
+  
   span {
-    color: ${theme.colors.accent};
+    color: ${theme.colors.accentLight};
   }
 `;
 
@@ -60,8 +63,8 @@ const Timeline = styled(motion.div)`
     background: linear-gradient(
       to bottom,
       transparent,
-      ${theme.colors.accent},
-      ${theme.colors.accent},
+      ${theme.colors.accentLight},
+      ${theme.colors.accentLight},
       transparent
     );
     
@@ -89,10 +92,10 @@ const StepNumber = styled(motion.div)`
   align-items: center;
   justify-content: center;
   background: ${theme.colors.surface};
-  border: 2px solid ${theme.colors.accent};
-  font-family: ${theme.fonts.heading};
+  border: 2px solid ${theme.colors.accentLight};
+  font-family: 'Robert Leuschke', ${theme.fonts.heading};
   font-size: ${theme.fontSizes['2xl']};
-  color: ${theme.colors.accent};
+  color: ${theme.colors.accentLight};
   position: relative;
   z-index: 1;
   
@@ -111,13 +114,14 @@ const StepContent = styled.div`
 
 const StepTitle = styled.h3`
   font-size: ${theme.fontSizes.xl};
-  color: ${theme.colors.text};
+  color: ${theme.colors.accent};
   margin-bottom: ${theme.spacing.sm};
 `;
 
 const StepDescription = styled.p`
   font-size: ${theme.fontSizes.md};
   line-height: 1.7;
+  color: ${theme.colors.textSecondary};
 `;
 
 const containerVariants = {
@@ -173,7 +177,7 @@ export const ProcessSection = () => {
           {process.map((step) => (
             <TimelineItem key={step.step} variants={itemVariants}>
               <StepNumber
-                whileHover={{ scale: 1.1, borderColor: theme.colors.accentHover }}
+                whileHover={{ scale: 1.1, borderColor: theme.colors.accent }}
                 transition={{ duration: 0.3 }}
               >
                 {step.step}
@@ -189,4 +193,3 @@ export const ProcessSection = () => {
     </ProcessContainer>
   );
 };
-

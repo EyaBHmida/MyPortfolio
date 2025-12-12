@@ -2,8 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 import { theme } from './theme';
 
 export const GlobalStyles = createGlobalStyle`
-  /* Import Google Fonts */
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+  /* Import Google Fonts - Robert Leuschke for titles, Lora for content */
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Robert+Leuschke&display=swap');
 
   /* CSS Reset */
   *, *::before, *::after {
@@ -22,7 +22,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: ${theme.fonts.body};
+    font-family: 'Lora', ${theme.fonts.body};
     font-weight: ${theme.fontWeights.regular};
     background-color: ${theme.colors.background};
     color: ${theme.colors.text};
@@ -34,10 +34,11 @@ export const GlobalStyles = createGlobalStyle`
 
   /* Typography */
   h1, h2, h3, h4, h5, h6 {
-    font-family: ${theme.fonts.heading};
-    font-weight: ${theme.fontWeights.medium};
+    font-family: 'Robert Leuschke', ${theme.fonts.heading};
+    font-weight: ${theme.fontWeights.regular};
     line-height: 1.2;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.02em;
+    color: ${theme.colors.accent};
   }
 
   h1 {
@@ -79,12 +80,12 @@ export const GlobalStyles = createGlobalStyle`
     transition: color ${theme.transitions.fast};
     
     &:hover {
-      color: ${theme.colors.accent};
+      color: ${theme.colors.accentLight};
     }
   }
 
   button {
-    font-family: ${theme.fonts.body};
+    font-family: 'Lora', ${theme.fonts.body};
     cursor: pointer;
     border: none;
     outline: none;
@@ -103,8 +104,8 @@ export const GlobalStyles = createGlobalStyle`
 
   /* Selection */
   ::selection {
-    background-color: ${theme.colors.accent};
-    color: ${theme.colors.background};
+    background-color: ${theme.colors.accentLight};
+    color: ${theme.colors.surface};
   }
 
   /* Scrollbar */
@@ -121,7 +122,7 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: ${theme.borderRadius.full};
     
     &:hover {
-      background: ${theme.colors.borderLight};
+      background: ${theme.colors.accentLight};
     }
   }
 
@@ -156,4 +157,3 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 `;
-

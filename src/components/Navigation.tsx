@@ -11,7 +11,7 @@ const Nav = styled(motion.nav)<{ $scrolled: boolean }>`
   z-index: 1000;
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
   background: ${({ $scrolled }) => 
-    $scrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent'};
+    $scrolled ? 'rgba(245, 240, 245, 0.95)' : 'transparent'};
   backdrop-filter: ${({ $scrolled }) => 
     $scrolled ? 'blur(10px)' : 'none'};
   border-bottom: 1px solid ${({ $scrolled }) => 
@@ -32,15 +32,15 @@ const NavContainer = styled.div`
 `;
 
 const Logo = styled(motion.a)`
-  font-family: ${theme.fonts.heading};
+  font-family: 'Robert Leuschke', ${theme.fonts.heading};
   font-size: ${theme.fontSizes['2xl']};
   font-weight: ${theme.fontWeights.medium};
-  color: ${theme.colors.text};
+  color: ${theme.colors.accent};
   cursor: pointer;
   letter-spacing: 0.05em;
   
   span {
-    color: ${theme.colors.accent};
+    color: ${theme.colors.accentLight};
   }
 `;
 
@@ -57,7 +57,7 @@ const NavLink = styled(motion.li)`
   a {
     font-size: ${theme.fontSizes.sm};
     font-weight: ${theme.fontWeights.medium};
-    color: ${theme.colors.textSecondary};
+    color: ${theme.colors.textMuted};
     text-transform: uppercase;
     letter-spacing: 0.1em;
     position: relative;
@@ -70,12 +70,12 @@ const NavLink = styled(motion.li)`
       left: 0;
       width: 0;
       height: 1px;
-      background: ${theme.colors.accent};
+      background: ${theme.colors.accentLight};
       transition: width ${theme.transitions.normal};
     }
     
     &:hover {
-      color: ${theme.colors.text};
+      color: ${theme.colors.accent};
       
       &::after {
         width: 100%;
@@ -97,7 +97,7 @@ const MobileMenuButton = styled.button`
   span {
     width: 24px;
     height: 2px;
-    background: ${theme.colors.text};
+    background: ${theme.colors.accent};
     transition: all ${theme.transitions.normal};
   }
 `;
@@ -109,7 +109,7 @@ const MobileMenu = styled(motion.div)`
   right: 0;
   bottom: 0;
   background: ${theme.colors.background};
-  z-index: 999;
+  z-index: 1001;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,29 +118,41 @@ const MobileMenu = styled(motion.div)`
 `;
 
 const MobileNavLink = styled(motion.a)`
-  font-family: ${theme.fonts.heading};
+  font-family: 'Robert Leuschke', ${theme.fonts.heading};
   font-size: ${theme.fontSizes['3xl']};
-  color: ${theme.colors.text};
+  color: ${theme.colors.accent};
   text-transform: capitalize;
   
   &:hover {
-    color: ${theme.colors.accent};
+    color: ${theme.colors.accentLight};
   }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: ${theme.spacing.xl};
-  right: ${theme.spacing.xl};
+  top: ${theme.spacing.lg};
+  right: ${theme.spacing.lg};
   font-size: ${theme.fontSizes['2xl']};
-  color: ${theme.colors.text};
+  color: ${theme.colors.accent};
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1002;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    top: ${theme.spacing.md};
+    right: ${theme.spacing.lg};
+  }
 `;
 
 const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
+  { label: 'Work', href: '#work' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Process', href: '#process' },
+  { label: 'Tools', href: '#tools' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -175,7 +187,10 @@ export const Navigation = () => {
       >
         <NavContainer>
           <Logo
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => {
+              setMobileMenuOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -220,7 +235,7 @@ export const Navigation = () => {
             transition={{ duration: 0.3 }}
           >
             <CloseButton onClick={() => setMobileMenuOpen(false)}>
-              ✕
+              &#10005;
             </CloseButton>
             {navItems.map((item, index) => (
               <MobileNavLink
@@ -243,4 +258,3 @@ export const Navigation = () => {
     </>
   );
 };
-

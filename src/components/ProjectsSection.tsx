@@ -8,7 +8,7 @@ import content from '../data/content.json';
 const ProjectsContainer = styled.section`
   min-height: 100vh;
   padding: ${theme.spacing['5xl']} ${theme.spacing.xl};
-  background: ${theme.colors.backgroundAlt};
+  background: ${theme.colors.surface};
   
   @media (max-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing['3xl']} ${theme.spacing.lg};
@@ -28,7 +28,7 @@ const SectionHeader = styled.div`
 const SectionLabel = styled(motion.span)`
   display: inline-block;
   font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.accent};
+  color: ${theme.colors.accentLight};
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-bottom: ${theme.spacing.lg};
@@ -36,8 +36,10 @@ const SectionLabel = styled(motion.span)`
 `;
 
 const SectionTitle = styled(motion.h2)`
+  color: ${theme.colors.accent};
+  
   span {
-    color: ${theme.colors.accent};
+    color: ${theme.colors.accentLight};
   }
 `;
 
@@ -48,14 +50,14 @@ const ProjectsGrid = styled(motion.div)`
 `;
 
 const ProjectCard = styled(motion.div)`
-  background: ${theme.colors.surface};
+  background: ${theme.colors.background};
   border: 1px solid ${theme.colors.border};
   overflow: hidden;
   cursor: pointer;
   transition: all ${theme.transitions.normal};
   
   &:hover {
-    border-color: ${theme.colors.accent};
+    border-color: ${theme.colors.accentLight};
     box-shadow: ${theme.shadows.glow};
   }
 `;
@@ -79,13 +81,13 @@ const ProjectInfo = styled.div`
 
 const ProjectTitle = styled.h3`
   font-size: ${theme.fontSizes['2xl']};
-  color: ${theme.colors.text};
+  color: ${theme.colors.accent};
   margin-bottom: ${theme.spacing.sm};
 `;
 
 const ProjectSubtitle = styled.p`
   font-size: ${theme.fontSizes.md};
-  color: ${theme.colors.accent};
+  color: ${theme.colors.accentLight};
   font-weight: ${theme.fontWeights.medium};
 `;
 
@@ -101,15 +103,15 @@ const ExpandButton = styled(motion.button)`
   gap: ${theme.spacing.sm};
   padding: ${theme.spacing.md} ${theme.spacing.lg};
   border: 1px solid ${theme.colors.border};
-  color: ${theme.colors.textSecondary};
+  color: ${theme.colors.textMuted};
   font-size: ${theme.fontSizes.sm};
   text-transform: uppercase;
   letter-spacing: 0.1em;
   transition: all ${theme.transitions.fast};
   
   &:hover {
-    border-color: ${theme.colors.accent};
-    color: ${theme.colors.accent};
+    border-color: ${theme.colors.accentLight};
+    color: ${theme.colors.accentLight};
   }
 `;
 
@@ -129,7 +131,7 @@ const DetailSection = styled.div`
 
 const DetailTitle = styled.h4`
   font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.accent};
+  color: ${theme.colors.accentLight};
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: ${theme.spacing.md};
@@ -138,6 +140,7 @@ const DetailTitle = styled.h4`
 const DetailText = styled.p`
   font-size: ${theme.fontSizes.md};
   line-height: 1.7;
+  color: ${theme.colors.textSecondary};
 `;
 
 const DetailList = styled.ul`
@@ -153,10 +156,10 @@ const DetailItem = styled.li`
   position: relative;
   
   &::before {
-    content: '→';
+    content: '\\2192';
     position: absolute;
     left: 0;
-    color: ${theme.colors.accent};
+    color: ${theme.colors.accentLight};
   }
 `;
 
@@ -169,12 +172,12 @@ const ResultsGrid = styled.div`
 const ResultItem = styled.div`
   padding: ${theme.spacing.lg};
   background: ${theme.colors.accentMuted};
-  border-left: 2px solid ${theme.colors.accent};
+  border-left: 2px solid ${theme.colors.accentLight};
 `;
 
 const ResultText = styled.p`
   font-size: ${theme.fontSizes.md};
-  color: ${theme.colors.text};
+  color: ${theme.colors.accent};
   font-weight: ${theme.fontWeights.medium};
 `;
 
@@ -255,7 +258,7 @@ export const ProjectsSection = () => {
                     animate={{ rotate: expandedProject === project.id ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    ↓
+                    &#8595;
                   </motion.span>
                 </ExpandButton>
               </ProjectHeader>
@@ -302,4 +305,3 @@ export const ProjectsSection = () => {
     </ProjectsContainer>
   );
 };
-

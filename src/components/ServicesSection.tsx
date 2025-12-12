@@ -9,6 +9,7 @@ const ServicesContainer = styled.section`
   display: flex;
   align-items: center;
   padding: ${theme.spacing['5xl']} ${theme.spacing.xl};
+  background: ${theme.colors.background};
   position: relative;
   
   @media (max-width: ${theme.breakpoints.md}) {
@@ -30,7 +31,7 @@ const SectionHeader = styled.div`
 const SectionLabel = styled(motion.span)`
   display: inline-block;
   font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.accent};
+  color: ${theme.colors.accentLight};
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-bottom: ${theme.spacing.lg};
@@ -38,8 +39,10 @@ const SectionLabel = styled(motion.span)`
 `;
 
 const SectionTitle = styled(motion.h2)`
+  color: ${theme.colors.accent};
+  
   span {
-    color: ${theme.colors.accent};
+    color: ${theme.colors.accentLight};
   }
 `;
 
@@ -75,7 +78,7 @@ const ServiceCard = styled(motion.div)`
   }
   
   &:hover {
-    border-color: ${theme.colors.accent};
+    border-color: ${theme.colors.accentLight};
     transform: translateY(-5px);
     box-shadow: ${theme.shadows.glow};
     
@@ -92,29 +95,33 @@ const ServiceIcon = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: ${theme.spacing.lg};
-  color: ${theme.colors.accent};
+  color: ${theme.colors.accentLight};
+  font-family: 'Robert Leuschke', ${theme.fonts.heading};
   font-size: ${theme.fontSizes['2xl']};
+  font-weight: ${theme.fontWeights.light};
+  border: 1px solid ${theme.colors.accentLight};
 `;
 
 const ServiceTitle = styled.h3`
   font-size: ${theme.fontSizes.xl};
   margin-bottom: ${theme.spacing.md};
-  color: ${theme.colors.text};
+  color: ${theme.colors.accent};
 `;
 
 const ServiceDescription = styled.p`
   font-size: ${theme.fontSizes.md};
   line-height: 1.7;
+  color: ${theme.colors.textSecondary};
 `;
 
 const getIcon = (iconName: string) => {
   const icons: { [key: string]: string } = {
-    calendar: '📅',
-    users: '👥',
-    palette: '🎨',
-    trending: '📈',
+    calendar: '01',
+    users: '02',
+    palette: '03',
+    trending: '04',
   };
-  return icons[iconName] || '✦';
+  return icons[iconName] || '00';
 };
 
 const containerVariants = {
@@ -183,4 +190,3 @@ export const ServicesSection = () => {
     </ServicesContainer>
   );
 };
-

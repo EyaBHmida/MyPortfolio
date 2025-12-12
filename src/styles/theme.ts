@@ -1,32 +1,38 @@
 export const theme = {
   colors: {
-    // Primary palette - Elegant dark with warm accents
-    background: '#0a0a0a',
-    backgroundAlt: '#111111',
-    surface: '#1a1a1a',
+    // Primary palette - Wine Plum Tones
+    background: '#f8f4f6',
+    backgroundAlt: '#efe8ec',
+    surface: '#ffffff',
     
-    // Text colors
-    text: '#ffffff',
-    textSecondary: '#a0a0a0',
-    textMuted: '#666666',
+    // Text colors - Wine Plum palette
+    text: '#5F214D',           // Wine Plum
+    textSecondary: '#68546D',  // Grayish Plum
+    textMuted: '#896E8F',      // Dusty Violet
     
-    // Accent - Warm gold/champagne
-    accent: '#c9a962',
-    accentHover: '#dfc07a',
-    accentMuted: 'rgba(201, 169, 98, 0.15)',
+    // Accent - Wine Plum palette
+    accent: '#5F214D',         // Wine Plum (primary)
+    accentLight: '#896E8F',    // Dusty Violet
+    accentLighter: '#A08A9F',  // Silver Plum
+    accentSoft: '#B49BA4',     // Soft Plum
+    accentHover: '#4a1a3d',
+    accentMuted: 'rgba(95, 33, 77, 0.1)',
     
     // Utility
-    border: '#2a2a2a',
-    borderLight: '#333333',
+    border: '#B49BA4',         // Soft Plum
+    borderLight: '#d4c8cf',
     
-    // Gradients
-    gradientPrimary: 'linear-gradient(135deg, #c9a962 0%, #8b7355 100%)',
-    gradientDark: 'linear-gradient(180deg, #0a0a0a 0%, #111111 100%)',
+    // Gradients - Wine Plum
+    gradientPrimary: 'linear-gradient(135deg, #5F214D 0%, #896E8F 100%)',
+    gradientLight: 'linear-gradient(135deg, #896E8F 0%, #A08A9F 100%)',
+    gradientSubtle: 'linear-gradient(180deg, #f8f4f6 0%, #efe8ec 100%)',
+    gradient3D: 'radial-gradient(circle at 30% 30%, #A08A9F 0%, #896E8F 20%, #68546D 40%, #5F214D 70%, #3d1530 100%)',
   },
   
   fonts: {
-    heading: "'Cormorant Garamond', Georgia, serif",
-    body: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
+    heading: "'Robert Leuschke', cursive",
+    body: "'Lora', Georgia, serif",
+    name: "'Lora', Georgia, serif",
   },
   
   fontSizes: {
@@ -87,13 +93,13 @@ export const theme = {
   },
   
   shadows: {
-    sm: '0 1px 2px rgba(0, 0, 0, 0.3)',
-    md: '0 4px 6px rgba(0, 0, 0, 0.3)',
-    lg: '0 10px 15px rgba(0, 0, 0, 0.3)',
-    xl: '0 20px 25px rgba(0, 0, 0, 0.4)',
-    glow: '0 0 40px rgba(201, 169, 98, 0.15)',
+    sm: '0 1px 2px rgba(95, 33, 77, 0.1)',
+    md: '0 4px 6px rgba(95, 33, 77, 0.1)',
+    lg: '0 10px 15px rgba(95, 33, 77, 0.1)',
+    xl: '0 20px 25px rgba(95, 33, 77, 0.15)',
+    glow: '0 0 40px rgba(137, 110, 143, 0.3)',
+    sphere: '0 20px 60px rgba(95, 33, 77, 0.3), 0 0 80px rgba(95, 33, 77, 0.15)',
   },
 };
 
 export type Theme = typeof theme;
-
