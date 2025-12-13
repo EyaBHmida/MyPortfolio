@@ -209,6 +209,14 @@ export const ContactSection = () => {
           </ContactLink>
           
           <ContactLink
+            href={`tel:${personal.phone?.replace(/\s/g, '')}`}
+            whileHover={{ x: 10 }}
+          >
+            <span>Phone</span>
+            {personal.phone}
+          </ContactLink>
+          
+          <ContactLink
             href={personal.linkedin}
             target="_blank"
             rel="noopener noreferrer"
