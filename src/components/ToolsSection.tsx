@@ -67,9 +67,7 @@ const ToolsGrid = styled(motion.div)`
 `;
 
 const ToolCard = styled(motion.div)`
-  background: ${theme.colors.background};
-  border: 1px solid ${theme.colors.border};
-  padding: ${theme.spacing.xl};
+  padding: ${theme.spacing.lg};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,9 +75,7 @@ const ToolCard = styled(motion.div)`
   transition: all ${theme.transitions.normal};
   
   &:hover {
-    border-color: ${theme.colors.accentLight};
     transform: translateY(-5px);
-    box-shadow: ${theme.shadows.glow};
   }
 `;
 
@@ -116,86 +112,20 @@ const ToolCategory = styled.span`
   letter-spacing: 0.1em;
 `;
 
-// Tools data with identified names
+// Tools data with identified names and categories
 const tools = [
-  {
-    id: 1,
-    name: 'Google Analytics',
-    category: 'Analytics',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.47_8c56016f.jpg',
-  },
-  {
-    id: 2,
-    name: 'Figma',
-    category: 'Design',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.01_994e0fd6.jpg',
-  },
-  {
-    id: 3,
-    name: 'Adobe Photoshop',
-    category: 'Design',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.01_c8ab460e.jpg',
-  },
-  {
-    id: 4,
-    name: 'CapCut',
-    category: 'Video Editing',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.01_52aa88f8.jpg',
-  },
-  {
-    id: 5,
-    name: 'Trello',
-    category: 'Project Management',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.00_f74aac3f.jpg',
-  },
-  {
-    id: 6,
-    name: 'Notion',
-    category: 'Project Management',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.00_5c4cf39e.jpg',
-  },
-  {
-    id: 7,
-    name: 'WordPress',
-    category: 'Content Management',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.00_10201633.jpg',
-  },
-  {
-    id: 8,
-    name: 'Google Ads',
-    category: 'Advertising',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.00_938052de.jpg',
-  },
-  {
-    id: 9,
-    name: 'Canva',
-    category: 'Design',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.00_33841380.jpg',
-  },
-  {
-    id: 10,
-    name: 'Meta Business Suite',
-    category: 'Social Media',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.00_52cb8404.jpg',
-  },
-  {
-    id: 11,
-    name: 'TikTok for Business',
-    category: 'Social Media',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.00_39a9200f.jpg',
-  },
-  {
-    id: 12,
-    name: 'LinkedIn Ads',
-    category: 'Advertising',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.00_1791ecd2.jpg',
-  },
-  {
-    id: 13,
-    name: 'Meta',
-    category: 'Social Media',
-    image: '/tools/WhatsApp Image 2025-12-11 à 15.19.00_b21a2785.jpg',
-  },
+  { id: 1, name: 'Canva', category: 'Design', image: '/Tools/1.png' },
+  { id: 2, name: 'Figma', category: 'Design', image: '/Tools/2.png' },
+  { id: 3, name: 'Adobe Photoshop', category: 'Design', image: '/Tools/3.png' },
+  { id: 4, name: 'Adobe Illustrator', category: 'Design', image: '/Tools/4.png' },
+  { id: 5, name: 'CapCut', category: 'Video Editing', image: '/Tools/5.png' },
+  { id: 6, name: 'Meta', category: 'Social Media', image: '/Tools/6.png' },
+  { id: 7, name: 'Google Ads', category: 'Advertising', image: '/Tools/7.png' },
+  { id: 8, name: 'Google Analytics', category: 'Analytics', image: '/Tools/8.png' },
+  { id: 9, name: 'Notion', category: 'Project Management', image: '/Tools/9.png' },
+  { id: 10, name: 'Trello', category: 'Project Management', image: '/Tools/10.png' },
+  { id: 11, name: 'TikTok for Business', category: 'Social Media', image: '/Tools/11.png' },
+  { id: 12, name: 'WordPress', category: 'Content Management', image: '/Tools/12.png' },
 ];
 
 const containerVariants = {
@@ -259,7 +189,7 @@ export const ToolsSection = () => {
             <ToolCard
               key={tool.id}
               variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.05 }}
             >
               <ToolIcon>
                 <img src={tool.image} alt={tool.name} />
