@@ -30,9 +30,9 @@ export const theme = {
   },
   
   fonts: {
-    heading: "'Robert Leuschke', cursive",
-    body: "'Lora', Georgia, serif",
-    name: "'Lora', Georgia, serif",
+    heading: "'Robert Leuschke'",
+    body: "'Lora'",
+    name: "'Lora'",
   },
   
   fontSizes: {

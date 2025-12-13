@@ -22,7 +22,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: 'Lora', ${theme.fonts.body};
+    font-family: 'Lora';
     font-weight: ${theme.fontWeights.regular};
     background-color: ${theme.colors.background};
     color: ${theme.colors.text};
@@ -34,7 +34,7 @@ export const GlobalStyles = createGlobalStyle`
 
   /* Typography */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Robert Leuschke', ${theme.fonts.heading};
+    font-family: 'Robert Leuschke';
     font-weight: ${theme.fontWeights.regular};
     line-height: 1.2;
     letter-spacing: 0.02em;
@@ -85,7 +85,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   button {
-    font-family: 'Lora', ${theme.fonts.body};
+    font-family: 'Lora';
     cursor: pointer;
     border: none;
     outline: none;
