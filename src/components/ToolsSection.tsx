@@ -122,9 +122,9 @@ const tools = [
   { id: 6, name: 'Meta', category: 'Social Media', image: '/Tools/6.png' },
   { id: 7, name: 'Google Ads', category: 'Advertising', image: '/Tools/7.png' },
   { id: 8, name: 'Google Analytics', category: 'Analytics', image: '/Tools/8.png' },
-  { id: 9, name: 'Notion', category: 'Project Management', image: '/Tools/9.png' },
-  { id: 10, name: 'Trello', category: 'Project Management', image: '/Tools/10.png' },
-  { id: 11, name: 'TikTok for Business', category: 'Social Media', image: '/Tools/11.png' },
+  { id: 9, name: 'TikTok for Business', category: 'Social Media', image: '/Tools/11.png' },
+  { id: 10, name: 'Notion', category: 'Project Management', image: '/Tools/9.png' },
+  { id: 11, name: 'Trello', category: 'Project Management', image: '/Tools/10.png' },
   { id: 12, name: 'WordPress', category: 'Content Management', image: '/Tools/12.png' },
 ];
 
