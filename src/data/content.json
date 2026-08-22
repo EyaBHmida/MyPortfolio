@@ -247,10 +247,8 @@
   "editorial": {
     "nav": [
       { "href": "#about", "label": "About" },
-      { "href": "#pharmavie", "label": "Pharmavie" },
-      { "href": "#campaigns", "label": "Campaigns" },
-      { "href": "#pitstop", "label": "Pitstop" },
-      { "href": "#selected", "label": "Selected" },
+      { "href": "#projects", "label": "Work" },
+      { "href": "#campaigns", "label": "Gallery" },
       { "href": "#clients", "label": "Clients" },
       { "href": "#contact", "label": "Contact" }
     ],
@@ -273,26 +271,13 @@
         { "value": 1, "suffix": "", "label": "Google Ads certified", "display": "Ads ✓" }
       ]
     },
-    "pharmavie": {
-      "kicker": "The Work",
-      "title": "A healthcare brand, grown in ",
-      "titleEm": "public",
-      "titleAfter": ".",
-      "index": "( 01 — Pharmavie )",
-      "lede": "Marketing & Digital Communication Lead — May 2023 – Present. Community from 20K to 53K (+165%), end-to-end go-to-market, and partnerships that shipped.",
-      "gallery": [
-        { "src": "/Work/2.jpg", "kind": "image", "caption": "Pharmavie", "index": "№ 01", "featured": true },
-        { "src": "/Work/18.jpg", "kind": "image", "caption": "Pharmavie", "index": "№ 02", "featured": false },
-        { "src": "/Work/19.jpg", "kind": "image", "caption": "Pharmavie", "index": "№ 03", "featured": false }
-      ]
-    },
     "campaigns": {
-      "kicker": "Red Carpet & Campaigns",
+      "kicker": "Selected work",
       "title": "Frames the feeds ",
       "titleEm": "follow",
       "titleAfter": ".",
-      "index": "( 02 — Campaigns )",
-      "lede": "Campaigns, stories, and social systems across healthcare, lifestyle, and growth brands — built for close-ups, scrolls, and results.",
+      "index": "( Gallery )",
+      "lede": "Campaigns, stories, and social systems across healthcare, lifestyle, and growth brands.",
       "gallery": [
         { "src": "/Work/1.jpg", "kind": "image", "caption": "Campaign", "index": "№ 01", "span": "4" },
         { "src": "/Work/3.jpg", "kind": "image", "caption": "Campaign", "index": "№ 02", "span": "4", "push": true },
@@ -302,73 +287,17 @@
         { "src": "/Work/7.jpg", "kind": "image", "caption": "Campaign", "index": "№ 06", "span": "4" },
         { "src": "/Work/8.jpg", "kind": "image", "caption": "Campaign", "index": "№ 07", "span": "4", "push": true },
         { "src": "/Work/9.jpg", "kind": "image", "caption": "Campaign", "index": "№ 08", "span": "4" },
-        { "src": "/Work/11.jpg", "kind": "image", "caption": "Campaign", "index": "№ 09", "span": "6" },
-        { "src": "/Work/12.jpg", "kind": "image", "caption": "Campaign", "index": "№ 10", "span": "6" },
-        { "src": "/Work/16.mp4", "kind": "video", "caption": "Reel", "index": "№ 11", "span": "5" },
-        { "src": "/Work/17.mp4", "kind": "video", "caption": "Reel", "index": "№ 12", "span": "7" },
-        { "src": "/Work/21.mp4", "kind": "video", "caption": "Reel", "index": "№ 13", "span": "4" }
-      ]
-    },
-    "pitstop": {
-      "kicker": "Cinema & Motorsport",
-      "title": "A brand built from ",
-      "titleEm": "zero",
-      "titleAfter": ".",
-      "index": "( 03 — Pitstop )",
-      "lede": "Marketing Coordinator & Creative Lead — Mar 2023 – Sep 2024. Content pillars, editorial calendar, and creative direction for a motorsport brand with no prior system.",
-      "gallery": [
-        { "src": "/Work/23.jpg", "kind": "image", "caption": "Pitstop Motorsports", "index": "№ 01" },
-        { "src": "/Work/24.jpg", "kind": "image", "caption": "Pitstop Motorsports", "index": "№ 02" }
-      ]
-    },
-    "selected": {
-      "kicker": "The Editorial Shelf",
-      "title": "Collectible ",
-      "titleEm": "frames",
-      "titleAfter": ".",
-      "index": "( 04 — Selected )",
-      "lede": "Selected stills from campaigns and brand work — each one a frame worth keeping.",
-      "gallery": [
-        { "src": "/Work/10.jpg", "kind": "image", "title": "Campaign", "meta": "Selected · № 01" },
-        { "src": "/Work/13.jpg", "kind": "image", "title": "Campaign", "meta": "Selected · № 02" },
-        { "src": "/Work/14.jpg", "kind": "image", "title": "Campaign", "meta": "Selected · № 03" },
-        { "src": "/Work/15.jpg", "kind": "image", "title": "Campaign", "meta": "Selected · № 04" },
-        { "src": "/Work/20.jpg", "kind": "image", "title": "Campaign", "meta": "Selected · № 05" },
-        { "src": "/Work/22.jpg", "kind": "image", "title": "Campaign", "meta": "Selected · № 06" }
-      ]
-    },
-    "roles": {
-      "kicker": "Other Roles",
-      "title": "Platforms, communities, ",
-      "titleEm": "systems",
-      "titleAfter": ".",
-      "index": "( 05 — Roles )",
-      "lede": "Mental-health GTM, bilingual community, and early marketing operations — short chapters that still shape how I work.",
-      "items": [
-        {
-          "id": "tachafy",
-          "src": "/brands/tachafy.jpeg",
-          "kind": "image",
-          "caption": "Tachafy",
-          "meta": "Sep 2024",
-          "body": "Content strategy and partner acquisition for a digital mental-healthcare platform."
-        },
-        {
-          "id": "bakchich",
-          "src": "/brands/bakchich.jpeg",
-          "kind": "image",
-          "caption": "Ba9chich",
-          "meta": "Aug – Oct 2022",
-          "body": "Bilingual EN/FR social content and creator personas for partnership decisions."
-        },
-        {
-          "id": "buzztowin",
-          "src": "/Work/12.jpg",
-          "kind": "image",
-          "caption": "Buzz To Win",
-          "meta": "Jun – Jul 2022",
-          "body": "Vendor operations on Ne5dem.com, SEO audits, and SEO-optimized copy."
-        }
+        { "src": "/Work/10.jpg", "kind": "image", "caption": "Campaign", "index": "№ 09", "span": "4" },
+        { "src": "/Work/11.jpg", "kind": "image", "caption": "Campaign", "index": "№ 10", "span": "6" },
+        { "src": "/Work/12.jpg", "kind": "image", "caption": "Campaign", "index": "№ 11", "span": "6" },
+        { "src": "/Work/13.jpg", "kind": "image", "caption": "Campaign", "index": "№ 12", "span": "4", "push": true },
+        { "src": "/Work/14.jpg", "kind": "image", "caption": "Campaign", "index": "№ 13", "span": "4" },
+        { "src": "/Work/15.jpg", "kind": "image", "caption": "Campaign", "index": "№ 14", "span": "4" },
+        { "src": "/Work/16.mp4", "kind": "video", "caption": "Reel", "index": "№ 15", "span": "5" },
+        { "src": "/Work/17.mp4", "kind": "video", "caption": "Reel", "index": "№ 16", "span": "7" },
+        { "src": "/Work/20.jpg", "kind": "image", "caption": "Campaign", "index": "№ 17", "span": "6" },
+        { "src": "/Work/21.mp4", "kind": "video", "caption": "Reel", "index": "№ 18", "span": "6" },
+        { "src": "/Work/22.jpg", "kind": "image", "caption": "Campaign", "index": "№ 19", "span": "4" }
       ]
     },
     "stage": {

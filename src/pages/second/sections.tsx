@@ -8,7 +8,6 @@ import {
   Preloader,
   riseIn,
   useCountUp,
-  useFinePointer,
   useLenisScroll,
   useLightbox,
   useParallax,
@@ -30,14 +29,6 @@ type GalleryItem = {
   title?: string;
   meta?: string;
 };
-type RoleItem = {
-  id: string;
-  src: string;
-  kind: 'image' | 'video';
-  caption: string;
-  meta: string;
-  body: string;
-};
 type Stat = {
   value: number;
   suffix: string;
@@ -46,6 +37,19 @@ type Stat = {
   display?: string;
 };
 type Client = { name: string; logo: string; fit: string };
+type ProjectPoint = { num: string; title: string; body: string };
+type Project = {
+  id: string;
+  theme: string;
+  kicker: string;
+  title: string;
+  dates: string;
+  logo: string;
+  logoFit: string;
+  logoTile: string;
+  phones: string[];
+  points: ProjectPoint[];
+};
 type Editorial = {
   nav: NavItem[];
   cta: { href: string; label: string };
@@ -57,15 +61,6 @@ type Editorial = {
     titleAfter: string;
     stats: Stat[];
   };
-  pharmavie: {
-    kicker: string;
-    title: string;
-    titleEm: string;
-    titleAfter: string;
-    index: string;
-    lede: string;
-    gallery: GalleryItem[];
-  };
   campaigns: {
     kicker: string;
     title: string;
@@ -74,33 +69,6 @@ type Editorial = {
     index: string;
     lede: string;
     gallery: GalleryItem[];
-  };
-  pitstop: {
-    kicker: string;
-    title: string;
-    titleEm: string;
-    titleAfter: string;
-    index: string;
-    lede: string;
-    gallery: GalleryItem[];
-  };
-  selected: {
-    kicker: string;
-    title: string;
-    titleEm: string;
-    titleAfter: string;
-    index: string;
-    lede: string;
-    gallery: GalleryItem[];
-  };
-  roles: {
-    kicker: string;
-    title: string;
-    titleEm: string;
-    titleAfter: string;
-    index: string;
-    lede: string;
-    items: RoleItem[];
   };
   stage: {
     kicker: string;
@@ -1402,117 +1370,210 @@ function GalleryMedia({
   );
 }
 
-/* ---------- Pharmavie mosaic ---------- */
+/* ---------- Editorial work bands (Endila structure, Aya skin) ---------- */
 
-const LightSection = styled(Section)`
-  background: ${tokens.ivory};
-  color: ${tokens.ink};
+const WorkBand = styled.section<{ $light: boolean }>`
+  background: ${({ $light }) => ($light ? tokens.ivory : tokens.noir)};
+  color: ${({ $light }) => ($light ? tokens.ink : tokens.ivory)};
+  padding-block: ${tokens.sectionY};
+  border-top: 1px solid ${({ $light }) =>
+    $light ? 'rgba(42, 13, 19, 0.12)' : 'rgba(211, 191, 219, 0.12)'};
 `;
 
-const BridalGrid = styled.ul`
+const WorkInner = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(0.85rem, 2.4vw, 1.6rem);
-  list-style: none;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(2.4rem, 5vw, 3.5rem);
+  align-items: center;
 
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: clamp(1.1rem, 1.7vw, 2rem);
+  @media (max-width: 1023px) {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
   }
 `;
 
-const BridalItem = styled.li`
-  position: relative;
-  ${mediaHover}
+const WorkRole = styled.p<{ $light: boolean }>`
+  font-family: ${tokens.serif};
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  font-weight: 400;
+  margin-bottom: 0.55rem;
+  color: ${({ $light }) => ($light ? tokens.ink : tokens.ivory)};
+`;
 
-  a {
-    display: block;
-    position: relative;
-    overflow: hidden;
+const WorkTitle = styled.h3<{ $light: boolean }>`
+  font-family: ${tokens.sans};
+  font-size: clamp(2.1rem, 4.8vw, 3.75rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.02;
+  margin-bottom: 0.45rem;
+  color: ${({ $light }) => ($light ? tokens.ink : tokens.ivory)};
+`;
+
+const WorkDates = styled.p<{ $light: boolean }>`
+  font-size: 0.88rem;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+  color: ${({ $light }) => ($light ? tokens.ink : tokens.lilac)};
+`;
+
+const WorkPoints = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+`;
+
+const WorkPoint = styled.div`
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  gap: 0.85rem;
+`;
+
+const WorkNum = styled.span<{ $light: boolean }>`
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: ${({ $light }) => ($light ? tokens.crimson : tokens.lilac)};
+`;
+
+const WorkPointTitle = styled.h4<{ $light: boolean }>`
+  font-family: ${tokens.serif};
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  color: ${({ $light }) => ($light ? tokens.ink : tokens.ivory)};
+`;
+
+const WorkPointBody = styled.p<{ $light: boolean }>`
+  font-size: 0.95rem;
+  line-height: 1.55;
+  opacity: 0.88;
+  color: ${({ $light }) =>
+    $light
+      ? `color-mix(in srgb, ${tokens.ink} 82%, ${tokens.crimson})`
+      : `color-mix(in srgb, ${tokens.ivory} 86%, ${tokens.lilac})`};
+`;
+
+const WorkVisual = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+`;
+
+const WorkLogoFrame = styled.div<{ $tile: string }>`
+  width: min(280px, 70%);
+  aspect-ratio: 1.35 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ $tile }) => $tile};
+  padding: 1rem;
+`;
+
+const WorkLogo = styled.img<{ $fit: string }>`
+  width: 100%;
+  height: 100%;
+  object-fit: ${({ $fit }) => $fit};
+`;
+
+const WorkPhones = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+`;
+
+const WorkPhone = styled.button`
+  width: 132px;
+  aspect-ratio: 9 / 19;
+  border-radius: 22px;
+  border: 8px solid #0b0b0b;
+  overflow: hidden;
+  background: #0b0b0b;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  padding: 0;
+  cursor: pointer;
+
+  img {
+    width: 100%;
     height: 100%;
-    background: #ded3dd;
-    box-shadow: 0 6px 22px rgba(42, 13, 19, 0.07);
-    transition: box-shadow 0.32s ${tokens.easeOut}, transform 0.32s ${tokens.easeOut};
+    object-fit: cover;
+    display: block;
   }
 
-  @media (hover: hover) {
-    a:hover {
-      box-shadow: 0 18px 44px rgba(42, 13, 19, 0.17);
-    }
-    a:hover img {
-      transform: scale(1.03);
-    }
-  }
-
-  &.b-feat {
-    @media (min-width: 1024px) {
-      grid-column: span 2;
-      grid-row: span 2;
-
-      figure {
-        aspect-ratio: auto;
-        height: 100%;
-      }
-    }
-  }
-
-  a:hover ${CapOverlay}, a:focus-visible ${CapOverlay} {
-    opacity: 1;
-    transform: none;
+  @media (max-width: 700px) {
+    width: 110px;
   }
 `;
 
-export function PharmavieSection({ data }: { data: Editorial['pharmavie'] }) {
+function WorkBandView({ project }: { project: Project }) {
+  const light = project.theme === 'light';
   const { open } = useLightbox();
-  useTouchColorReveal('#pharmavie .bridal-item');
-  const items = data.gallery.map((g) => ({
-    src: g.src,
-    caption: `${g.caption ?? ''} ${g.index ?? ''}`.trim(),
-    kind: g.kind,
+  const revealRef = useReveal<HTMLDivElement>();
+  const phoneItems = project.phones.map((src) => ({
+    src,
+    caption: project.title,
+    kind: 'image' as const,
   }));
 
   return (
-    <LightSection id="pharmavie">
+    <WorkBand id={project.id} $light={light}>
       <Wrap>
-        <SectionHead>
-          <Reveal>
-            <Kicker $light>{data.kicker}</Kicker>
-          </Reveal>
-          <HeadRow>
-            <SplitTitle
-              before={data.title}
-              em={data.titleEm}
-              after={data.titleAfter}
-              light
-            />
-            <Count $light>{data.index}</Count>
-          </HeadRow>
-          <Reveal>
-            <Lede $light>{data.lede}</Lede>
-          </Reveal>
-        </SectionHead>
-        <BridalGrid data-gallery>
-          {data.gallery.map((item) => (
-            <BridalItem
-              key={item.src}
-              className={`bridal-item work ${item.featured ? 'b-feat' : ''}`}
-            >
-              <GalleryMedia
-                item={item}
-                onOpen={() =>
-                  open(
-                    items,
-                    data.gallery.findIndex((g) => g.src === item.src),
-                  )
-                }
-              />
-            </BridalItem>
-          ))}
-        </BridalGrid>
+        <WorkInner ref={revealRef} className="reveal">
+          <div>
+            <WorkRole $light={light}>{project.kicker}</WorkRole>
+            <WorkTitle $light={light}>{project.title}</WorkTitle>
+            <WorkDates $light={light}>{project.dates}</WorkDates>
+            <WorkPoints>
+              {project.points.map((point) => (
+                <WorkPoint key={point.num}>
+                  <WorkNum $light={light}>{point.num}</WorkNum>
+                  <div>
+                    <WorkPointTitle $light={light}>{point.title}</WorkPointTitle>
+                    <WorkPointBody $light={light}>{point.body}</WorkPointBody>
+                  </div>
+                </WorkPoint>
+              ))}
+            </WorkPoints>
+          </div>
+          <WorkVisual>
+            {project.logo !== '' && (
+              <WorkLogoFrame $tile={project.logoTile}>
+                <WorkLogo src={project.logo} alt={project.title} $fit={project.logoFit} />
+              </WorkLogoFrame>
+            )}
+            {project.phones.length > 0 && (
+              <WorkPhones data-gallery>
+                {project.phones.map((src, i) => (
+                  <WorkPhone
+                    key={src}
+                    type="button"
+                    aria-label={`${project.title} mockup ${i + 1}`}
+                    onClick={() => open(phoneItems, i)}
+                  >
+                    <img src={src} alt="" loading="lazy" />
+                  </WorkPhone>
+                ))}
+              </WorkPhones>
+            )}
+          </WorkVisual>
+        </WorkInner>
       </Wrap>
-    </LightSection>
+    </WorkBand>
   );
 }
+
+export function EditorialWork({ projects }: { projects: Project[] }) {
+  return (
+    <div id="projects">
+      {projects.map((project) => (
+        <WorkBandView key={project.id} project={project} />
+      ))}
+    </div>
+  );
+}
+
 
 /* ---------- Campaigns staggered ---------- */
 
@@ -1605,437 +1666,6 @@ export function CampaignsSection({ data }: { data: Editorial['campaigns'] }) {
             </WorkItem>
           ))}
         </Works>
-      </Wrap>
-    </Section>
-  );
-}
-
-/* ---------- Pitstop posters ---------- */
-
-const FilmSection = styled(Section)`
-  background: ${tokens.noir};
-  position: relative;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 14px;
-    background-image: radial-gradient(
-      circle at 7px 7px,
-      ${tokens.bordeaux2} 3.5px,
-      transparent 4px
-    );
-    background-size: 28px 14px;
-    opacity: 0.8;
-  }
-  &::before {
-    top: calc(${tokens.sectionY} * 0.42);
-  }
-  &::after {
-    bottom: calc(${tokens.sectionY} * 0.42);
-  }
-`;
-
-const Posters = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(1rem, 2vw, 1.8rem);
-  justify-content: flex-start;
-  list-style: none;
-
-  @media (min-width: 640px) {
-    justify-content: center;
-  }
-`;
-
-const Poster = styled.li`
-  flex: 0 0 auto;
-  width: calc((100% - 1 * clamp(1rem, 2vw, 1.8rem)) / 2 - 0.5px);
-
-  @media (min-width: 640px) {
-    width: calc((100% - 2 * clamp(1rem, 2vw, 1.8rem)) / 3 - 0.5px);
-  }
-  @media (min-width: 1024px) {
-    width: calc((100% - 3 * clamp(1rem, 2vw, 1.8rem)) / 4 - 0.5px);
-  }
-
-  a {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    background: #241018;
-    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-    transition: transform 0.5s ${tokens.easeOut}, box-shadow 0.5s;
-    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
-  }
-
-  figure {
-    aspect-ratio: 2 / 3;
-    overflow: hidden;
-    margin: 0;
-    position: relative;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(1) contrast(1.05) brightness(0.94);
-    transition: filter 0.9s ${tokens.easeLuxe}, transform 1.2s ${tokens.easeLuxe};
-  }
-
-  .sheen {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(
-      115deg,
-      transparent 40%,
-      rgba(211, 191, 219, 0.14) 50%,
-      transparent 60%
-    );
-    transform: translateX(-120%);
-    transition: transform 0.9s ${tokens.easeLuxe};
-  }
-
-  @media (hover: hover) {
-    a:hover img,
-    a:focus-visible img {
-      filter: none;
-      transform: scale(1.06);
-    }
-    a:hover {
-      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.6);
-    }
-    a:hover .sheen {
-      transform: translateX(120%);
-    }
-  }
-
-  &.in-color img {
-    filter: none;
-  }
-`;
-
-export function PitstopSection({ data }: { data: Editorial['pitstop'] }) {
-  const { open } = useLightbox();
-  const fine = useFinePointer();
-  const reduced = usePrefersReducedMotion();
-  useTouchColorReveal('#pitstop .poster');
-  const items = data.gallery.map((g) => ({
-    src: g.src,
-    caption: `${g.caption ?? ''} ${g.index ?? ''}`.trim(),
-    kind: g.kind,
-  }));
-
-  return (
-    <FilmSection id="pitstop" className="film">
-      <Wrap>
-        <SectionHead>
-          <Reveal>
-            <Kicker>{data.kicker}</Kicker>
-          </Reveal>
-          <HeadRow>
-            <SplitTitle before={data.title} em={data.titleEm} after={data.titleAfter} />
-            <Count>{data.index}</Count>
-          </HeadRow>
-          <Reveal>
-            <Lede>{data.lede}</Lede>
-          </Reveal>
-        </SectionHead>
-        <Posters data-gallery className="posters">
-          {data.gallery.map((item) => (
-            <Poster
-              key={item.src}
-              className="poster"
-              onMouseMove={
-                fine && !reduced
-                  ? (e) => {
-                      const a = e.currentTarget.querySelector('a') as HTMLElement;
-                      const r = a.getBoundingClientRect();
-                      const x = (e.clientX - r.left) / r.width - 0.5;
-                      const y = (e.clientY - r.top) / r.height - 0.5;
-                      a.style.setProperty('--ry', `${(x * 7).toFixed(2)}deg`);
-                      a.style.setProperty('--rx', `${(-y * 7).toFixed(2)}deg`);
-                    }
-                  : undefined
-              }
-              onMouseLeave={
-                fine && !reduced
-                  ? (e) => {
-                      const a = e.currentTarget.querySelector('a') as HTMLElement;
-                      a.style.setProperty('--ry', '0deg');
-                      a.style.setProperty('--rx', '0deg');
-                    }
-                  : undefined
-              }
-            >
-              <a
-                href={item.src}
-                data-lightbox
-                onClick={(e) => {
-                  e.preventDefault();
-                  open(
-                    items,
-                    data.gallery.findIndex((g) => g.src === item.src),
-                  );
-                }}
-              >
-                <figure>
-                  <img src={item.src} alt={item.caption ?? ''} loading="lazy" />
-                  <span className="sheen" />
-                </figure>
-              </a>
-            </Poster>
-          ))}
-        </Posters>
-      </Wrap>
-    </FilmSection>
-  );
-}
-
-/* ---------- Selected covers ---------- */
-
-const LilacSection = styled(Section)`
-  background: linear-gradient(175deg, ${tokens.lilac} 0%, #c6aed2 100%);
-  color: ${tokens.ink};
-`;
-
-const Mags = styled.ul`
-  display: grid;
-  gap: clamp(1.6rem, 3vw, 3rem);
-  grid-template-columns: repeat(2, 1fr);
-  list-style: none;
-
-  @media (min-width: 900px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-`;
-
-const Mag = styled.li`
-  text-align: left;
-
-  a {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    background: #3b2033;
-    box-shadow: 0 18px 50px rgba(42, 13, 19, 0.35);
-    transition: transform 0.7s ${tokens.easeOut}, box-shadow 0.7s;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 10px;
-      background: linear-gradient(90deg, rgba(42, 13, 19, 0.28), transparent);
-      pointer-events: none;
-    }
-  }
-
-  figure {
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-    margin: 0;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(1) contrast(1.03);
-    transition: filter 0.9s ${tokens.easeLuxe}, transform 1.2s ${tokens.easeLuxe};
-  }
-
-  @media (hover: hover) {
-    a:hover {
-      transform: translateY(-10px) rotate(-0.6deg);
-      box-shadow: 0 34px 70px rgba(42, 13, 19, 0.5);
-    }
-    a:hover img,
-    a:focus-visible img {
-      filter: none;
-      transform: scale(1.045);
-    }
-  }
-
-  &.in-color img {
-    filter: none;
-  }
-`;
-
-const MagMeta = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-top: 1.1rem;
-  gap: 1rem;
-
-  b {
-    font-family: ${tokens.serif};
-    font-weight: 500;
-    font-size: 1.15rem;
-    color: ${tokens.wine};
-  }
-
-  span {
-    font-size: 0.62rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: ${tokens.crimson};
-  }
-`;
-
-export function SelectedSection({ data }: { data: Editorial['selected'] }) {
-  const { open } = useLightbox();
-  useTouchColorReveal('#selected .mag');
-  const items = data.gallery.map((g) => ({
-    src: g.src,
-    caption: `${g.title ?? ''} ${g.meta ?? ''}`.trim(),
-    kind: g.kind,
-  }));
-
-  return (
-    <LilacSection id="selected">
-      <Wrap>
-        <SectionHead>
-          <Reveal>
-            <Kicker $lilac>{data.kicker}</Kicker>
-          </Reveal>
-          <HeadRow>
-            <SplitTitle
-              before={data.title}
-              em={data.titleEm}
-              after={data.titleAfter}
-              lilac
-            />
-            <Count $lilac>{data.index}</Count>
-          </HeadRow>
-          <Reveal>
-            <Lede $lilac>{data.lede}</Lede>
-          </Reveal>
-        </SectionHead>
-        <Mags data-gallery>
-          {data.gallery.map((item) => (
-            <Mag key={item.src} className="mag">
-              <a
-                href={item.src}
-                data-lightbox
-                onClick={(e) => {
-                  e.preventDefault();
-                  open(
-                    items,
-                    data.gallery.findIndex((g) => g.src === item.src),
-                  );
-                }}
-              >
-                <figure>
-                  <img src={item.src} alt={item.title ?? ''} loading="lazy" />
-                </figure>
-              </a>
-              <MagMeta>
-                <b>{item.title}</b>
-                <span>{item.meta}</span>
-              </MagMeta>
-            </Mag>
-          ))}
-        </Mags>
-      </Wrap>
-    </LilacSection>
-  );
-}
-
-/* ---------- Roles ---------- */
-
-const GroomingGrid = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(0.85rem, 2.4vw, 1.6rem);
-  list-style: none;
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.1rem, 1.7vw, 2rem);
-  }
-`;
-
-const RoleCard = styled.li`
-  ${mediaHover}
-
-  a {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    background: #241018;
-  }
-
-  img {
-    object-position: center 28%;
-  }
-
-  a:hover ${CapOverlay}, a:focus-visible ${CapOverlay} {
-    opacity: 1;
-    transform: none;
-  }
-`;
-
-const RoleBody = styled.p`
-  margin-top: 1rem;
-  font-size: 0.92rem;
-  color: ${tokens.lilac};
-  max-width: 38ch;
-`;
-
-export function RolesSection({ data }: { data: Editorial['roles'] }) {
-  const { open } = useLightbox();
-  useTouchColorReveal('#roles .work');
-  const items = data.items.map((g) => ({
-    src: g.src,
-    caption: `${g.caption} ${g.meta}`,
-    kind: g.kind as 'image' | 'video',
-  }));
-
-  return (
-    <Section id="roles">
-      <Wrap>
-        <SectionHead>
-          <Reveal>
-            <Kicker>{data.kicker}</Kicker>
-          </Reveal>
-          <HeadRow>
-            <SplitTitle before={data.title} em={data.titleEm} after={data.titleAfter} />
-            <Count>{data.index}</Count>
-          </HeadRow>
-          <Reveal>
-            <Lede>{data.lede}</Lede>
-          </Reveal>
-        </SectionHead>
-        <GroomingGrid data-gallery className="grooming-grid">
-          {data.items.map((item) => (
-            <RoleCard key={item.id} className="work">
-              <GalleryMedia
-                item={{
-                  src: item.src,
-                  kind: item.kind,
-                  caption: item.caption,
-                  index: item.meta,
-                }}
-                onOpen={() =>
-                  open(
-                    items,
-                    data.items.findIndex((g) => g.id === item.id),
-                  )
-                }
-              />
-              <RoleBody>{item.body}</RoleBody>
-            </RoleCard>
-          ))}
-        </GroomingGrid>
       </Wrap>
     </Section>
   );

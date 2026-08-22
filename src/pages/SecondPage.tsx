@@ -7,12 +7,9 @@ import {
   EditorialHeader,
   EditorialHero,
   EditorialShell,
+  EditorialWork,
   PartnersSection,
-  PharmavieSection,
-  PitstopSection,
   Preloader,
-  RolesSection,
-  SelectedSection,
   StageSectionView,
   WhatsAppFloat,
   type SecondPageData,
@@ -21,7 +18,7 @@ import {
 const data = content as typeof content & { editorial: SecondPageData['editorial'] };
 
 export const SecondPage = () => {
-  const { editorial, personal, about, clients, hero } = data;
+  const { editorial, personal, about, clients, hero, projects } = data;
 
   return (
     <EditorialShell>
@@ -50,11 +47,8 @@ export const SecondPage = () => {
           personal={personal}
           portraitSrc="/cv-photo.jpg"
         />
-        <PharmavieSection data={editorial.pharmavie} />
+        <EditorialWork projects={projects} />
         <CampaignsSection data={editorial.campaigns} />
-        <PitstopSection data={editorial.pitstop} />
-        <SelectedSection data={editorial.selected} />
-        <RolesSection data={editorial.roles} />
         <StageSectionView data={editorial.stage} />
         <PartnersSection data={editorial.partners} clients={clients} />
         <ContactSectionView data={editorial.contactSection} personal={personal} />
