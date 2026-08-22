@@ -1,307 +1,176 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef } from 'react';
 import { theme } from '../styles/theme';
 import content from '../data/content.json';
 
-const ProjectsContainer = styled.section`
-  min-height: 100vh;
-  padding: ${theme.spacing['5xl']} ${theme.spacing.xl};
-  background: ${theme.colors.surface};
-  
+const Band = styled.section<{ $dark: boolean }>`
+  background: ${({ $dark }) => ($dark ? theme.colors.blackSoft : theme.colors.paper)};
+  color: ${({ $dark }) => ($dark ? theme.colors.white : theme.colors.black)};
+  padding: 88px 32px;
+  border-top: 1px solid ${({ $dark }) => ($dark ? theme.colors.lineDark : theme.colors.line)};
+
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['3xl']} ${theme.spacing.lg};
+    padding: 64px 20px;
   }
 `;
 
-const ProjectsContent = styled.div`
-  max-width: 1200px;
+const Inner = styled.div`
+  max-width: 1180px;
   margin: 0 auto;
-`;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
 
-const SectionHeader = styled.div`
-  text-align: center;
-  margin-bottom: ${theme.spacing['4xl']};
-`;
-
-const SectionLabel = styled(motion.span)`
-  display: inline-block;
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.accentLight};
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin-bottom: ${theme.spacing.lg};
-  font-weight: ${theme.fontWeights.medium};
-`;
-
-const SectionTitle = styled(motion.h2)`
-  color: ${theme.colors.accent};
-  
-  span {
-    color: ${theme.colors.accentLight};
+  @media (max-width: ${theme.breakpoints.lg}) {
+    grid-template-columns: 1fr;
+    gap: 36px;
   }
 `;
 
-const ProjectsGrid = styled(motion.div)`
+const Kicker = styled.p`
+  font-family: ${theme.fonts.serif};
+  font-size: clamp(22px, 2.4vw, 32px);
+  margin-bottom: 10px;
+`;
+
+const Title = styled.h3`
+  font-family: ${theme.fonts.display};
+  font-size: clamp(36px, 5vw, 64px);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: 8px;
+`;
+
+const Dates = styled.p`
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 32px;
+`;
+
+const Points = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${theme.spacing['2xl']};
+  gap: 22px;
 `;
 
-const ProjectCard = styled(motion.div)`
-  background: ${theme.colors.background};
-  border: 1px solid ${theme.colors.border};
-  overflow: hidden;
-  cursor: pointer;
-  transition: all ${theme.transitions.normal};
-  
-  &:hover {
-    border-color: ${theme.colors.accentLight};
-    box-shadow: ${theme.shadows.glow};
-  }
+const Point = styled.div`
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 14px;
 `;
 
-const ProjectHeader = styled.div`
-  padding: ${theme.spacing['2xl']};
+const Num = styled.span`
+  font-size: 22px;
+  letter-spacing: 0.04em;
+`;
+
+const PointTitle = styled.h4`
+  font-family: ${theme.fonts.serif};
+  font-size: 18px;
+  letter-spacing: 0;
+  margin-bottom: 6px;
+`;
+
+const PointBody = styled.p`
+  font-size: 15.5px;
+  line-height: 1.55;
+  opacity: 0.88;
+`;
+
+const Visual = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: ${theme.spacing.xl};
-  
-  @media (max-width: ${theme.breakpoints.md}) {
-    flex-direction: column;
-    gap: ${theme.spacing.md};
-  }
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 `;
 
-const ProjectInfo = styled.div`
-  flex: 1;
-`;
-
-const ProjectTitle = styled.h3`
-  font-size: ${theme.fontSizes['2xl']};
-  color: ${theme.colors.accent};
-  margin-bottom: ${theme.spacing.sm};
-`;
-
-const ProjectSubtitle = styled.p`
-  font-size: ${theme.fontSizes.md};
-  color: ${theme.colors.accentLight};
-  font-weight: ${theme.fontWeights.medium};
-`;
-
-const ProjectRole = styled.p`
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.textMuted};
-  margin-top: ${theme.spacing.sm};
-`;
-
-const ExpandButton = styled(motion.button)`
+const LogoFrame = styled.div<{ $tile: string }>`
+  width: min(280px, 70%);
+  aspect-ratio: 1.35 / 1;
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
-  padding: ${theme.spacing.md} ${theme.spacing.lg};
-  border: 1px solid ${theme.colors.border};
-  color: ${theme.colors.textMuted};
-  font-size: ${theme.fontSizes.sm};
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: all ${theme.transitions.fast};
-  
-  &:hover {
-    border-color: ${theme.colors.accentLight};
-    color: ${theme.colors.accentLight};
-  }
+  justify-content: center;
+  background: ${({ $tile }) => $tile};
+  padding: 16px;
 `;
 
-const ProjectDetails = styled(motion.div)`
-  padding: 0 ${theme.spacing['2xl']} ${theme.spacing['2xl']};
-  border-top: 1px solid ${theme.colors.border};
+const Logo = styled.img<{ $fit: string }>`
+  width: 100%;
+  height: 100%;
+  object-fit: ${({ $fit }) => $fit};
 `;
 
-const DetailSection = styled.div`
-  padding-top: ${theme.spacing.xl};
-  
-  &:not(:last-child) {
-    padding-bottom: ${theme.spacing.xl};
-    border-bottom: 1px solid ${theme.colors.border};
-  }
-`;
-
-const DetailTitle = styled.h4`
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.accentLight};
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: ${theme.spacing.md};
-`;
-
-const DetailText = styled.p`
-  font-size: ${theme.fontSizes.md};
-  line-height: 1.7;
-  color: ${theme.colors.textSecondary};
-`;
-
-const DetailList = styled.ul`
+const Phones = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.sm};
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
 `;
 
-const DetailItem = styled.li`
-  font-size: ${theme.fontSizes.md};
-  color: ${theme.colors.textSecondary};
-  padding-left: ${theme.spacing.lg};
-  position: relative;
-  
-  &::before {
-    content: '\\2192';
-    position: absolute;
-    left: 0;
-    color: ${theme.colors.accentLight};
+const Phone = styled.div`
+  width: 132px;
+  aspect-ratio: 9 / 19;
+  border-radius: 22px;
+  border: 8px solid #0b0b0b;
+  overflow: hidden;
+  background: #0b0b0b;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    width: 110px;
   }
 `;
-
-const ResultsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: ${theme.spacing.lg};
-`;
-
-const ResultItem = styled.div`
-  padding: ${theme.spacing.lg};
-  background: ${theme.colors.accentMuted};
-  border-left: 2px solid ${theme.colors.accentLight};
-`;
-
-const ResultText = styled.p`
-  font-size: ${theme.fontSizes.md};
-  color: ${theme.colors.accent};
-  font-weight: ${theme.fontWeights.medium};
-`;
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: 'easeOut' as const },
-  },
-};
 
 export const ProjectsSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [expandedProject, setExpandedProject] = useState<string | null>(null);
-  const { projects } = content;
-
-  const toggleProject = (projectId: string) => {
-    setExpandedProject(expandedProject === projectId ? null : projectId);
-  };
-
   return (
-    <ProjectsContainer id="projects" ref={ref}>
-      <ProjectsContent>
-        <SectionHeader>
-          <SectionLabel
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            Featured Work
-          </SectionLabel>
-          
-          <SectionTitle
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Case <span>Studies</span>
-          </SectionTitle>
-        </SectionHeader>
-        
-        <ProjectsGrid
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-        >
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              variants={cardVariants}
-              layout
-            >
-              <ProjectHeader onClick={() => toggleProject(project.id)}>
-                <ProjectInfo>
-                  <ProjectTitle>{project.title}</ProjectTitle>
-                  <ProjectSubtitle>{project.subtitle}</ProjectSubtitle>
-                  <ProjectRole>{project.role}</ProjectRole>
-                </ProjectInfo>
-                
-                <ExpandButton
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {expandedProject === project.id ? 'Close' : 'View Details'}
-                  <motion.span
-                    animate={{ rotate: expandedProject === project.id ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    &#8595;
-                  </motion.span>
-                </ExpandButton>
-              </ProjectHeader>
-              
-              <AnimatePresence>
-                {expandedProject === project.id && (
-                  <ProjectDetails
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.4, ease: 'easeInOut' }}
-                  >
-                    <DetailSection>
-                      <DetailTitle>Challenge</DetailTitle>
-                      <DetailText>{project.challenge}</DetailText>
-                    </DetailSection>
-                    
-                    <DetailSection>
-                      <DetailTitle>Approach</DetailTitle>
-                      <DetailList>
-                        {project.approach.map((item, index) => (
-                          <DetailItem key={index}>{item}</DetailItem>
-                        ))}
-                      </DetailList>
-                    </DetailSection>
-                    
-                    <DetailSection>
-                      <DetailTitle>Results</DetailTitle>
-                      <ResultsGrid>
-                        {project.results.map((result, index) => (
-                          <ResultItem key={index}>
-                            <ResultText>{result}</ResultText>
-                          </ResultItem>
-                        ))}
-                      </ResultsGrid>
-                    </DetailSection>
-                  </ProjectDetails>
+    <div id="projects">
+      {content.projects.map((project) => {
+        const dark = project.theme === 'dark';
+        return (
+          <Band key={project.id} $dark={dark}>
+            <Inner>
+              <div>
+                <Kicker>{project.kicker}</Kicker>
+                <Title>{project.title}</Title>
+                <Dates>{project.dates}</Dates>
+                <Points>
+                  {project.points.map((point) => (
+                    <Point key={point.num}>
+                      <Num>{point.num}</Num>
+                      <div>
+                        <PointTitle>{point.title}</PointTitle>
+                        <PointBody>{point.body}</PointBody>
+                      </div>
+                    </Point>
+                  ))}
+                </Points>
+              </div>
+              <Visual>
+                {project.logo !== '' && (
+                  <LogoFrame $tile={project.logoTile}>
+                    <Logo src={project.logo} alt={project.title} $fit={project.logoFit} />
+                  </LogoFrame>
                 )}
-              </AnimatePresence>
-            </ProjectCard>
-          ))}
-        </ProjectsGrid>
-      </ProjectsContent>
-    </ProjectsContainer>
+                {project.phones.length > 0 && (
+                  <Phones>
+                    {project.phones.map((src) => (
+                      <Phone key={src}>
+                        <img src={src} alt="" />
+                      </Phone>
+                    ))}
+                  </Phones>
+                )}
+              </Visual>
+            </Inner>
+          </Band>
+        );
+      })}
+    </div>
   );
 };

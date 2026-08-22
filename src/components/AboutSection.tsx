@@ -1,199 +1,130 @@
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { theme } from '../styles/theme';
 import content from '../data/content.json';
 
-const AboutContainer = styled.section`
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: ${theme.spacing['5xl']} ${theme.spacing.xl};
-  background: ${theme.colors.surface};
-  position: relative;
-  
+const Section = styled.section`
+  background: ${theme.colors.black};
+  color: ${theme.colors.white};
+`;
+
+const Copy = styled.div`
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 96px 32px 72px;
+
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['3xl']} ${theme.spacing.lg};
+    padding: 64px 20px 48px;
   }
 `;
 
-const AboutContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+const Heading = styled.h2`
+  font-family: ${theme.fonts.serif};
+  font-style: italic;
+  font-size: clamp(48px, 8vw, 86px);
+  letter-spacing: -0.03em;
+  margin-bottom: 36px;
+`;
+
+const Lead = styled.p`
+  font-size: clamp(20px, 2.3vw, 28px);
+  line-height: 1.45;
+  max-width: 920px;
+  margin-bottom: 22px;
+
+  strong {
+    font-weight: 700;
+  }
+`;
+
+const Body = styled.p`
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.6;
+  max-width: 860px;
+  color: #d8d8d8;
+`;
+
+const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: ${theme.spacing['4xl']};
-  align-items: center;
-  
-  @media (max-width: ${theme.breakpoints.lg}) {
+
+  @media (max-width: ${theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
-    gap: ${theme.spacing['2xl']};
   }
 `;
 
-const AboutLeft = styled.div``;
-
-const SectionLabel = styled(motion.span)`
-  display: inline-block;
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.accentLight};
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin-bottom: ${theme.spacing.lg};
-  font-weight: ${theme.fontWeights.medium};
+const Cell = styled.div`
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: ${theme.colors.blackSoft};
 `;
 
-const SectionTitle = styled(motion.h2)`
-  margin-bottom: ${theme.spacing.xl};
-  color: ${theme.colors.accent};
-  
+const MediaImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const MediaVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const Play = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
   span {
-    color: ${theme.colors.accentLight};
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid ${theme.colors.white};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.25);
+  }
+
+  span::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 16px solid ${theme.colors.white};
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-left: 4px;
   }
 `;
-
-const Description = styled(motion.p)`
-  margin-bottom: ${theme.spacing.xl};
-  line-height: 1.9;
-  color: ${theme.colors.textSecondary};
-`;
-
-const Philosophy = styled(motion.blockquote)`
-  font-family: 'Robert Leuschke', ${theme.fonts.heading};
-  font-size: ${theme.fontSizes['2xl']};
-  font-style: italic;
-  color: ${theme.colors.accent};
-  padding-left: ${theme.spacing.xl};
-  border-left: 2px solid ${theme.colors.accentLight};
-  line-height: 1.6;
-  
-  @media (max-width: ${theme.breakpoints.md}) {
-    font-size: ${theme.fontSizes.xl};
-  }
-`;
-
-const AboutRight = styled.div``;
-
-const ExpertiseTitle = styled(motion.h3)`
-  font-size: ${theme.fontSizes.xl};
-  margin-bottom: ${theme.spacing.xl};
-  color: ${theme.colors.accent};
-`;
-
-const ExpertiseList = styled(motion.ul)`
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.md};
-`;
-
-const ExpertiseItem = styled(motion.li)`
-  display: flex;
-  align-items: flex-start;
-  gap: ${theme.spacing.md};
-  font-size: ${theme.fontSizes.md};
-  color: ${theme.colors.textSecondary};
-  padding: ${theme.spacing.md} 0;
-  border-bottom: 1px solid ${theme.colors.border};
-  
-  &:last-child {
-    border-bottom: none;
-  }
-  
-  &::before {
-    content: '\\2666';
-    color: ${theme.colors.accentLight};
-    font-size: ${theme.fontSizes.xs};
-    margin-top: 4px;
-  }
-`;
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
-  },
-};
 
 export const AboutSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
   const { about } = content;
 
   return (
-    <AboutContainer id="about" ref={ref}>
-      <AboutContent>
-        <AboutLeft>
-          <SectionLabel
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            About Me
-          </SectionLabel>
-          
-          <SectionTitle
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Crafting <span>Stories</span> That Connect Brands With People
-          </SectionTitle>
-          
-          <Description
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {about.description}
-          </Description>
-          
-          <Philosophy
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            "{about.philosophy}"
-          </Philosophy>
-        </AboutLeft>
-        
-        <AboutRight>
-          <ExpertiseTitle
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Expertise
-          </ExpertiseTitle>
-          
-          <ExpertiseList
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            {about.expertise.map((skill, index) => (
-              <ExpertiseItem
-                key={index}
-                variants={itemVariants}
-              >
-                {skill}
-              </ExpertiseItem>
-            ))}
-          </ExpertiseList>
-        </AboutRight>
-      </AboutContent>
-    </AboutContainer>
+    <Section id="about">
+      <Copy>
+        <Heading>{about.heading}</Heading>
+        <Lead>{about.lead}</Lead>
+        <Body>{about.body}</Body>
+      </Copy>
+      <Grid>
+        {about.grid.map((item) => (
+          <Cell key={item.src}>
+            {item.type === 'video' ? (
+              <>
+                <MediaVideo src={item.src} muted loop playsInline autoPlay />
+                <Play><span /></Play>
+              </>
+            ) : (
+              <MediaImg src={item.src} alt="" />
+            )}
+          </Cell>
+        ))}
+      </Grid>
+    </Section>
   );
 };

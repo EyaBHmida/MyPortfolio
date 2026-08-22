@@ -1,254 +1,124 @@
 import styled from 'styled-components';
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { theme } from '../styles/theme';
 import content from '../data/content.json';
 
-const ContactContainer = styled.section`
-  min-height: 100vh;
+const Footer = styled.footer`
+  background: ${theme.colors.black};
+  color: ${theme.colors.white};
+  padding: 88px 32px 40px;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: 64px 20px 32px;
+  }
+`;
+
+const Inner = styled.div`
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+  align-items: start;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Heading = styled.h2`
+  font-family: ${theme.fonts.serif};
+  font-size: clamp(40px, 6vw, 68px);
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+  max-width: 520px;
+`;
+
+const Cta = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${theme.colors.white};
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 16px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    background: ${theme.colors.white};
+    color: ${theme.colors.black};
+    text-decoration: none;
+  }
+`;
+
+const Meta = styled.div`
+  font-size: 16px;
+  line-height: 1.7;
+  padding-top: 8px;
+`;
+
+const MetaLink = styled.a`
+  display: block;
+
+  &:hover { text-decoration: underline; }
+`;
+
+const Socials = styled.div`
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+`;
+
+const Social = styled.a`
+  width: 42px;
+  height: 42px;
+  border: 1px solid #3a3a3a;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${theme.spacing['5xl']} ${theme.spacing.xl};
-  background: ${theme.colors.surface};
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background: radial-gradient(
-      ellipse at 50% 100%,
-      rgba(183, 138, 190, 0.1) 0%,
-      transparent 50%
-    );
-    pointer-events: none;
-  }
-  
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing['3xl']} ${theme.spacing.lg};
-  }
+  font-size: 12px;
+  letter-spacing: 0.04em;
 `;
 
-const ContactContent = styled.div`
-  max-width: 800px;
-  text-align: center;
-  z-index: 1;
-`;
-
-const SectionLabel = styled(motion.span)`
-  display: inline-block;
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.accentLight};
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin-bottom: ${theme.spacing.lg};
-  font-weight: ${theme.fontWeights.medium};
-`;
-
-const SectionTitle = styled(motion.h2)`
-  margin-bottom: ${theme.spacing.xl};
-  color: ${theme.colors.accent};
-  
-  span {
-    color: ${theme.colors.accentLight};
-  }
-`;
-
-const Description = styled(motion.p)`
-  font-size: ${theme.fontSizes.xl};
-  line-height: 1.8;
-  margin-bottom: ${theme.spacing['3xl']};
-  color: ${theme.colors.textSecondary};
-  
-  @media (max-width: ${theme.breakpoints.md}) {
-    font-size: ${theme.fontSizes.lg};
-  }
-`;
-
-const ContactLinks = styled(motion.div)`
+const Bottom = styled.div`
+  max-width: 1180px;
+  margin: 48px auto 0;
+  padding-top: 22px;
+  border-top: 1px solid ${theme.colors.lineDark};
+  font-size: 12px;
+  color: ${theme.colors.muted};
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${theme.spacing.xl};
-  margin-bottom: ${theme.spacing['3xl']};
-`;
-
-const ContactLink = styled(motion.a)`
-  display: flex;
-  align-items: center;
-  gap: ${theme.spacing.md};
-  font-size: ${theme.fontSizes.lg};
-  color: ${theme.colors.textMuted};
-  transition: all ${theme.transitions.normal};
-  
-  span {
-    font-size: ${theme.fontSizes.sm};
-    color: ${theme.colors.accentLight};
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: ${theme.fontWeights.medium};
-    min-width: 80px;
-  }
-  
-  &:hover {
-    color: ${theme.colors.accent};
-    transform: translateX(10px);
-  }
-`;
-
-const CTAButton = styled(motion.a)`
-  display: inline-flex;
-  align-items: center;
-  gap: ${theme.spacing.md};
-  padding: ${theme.spacing.xl} ${theme.spacing['3xl']};
-  background: ${theme.colors.accent};
-  color: ${theme.colors.surface};
-  font-size: ${theme.fontSizes.md};
-  font-weight: ${theme.fontWeights.semibold};
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all ${theme.transitions.normal};
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: left 0.5s ease;
-  }
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: ${theme.shadows.glow};
-    color: ${theme.colors.surface};
-    background: ${theme.colors.accentLight};
-    
-    &::before {
-      left: 100%;
-    }
-  }
-`;
-
-const Footer = styled(motion.footer)`
-  position: absolute;
-  bottom: ${theme.spacing.xl};
-  left: 0;
-  right: 0;
-  text-align: center;
-`;
-
-const FooterText = styled.p`
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.textMuted};
-  
-  span {
-    color: ${theme.colors.accentLight};
-  }
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 `;
 
 export const ContactSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
   const { personal, contact: contactContent } = content;
+  const year = new Date().getFullYear();
 
   return (
-    <ContactContainer id="contact" ref={ref}>
-      <ContactContent>
-        <SectionLabel
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          Get In Touch
-        </SectionLabel>
-        
-        <SectionTitle
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          {contactContent.heading.split(' ')[0]}{' '}
-          <span>{contactContent.heading.split(' ').slice(1).join(' ')}</span>
-        </SectionTitle>
-        
-        <Description
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {contactContent.description}
-        </Description>
-        
-        <ContactLinks
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <ContactLink
-            href={`mailto:${personal.email}`}
-            whileHover={{ x: 10 }}
-          >
-            <span>Email</span>
-            {personal.email}
-          </ContactLink>
-          
-          <ContactLink
-            href={`tel:${personal.phone?.replace(/\s/g, '')}`}
-            whileHover={{ x: 10 }}
-          >
-            <span>Phone</span>
-            {personal.phone}
-          </ContactLink>
-          
-          <ContactLink
-            href={personal.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ x: 10 }}
-          >
-            <span>LinkedIn</span>
-            View Profile
-          </ContactLink>
-        </ContactLinks>
-        
-        <CTAButton
-          href={`mailto:${personal.email}`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          {contactContent.cta}
-          <span>&#8594;</span>
-        </CTAButton>
-      </ContactContent>
-      
-      <Footer
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, delay: 0.6 }}
-      >
-        <FooterText>
-          &copy; {new Date().getFullYear()} <span>{personal.fullName}</span>. All rights reserved.
-        </FooterText>
-      </Footer>
-    </ContactContainer>
+    <Footer id="contact">
+      <Inner>
+        <div>
+          <Heading>{contactContent.heading}</Heading>
+          <Cta href={`mailto:${personal.email}`}>{contactContent.cta}</Cta>
+        </div>
+        <Meta>
+          <div>{contactContent.entity}</div>
+          <MetaLink href={`mailto:${personal.email}`}>{personal.email}</MetaLink>
+          <MetaLink href={`tel:${personal.phone.replace(/\s/g, '')}`}>{personal.phone}</MetaLink>
+          <div>{contactContent.city}</div>
+          <Socials>
+            <Social href={personal.linkedin} target="_blank" rel="noopener noreferrer">IN</Social>
+            <Social href={`mailto:${personal.email}`}>@</Social>
+          </Socials>
+        </Meta>
+      </Inner>
+      <Bottom>
+        <span>© {year} {personal.fullName}</span>
+        <span>EN · FR · AR</span>
+      </Bottom>
+    </Footer>
   );
 };

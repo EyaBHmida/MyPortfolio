@@ -2,148 +2,246 @@
   "personal": {
     "name": "Eya",
     "fullName": "Eya Ben Hmida",
-    "title": "Strategic Marketing & Brand Content Specialist",
-    "tagline": "I help premium brands grow through creative marketing strategies, content storytelling, and influencer collaborations that deliver measurable results.",
+    "initials": "EBH",
+    "title": "Marketing Manager & Business Developer",
+    "headline": "MARKETING MANAGER & BUSINESS DEVELOPER",
+    "tagline": "Content, growth, and partnerships across healthcare, motorsport, and startup brands.",
     "email": "eya.b.hmida.1997@gmail.com",
     "phone": "+216 27 427 121",
-    "linkedin": "https://www.linkedin.com/in/eya-ben-hmida-a71b5a219/",
-    "roles": [
-      "Marketing Strategist",
-      "Content Creator",
-      "Brand Builder",
-      "Influencer Collaborator",
-      "Creative Director"
+    "linkedin": "https://www.linkedin.com/in/eya-ben-hmida",
+    "location": "Tunis, Tunisia",
+    "availability": "Open to remote / global",
+    "languages": [
+      { "code": "EN", "level": "Fluent" },
+      { "code": "FR", "level": "Fluent" },
+      { "code": "AR", "level": "Native" }
+    ]
+  },
+  "hero": {
+    "images": [
+      "/cv-photo.jpg",
+      "/main-pic.jpg",
+      "/background-pic.jpg"
     ]
   },
   "about": {
-    "description": "I'm a marketing professional with 3+ years of experience leading end-to-end digital strategies for multiple companies. I create social media strategies, manage content production, collaborate with designers, build editorial calendars, prepare analytics reports, and direct influencer campaigns.",
-    "philosophy": "I combine creativity and strategy to help brands connect with their audience, grow visibility, and strengthen their identity.",
-    "expertise": [
-      "Social Media Strategy (Instagram, TikTok, Facebook, LinkedIn)",
-      "Content Planning & Editorial Calendars",
-      "Influencer Collaboration & Campaign Management",
-      "Creative Direction & Visual Storytelling",
-      "Analytics, Reports & Optimization",
-      "Pitch Decks & Sponsorship Proposals"
+    "heading": "About Eya",
+    "lead": "Hi, I’m Eya — Marketing Manager, Business Developer, content strategist, and partnership closer. I move between a regulated healthcare platform one week and a motorsport brand built from zero the next.",
+    "body": "Over the last four years I’ve grown a brand community by 165%, built social and content systems from scratch, and sourced and closed influencer and agency partnerships — the full business-development cycle, not just the marketing half of it. I work well with ambiguity, bridge technical and business teams, and report results in numbers, not adjectives.",
+    "grid": [
+      { "src": "/Work/2.jpg", "type": "image" },
+      { "src": "/Work/16.mp4", "type": "video" },
+      { "src": "/Work/10.jpg", "type": "image" },
+      { "src": "/Work/22.jpg", "type": "image" }
     ]
   },
-  "services": [
-    {
-      "id": "content-strategy",
-      "title": "Content & Social Strategy",
-      "description": "Build editorial calendars, content pillars, and storytelling frameworks that resonate with your audience.",
-      "icon": "calendar"
-    },
-    {
-      "id": "influencer-strategy",
-      "title": "Influencer & Collaboration Strategy",
-      "description": "Plan and manage influencer partnerships from briefs to posts, ensuring authentic brand representation.",
-      "icon": "users"
-    },
-    {
-      "id": "brand-identity",
-      "title": "Brand Identity & Visual Storytelling",
-      "description": "Ensure cohesive visuals, tone, and premium positioning across all touchpoints.",
-      "icon": "palette"
-    },
-    {
-      "id": "community-growth",
-      "title": "Community Engagement & Growth",
-      "description": "Design campaigns that engage followers and convert them into loyal audiences.",
-      "icon": "trending"
-    }
+  "clients": [
+    { "name": "Pharmavie", "logo": "/brands/pharmavie.jpeg", "fit": "contain", "tile": "#F4F4F4" },
+    { "name": "Pitstop Motorsports", "logo": "/brands/pitstop.jpeg", "fit": "cover", "tile": "#000000" },
+    { "name": "Tachafy", "logo": "/brands/tachafy.jpeg", "fit": "contain", "tile": "#111111" },
+    { "name": "Ba9chich", "logo": "/brands/bakchich.jpeg", "fit": "cover", "tile": "#2B6CB0" }
+  ],
+  "workGallery": [
+    { "id": 1, "src": "/Work/1.jpg", "type": "image" },
+    { "id": 3, "src": "/Work/3.jpg", "type": "image" },
+    { "id": 4, "src": "/Work/4.jpg", "type": "image" },
+    { "id": 5, "src": "/Work/5.jpg", "type": "image" },
+    { "id": 6, "src": "/Work/6.jpg", "type": "image" },
+    { "id": 7, "src": "/Work/7.jpg", "type": "image" },
+    { "id": 8, "src": "/Work/8.jpg", "type": "image" },
+    { "id": 9, "src": "/Work/9.jpg", "type": "image" },
+    { "id": 11, "src": "/Work/11.jpg", "type": "image" },
+    { "id": 12, "src": "/Work/12.jpg", "type": "image" },
+    { "id": 13, "src": "/Work/13.jpg", "type": "image" },
+    { "id": 14, "src": "/Work/14.jpg", "type": "image" },
+    { "id": 15, "src": "/Work/15.jpg", "type": "image" },
+    { "id": 17, "src": "/Work/17.mp4", "type": "video" },
+    { "id": 18, "src": "/Work/18.jpg", "type": "image" },
+    { "id": 19, "src": "/Work/19.jpg", "type": "image" },
+    { "id": 20, "src": "/Work/20.jpg", "type": "image" },
+    { "id": 21, "src": "/Work/21.mp4", "type": "video" },
+    { "id": 23, "src": "/Work/23.jpg", "type": "image" },
+    { "id": 24, "src": "/Work/24.jpg", "type": "image" }
   ],
   "projects": [
     {
       "id": "pharmavie",
+      "theme": "light",
+      "featured": true,
+      "kicker": "Marketing & Digital Communication Lead",
       "title": "Pharmavie",
-      "subtitle": "Social Media & Influencer Campaign",
-      "role": "Lead Marketing Strategist + Influencer Collaboration",
-      "challenge": "Brand lacked structured storytelling and influencer campaigns.",
-      "approach": [
-        "Designed influencer strategy targeting niche audiences",
-        "Prepared campaign scripts, content guidelines, and storyboards",
-        "Collaborated with agencies and creators to produce consistent posts and stories"
-      ],
-      "results": [
-        "Followers increased from 20K → 53K",
-        "Multiple high-quality influencer partnerships",
-        "Strengthened brand image and audience connection"
-      ],
-      "featured": true
+      "dates": "May 2023 – Present",
+      "logo": "/brands/pharmavie.jpeg",
+      "logoFit": "contain",
+      "logoTile": "#F4F4F4",
+      "phones": ["/Work/2.jpg", "/Work/18.jpg", "/Work/19.jpg"],
+      "points": [
+        {
+          "num": "01",
+          "title": "Challenge",
+          "body": "Grow qualified demand and audience while keeping content, SEO, and an AI-powered diagnostic feature moving in step with developers and medical specialists."
+        },
+        {
+          "num": "02",
+          "title": "Approach",
+          "body": "Owned go-to-market strategy end-to-end; sourced, negotiated, and closed influencer and agency partnerships; ran the content calendar across Facebook, Instagram, and LinkedIn; kept website SEO and UX on track."
+        },
+        {
+          "num": "03",
+          "title": "Results",
+          "body": "Community grew from 20K to 53K followers (+165%). AI-powered skin-diagnosis feature shipped through sustained cross-functional collaboration."
+        }
+      ]
     },
     {
       "id": "pitstop",
+      "theme": "dark",
+      "featured": false,
+      "kicker": "Marketing Coordinator & Creative Lead For:",
       "title": "Pitstop Motorsports",
-      "subtitle": "Content & Brand Storytelling",
-      "role": "Marketing Coordinator + Creative Lead",
-      "challenge": "Brand was starting from scratch with no structured content, storytelling, or campaigns.",
-      "approach": [
-        "Defined content pillars and built the full editorial calendar",
-        "Collaborated with creators to produce reels, stories, and posts",
-        "Developed creative briefs, scripts, and visual direction",
-        "Built the social media strategy from the ground up"
-      ],
-      "results": [
-        "Cohesive and premium feed aesthetic across platforms",
-        "Significant engagement growth (saves, shares, comments)"
-      ],
-      "featured": true
+      "dates": "Mar 2023 – Sep 2024",
+      "logo": "/brands/pitstop.jpeg",
+      "logoFit": "cover",
+      "logoTile": "#000000",
+      "phones": ["/Work/23.jpg", "/Work/24.jpg"],
+      "points": [
+        {
+          "num": "01",
+          "title": "From zero",
+          "body": "The brand had no structured content, storytelling, or campaigns. I defined content pillars and owned the full editorial calendar."
+        },
+        {
+          "num": "02",
+          "title": "Creative system",
+          "body": "Directed briefs, scripts, and visual direction; partnered with creators on reels, stories, and posts — building the social strategy from the ground up."
+        }
+      ]
     },
     {
-      "id": "startup",
-      "title": "Confidential Startup Project",
-      "subtitle": "Brand & Content Strategy",
-      "role": "Marketing Strategist",
-      "challenge": "New brand required a full marketing system: social content, influencer collaborations, and launch strategy.",
-      "approach": [
-        "Developed complete social media strategy and content calendar",
-        "Collaborated with creators to produce stories, reels, and posts",
-        "Built campaign structure and creative briefs for influencer partnerships"
-      ],
-      "results": [
-        "Structured social media presence and engaging content system",
-        "Created foundation for brand visibility and audience growth"
-      ],
-      "featured": true
+      "id": "tachafy",
+      "theme": "light",
+      "featured": false,
+      "kicker": "Marketing Specialist & Business Developer For:",
+      "title": "Tachafy",
+      "dates": "Sep 2024",
+      "logo": "/brands/tachafy.jpeg",
+      "logoFit": "contain",
+      "logoTile": "#111111",
+      "phones": [],
+      "points": [
+        {
+          "num": "01",
+          "title": "Go-to-market",
+          "body": "Owned content strategy for a digital mental-healthcare platform, translating clinical concepts into accessible content for patients and providers."
+        },
+        {
+          "num": "02",
+          "title": "Partner acquisition",
+          "body": "Sourced and engaged clinics and healthcare providers; built pitch decks and business cases backed by market and competitor research."
+        }
+      ]
+    },
+    {
+      "id": "bakchich",
+      "theme": "dark",
+      "featured": false,
+      "kicker": "Community Manager Intern For:",
+      "title": "Ba9chich",
+      "dates": "Aug – Oct 2022",
+      "logo": "/brands/bakchich.jpeg",
+      "logoFit": "cover",
+      "logoTile": "#2B6CB0",
+      "phones": [],
+      "points": [
+        {
+          "num": "01",
+          "title": "Bilingual content",
+          "body": "Produced English and French social content, supporting cross-market audience growth."
+        },
+        {
+          "num": "02",
+          "title": "Creator insight",
+          "body": "Built creator personas through direct interviews to guide content and partnership decisions."
+        }
+      ]
+    },
+    {
+      "id": "buzztowin",
+      "theme": "light",
+      "featured": false,
+      "kicker": "Community Manager Intern For:",
+      "title": "Buzz To Win",
+      "dates": "Jun – Jul 2022",
+      "logo": "",
+      "logoFit": "contain",
+      "logoTile": "",
+      "phones": [],
+      "points": [
+        {
+          "num": "01",
+          "title": "Operations",
+          "body": "Coordinated freelancer and vendor profiles on Ne5dem.com and supported day-to-day marketing operations."
+        },
+        {
+          "num": "02",
+          "title": "SEO",
+          "body": "Ran SEO audits and delivered SEO-optimized copywriting; contributed to internal training materials."
+        }
+      ]
     }
   ],
-  "process": [
+  "services": {
+    "headingLeft": "What I",
+    "headingRight": "do",
+    "intro": "I am a bilingual marketing manager with 4+ years across healthcare, lifestyle, D2C, and startup brands — looking to expand yours.",
+    "items": [
+      "Go-To-Market Strategy",
+      "Content & Social Strategy",
+      "Business Development",
+      "Performance & Paid Media",
+      "SEO & Web",
+      "Bilingual Content EN · FR · AR"
+    ]
+  },
+  "tools": [
+    "Google Ads (Certified)",
+    "Google Analytics",
+    "Meta Business Suite",
+    "TikTok for Business",
+    "SEO / SEA",
+    "CRM",
+    "ChatGPT & AI Content Tools",
+    "Canva / Canva AI",
+    "Figma",
+    "Adobe Creative Suite",
+    "CapCut",
+    "WordPress",
+    "Notion",
+    "Trello",
+    "Microsoft Office",
+    "SPSS/Amos"
+  ],
+  "education": [
     {
-      "step": 1,
-      "title": "Discover",
-      "description": "Understand brand, audience, and goals"
+      "degree": "Master's Degree in Marketing",
+      "school": "Higher Institute of Management of Tunis (ISG)",
+      "dates": "2020 – 2022"
     },
     {
-      "step": 2,
-      "title": "Create Strategy",
-      "description": "Social, content, influencers, tone, visuals"
+      "degree": "Bachelor's Degree in Economics: Currency, Finance and Banking",
+      "school": "Faculty of Economic Sciences and Management of Nabeul",
+      "dates": ""
     },
     {
-      "step": 3,
-      "title": "Produce",
-      "description": "Reels, stories, designs, and content with creators"
-    },
-    {
-      "step": 4,
-      "title": "Launch",
-      "description": "Publish campaigns and collaborate with influencers"
-    },
-    {
-      "step": 5,
-      "title": "Optimize",
-      "description": "Analyze results, report insights, and improve performance"
+      "degree": "Baccalaureate of Management and Economics",
+      "school": "",
+      "dates": ""
     }
   ],
   "contact": {
-    "heading": "Let's Collaborate",
-    "description": "Let's collaborate to grow your brand and craft campaigns that engage.",
-    "cta": "Work With Me"
+    "heading": "Build your next launch",
+    "cta": "Work with me",
+    "entity": "Eya Ben Hmida",
+    "city": "Tunis, Tunisia — open to remote / global"
   }
 }
-
-
-
-
-
-

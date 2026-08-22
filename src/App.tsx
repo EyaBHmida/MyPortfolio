@@ -4,11 +4,10 @@ import { theme } from './styles/theme';
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
-import { ServicesSection } from './components/ServicesSection';
 import { WorkSection } from './components/WorkSection';
 import { ProjectsSection } from './components/ProjectsSection';
+import { ServicesSection } from './components/ServicesSection';
 import { ToolsSection } from './components/ToolsSection';
-import { ProcessSection } from './components/ProcessSection';
 import { ContactSection } from './components/ContactSection';
 
 function App() {
@@ -19,11 +18,10 @@ function App() {
       <main>
         <HeroSection />
         <AboutSection />
-        <ServicesSection />
         <WorkSection />
         <ProjectsSection />
+        <ServicesSection />
         <ToolsSection />
-        <ProcessSection />
         <ContactSection />
       </main>
     </ThemeProvider>
