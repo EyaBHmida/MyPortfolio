@@ -100,6 +100,7 @@ export const Navigation = () => {
         <li><LinkItem href="#about">About</LinkItem></li>
         <li><LinkItem href="#work">Work</LinkItem></li>
         <li><LinkItem href="#do">What I do</LinkItem></li>
+        <li><LinkItem href="/second">Editorial</LinkItem></li>
         <li><Cta href={`mailto:${personal.email}`}>{content.contact.cta}</Cta></li>
       </Links>
       <MobileCta href={`mailto:${personal.email}`}>{content.contact.cta}</MobileCta>
