@@ -5,10 +5,10 @@ import content from '../data/content.json';
 const Footer = styled.footer`
   background: ${theme.colors.black};
   color: ${theme.colors.white};
-  padding: 88px 32px 40px;
+  padding: 88px 32px max(40px, env(safe-area-inset-bottom));
 
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: 64px 20px 32px;
+    padding: 64px 20px max(32px, env(safe-area-inset-bottom));
   }
 `;
 
@@ -59,6 +59,7 @@ const Meta = styled.div`
 
 const MetaLink = styled.a`
   display: block;
+  overflow-wrap: anywhere;
 
   &:hover { text-decoration: underline; }
 `;

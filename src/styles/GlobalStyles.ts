@@ -11,6 +11,9 @@ export const GlobalStyles = createGlobalStyle`
   html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 
     @media (max-width: ${theme.breakpoints.md}) {
       font-size: 15px;
@@ -32,7 +35,7 @@ export const GlobalStyles = createGlobalStyle`
     background: ${theme.colors.black};
     color: ${theme.colors.white};
     line-height: 1.55;
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

@@ -20,7 +20,7 @@ const Copy = styled.div`
 const Heading = styled.h2`
   font-family: ${theme.fonts.serif};
   font-style: italic;
-  font-size: clamp(48px, 8vw, 86px);
+  font-size: clamp(36px, 10vw, 86px);
   letter-spacing: -0.03em;
   margin-bottom: 36px;
 `;

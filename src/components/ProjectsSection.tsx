@@ -35,10 +35,12 @@ const Kicker = styled.p`
 
 const Title = styled.h3`
   font-family: ${theme.fonts.display};
-  font-size: clamp(36px, 5vw, 64px);
+  font-size: clamp(28px, 8vw, 64px);
   text-transform: uppercase;
   letter-spacing: 0.01em;
   margin-bottom: 8px;
+  overflow-wrap: anywhere;
+  line-height: 1.02;
 `;
 
 const Dates = styled.p`
@@ -55,8 +57,13 @@ const Points = styled.div`
 
 const Point = styled.div`
   display: grid;
-  grid-template-columns: 52px 1fr;
-  gap: 14px;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+
+  @media (min-width: ${theme.breakpoints.md}) {
+    grid-template-columns: 52px 1fr;
+    gap: 14px;
+  }
 `;
 
 const Num = styled.span`
@@ -85,7 +92,7 @@ const Visual = styled.div`
 `;
 
 const LogoFrame = styled.div<{ $tile: string }>`
-  width: min(280px, 70%);
+  width: min(280px, 100%);
   aspect-ratio: 1.35 / 1;
   display: flex;
   align-items: center;
@@ -103,15 +110,18 @@ const Logo = styled.img<{ $fit: string }>`
 const Phones = styled.div`
   display: flex;
   justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
+  width: 100%;
 `;
 
 const Phone = styled.div`
-  width: 132px;
+  flex: 1 1 0;
+  min-width: 72px;
+  max-width: 132px;
   aspect-ratio: 9 / 19;
-  border-radius: 22px;
-  border: 8px solid #0b0b0b;
+  border-radius: 18px;
+  border: 6px solid #0b0b0b;
   overflow: hidden;
   background: #0b0b0b;
   box-shadow: 0 18px 40px rgba(0,0,0,0.28);
@@ -122,8 +132,10 @@ const Phone = styled.div`
     object-fit: cover;
   }
 
-  @media (max-width: ${theme.breakpoints.md}) {
-    width: 110px;
+  @media (min-width: ${theme.breakpoints.md}) {
+    flex: 0 0 132px;
+    border-width: 8px;
+    border-radius: 22px;
   }
 `;
 

@@ -39,7 +39,8 @@
     { "name": "Pharmavie", "logo": "/brands/pharmavie.jpeg", "fit": "contain", "tile": "#F4F4F4" },
     { "name": "Pitstop Motorsports", "logo": "/brands/pitstop.jpeg", "fit": "cover", "tile": "#000000" },
     { "name": "Tachafy", "logo": "/brands/tachafy.jpeg", "fit": "contain", "tile": "#111111" },
-    { "name": "Ba9chich", "logo": "/brands/bakchich.jpeg", "fit": "cover", "tile": "#2B6CB0" }
+    { "name": "Ba9chich", "logo": "/brands/bakchich.jpeg", "fit": "cover", "tile": "#2B6CB0" },
+    { "name": "Buzz To Win", "logo": "/brands/b2w.png", "fit": "cover", "tile": "#F4A024" }
   ],
   "workGallery": [
     { "id": 1, "src": "/Work/1.jpg", "type": "image" },
@@ -172,9 +173,9 @@
       "kicker": "Community Manager Intern For:",
       "title": "Buzz To Win",
       "dates": "Jun – Jul 2022",
-      "logo": "",
-      "logoFit": "contain",
-      "logoTile": "",
+      "logo": "/brands/b2w.png",
+      "logoFit": "cover",
+      "logoTile": "#F4A024",
       "phones": [],
       "points": [
         {

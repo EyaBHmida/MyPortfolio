@@ -9,9 +9,13 @@ const HeadingBand = styled.section`
   text-align: center;
   padding: 88px 24px;
 
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: 56px 20px;
+  }
+
   h2 {
     font-family: ${theme.fonts.serif};
-    font-size: clamp(56px, 9vw, 96px);
+    font-size: clamp(40px, 12vw, 96px);
     letter-spacing: -0.04em;
   }
 `;
@@ -86,9 +90,10 @@ const Clients = styled.section`
 const ClientsTitle = styled.h2`
   font-family: ${theme.fonts.serif};
   font-style: italic;
-  font-size: clamp(40px, 6vw, 72px);
+  font-size: clamp(32px, 8vw, 72px);
   text-align: center;
   margin-bottom: 48px;
+  overflow-wrap: anywhere;
 `;
 
 const LogoRow = styled.div`
@@ -100,6 +105,13 @@ const LogoRow = styled.div`
 
   @media (max-width: ${theme.breakpoints.md}) {
     grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    > *:nth-child(5) {
+      grid-column: 1 / -1;
+      max-width: 50%;
+      justify-self: center;
+    }
   }
 `;
 
@@ -126,7 +138,7 @@ const Lightbox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
 `;
 
 const LightboxMedia = styled.img`
@@ -142,11 +154,13 @@ const LightboxVideo = styled.video`
 
 const Close = styled.button`
   position: absolute;
-  top: 24px;
-  right: 28px;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
   color: ${theme.colors.white};
   font-size: 32px;
   z-index: 2001;
+  width: 44px;
+  height: 44px;
 `;
 
 export const WorkSection = () => {

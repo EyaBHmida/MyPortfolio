@@ -28,7 +28,7 @@ const Inner = styled.div`
 
 const Heading = styled.h2`
   font-family: ${theme.fonts.serif};
-  font-size: clamp(56px, 8vw, 88px);
+  font-size: clamp(40px, 12vw, 88px);
   letter-spacing: -0.04em;
   line-height: 0.9;
 
@@ -55,11 +55,12 @@ const Pill = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 260px;
-  padding: 14px 28px;
+  width: 100%;
+  max-width: 420px;
+  padding: 14px 20px;
   border: 1px solid ${theme.colors.black};
   border-radius: 999px;
-  font-size: 15px;
+  font-size: 14px;
   text-align: center;
 `;
 

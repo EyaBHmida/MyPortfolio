@@ -160,10 +160,13 @@ const PreloaderLine = styled.div`
 `;
 
 const PreloaderWord = styled.p`
-  font-size: 0.68rem;
-  letter-spacing: 0.5em;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${tokens.lilacDeep};
+  max-width: min(92vw, 340px);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 `;
 
 export function Preloader({ signatureSrc, word }: { signatureSrc: string; word: string }) {
@@ -326,6 +329,16 @@ const LightboxMedia = styled.div`
     object-fit: contain;
     display: block;
   }
+
+  @media (max-width: 640px) {
+    max-height: 58svh;
+    margin-bottom: 12svh;
+
+    img,
+    video {
+      max-height: 58svh;
+    }
+  }
 `;
 
 const LbCaption = styled.p`
@@ -339,11 +352,20 @@ const LbCaption = styled.p`
   gap: 1.4rem;
   width: min(92vw, 44rem);
   font-size: 0.64rem;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${tokens.lilac};
   text-align: left;
   line-height: 1.7;
+  flex-wrap: wrap;
+  padding-inline: 0.75rem;
+  overflow-wrap: anywhere;
+
+  @media (max-width: 640px) {
+    bottom: 1.05rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+  }
 `;
 
 const LbCount = styled.span`
@@ -378,8 +400,8 @@ const LbBtn = styled.button`
   }
 
   &.lb-close {
-    top: 1.4rem;
-    right: 1.4rem;
+    top: max(1rem, env(safe-area-inset-top));
+    right: max(1rem, env(safe-area-inset-right));
   }
   &.lb-prev {
     left: 1.2rem;

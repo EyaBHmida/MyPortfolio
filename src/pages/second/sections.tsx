@@ -155,6 +155,12 @@ export const EditorialGlobal = createGlobalStyle`
   html.lenis { height: auto; }
   .lenis.lenis-smooth { scroll-behavior: auto; }
 
+  html {
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
     font-family: ${tokens.sans};
     font-weight: 300;
@@ -247,6 +253,10 @@ const Wrap = styled.div`
 const Section = styled.section<{ $pad?: boolean }>`
   position: relative;
   padding-block: ${({ $pad = true }) => ($pad ? tokens.sectionY : 0)};
+
+  @media (max-width: 700px) {
+    padding-block: ${({ $pad = true }) => ($pad ? '4.25rem' : 0)};
+  }
 `;
 
 const Kicker = styled.p<{ $light?: boolean; $lilac?: boolean }>`
@@ -268,14 +278,27 @@ const Kicker = styled.p<{ $light?: boolean; $lilac?: boolean }>`
       $lilac ? tokens.wine : $light ? tokens.crimson : tokens.lilac};
     opacity: 0.6;
   }
+
+  @media (max-width: 700px) {
+    letter-spacing: 0.2em;
+    font-size: 0.62rem;
+    gap: 0.6rem;
+    max-width: 100%;
+    flex-wrap: wrap;
+
+    &::before {
+      width: 1.4rem;
+    }
+  }
 `;
 
 const H2 = styled.h2<{ $light?: boolean; $lilac?: boolean }>`
   font-family: ${tokens.serif};
   font-weight: 500;
-  font-size: clamp(2.4rem, 5.6vw, 4.9rem);
+  font-size: clamp(2rem, 9vw, 4.9rem);
   line-height: 1.04;
   letter-spacing: 0.005em;
+  overflow-wrap: anywhere;
   color: ${({ $light, $lilac }) => ($light || $lilac ? tokens.wine : tokens.ivory)};
   em {
     font-style: italic;
@@ -286,9 +309,10 @@ const H2 = styled.h2<{ $light?: boolean; $lilac?: boolean }>`
 const Display = styled.h2`
   font-family: ${tokens.serif};
   font-weight: 500;
-  font-size: clamp(2.9rem, 8vw, 7rem);
+  font-size: clamp(2.2rem, 11vw, 7rem);
   line-height: 1.04;
   max-width: 14ch;
+  overflow-wrap: anywhere;
   em {
     font-style: italic;
     font-weight: 400;
@@ -315,6 +339,10 @@ const Count = styled.p<{ $light?: boolean; $lilac?: boolean }>`
     $light || $lilac ? tokens.crimson : tokens.lilacDeep};
   letter-spacing: 0.05em;
   white-space: nowrap;
+
+  @media (max-width: 700px) {
+    white-space: normal;
+  }
 `;
 
 const SectionHead = styled.div`
@@ -424,7 +452,12 @@ const SiteHeader = styled.header`
   inset-inline: 0;
   top: 0;
   z-index: 200;
-  height: ${tokens.headerH};
+  height: calc(${tokens.headerH} + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+
+  @media (max-width: 1023px) {
+    height: calc(4.25rem + env(safe-area-inset-top));
+  }
   display: flex;
   align-items: center;
   transition:
@@ -447,12 +480,12 @@ const HeaderIn = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1rem;
   width: 100%;
 `;
 
 const BrandImg = styled.img`
-  width: clamp(96px, 10vw, 128px);
+  width: clamp(72px, 22vw, 128px);
   height: auto;
   filter: brightness(0) invert(1);
 `;
@@ -525,8 +558,8 @@ const HeaderCta = styled.a`
 
 const Burger = styled.button`
   display: none;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 44px;
+  height: 44px;
   place-items: center;
   position: relative;
   z-index: 250;
@@ -572,6 +605,8 @@ const MobileMenu = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: ${tokens.gutter};
+  padding-top: max(5rem, calc(env(safe-area-inset-top) + 4rem));
+  overflow-y: auto;
   clip-path: inset(0 0 100% 0);
   visibility: hidden;
   transition: clip-path 0.8s ${tokens.easeLuxe}, visibility 0.8s;
@@ -589,7 +624,7 @@ const MobileMenu = styled.div`
 
   nav a {
     font-family: ${tokens.serif};
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(1.7rem, 8vw, 3rem);
     color: ${tokens.ivory};
     padding-block: 0.35rem;
     display: flex;
@@ -615,9 +650,10 @@ const MobileMenu = styled.div`
   .mm-foot {
     margin-top: 3rem;
     display: flex;
-    gap: 1.6rem;
+    flex-wrap: wrap;
+    gap: 1rem 1.6rem;
     font-size: 0.7rem;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: ${tokens.lilac};
     opacity: 0;
@@ -650,7 +686,13 @@ export function EditorialHeader({
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 40);
-      if (y > window.innerHeight && y > lastY.current + 6) setHidden(true);
+      if (
+        window.innerWidth > 1023 &&
+        y > window.innerHeight &&
+        y > lastY.current + 6
+      ) {
+        setHidden(true);
+      }
       if (y < lastY.current - 6) setHidden(false);
       if (y < 40) setHidden(false);
       lastY.current = y;
@@ -716,7 +758,7 @@ export function EditorialHeader({
   return (
     <>
       <SiteHeader
-        className={`${scrolled ? 'is-scrolled' : ''} ${hidden ? 'is-hidden' : ''}`}
+        className={`${scrolled ? 'is-scrolled' : ''} ${hidden && !menuOpen ? 'is-hidden' : ''}`}
       >
         <Wrap>
           <HeaderIn>
@@ -809,6 +851,10 @@ const Hero = styled(Section)`
   padding: 0;
   overflow: clip;
   isolation: isolate;
+
+  @media (max-width: 700px) {
+    padding-block: 0;
+  }
 `;
 
 const HeroSlides = styled.div`
@@ -876,11 +922,16 @@ const HeroContent = styled.div`
   align-self: end;
   justify-self: center;
   text-align: center;
-  padding: 0 ${tokens.gutter} clamp(8rem, 16vh, 11rem);
+  padding: 0 ${tokens.gutter} clamp(6.5rem, 14vh, 11rem);
   display: grid;
   justify-items: center;
   gap: 1.5rem;
   width: 100%;
+
+  @media (max-width: 700px) {
+    padding-bottom: 6.5rem;
+    gap: 1rem;
+  }
 `;
 
 const HeroKicker = styled.p`
@@ -901,6 +952,20 @@ const HeroKicker = styled.p`
     height: 1px;
     background: ${tokens.lilac};
     opacity: 0.6;
+  }
+
+  @media (max-width: 700px) {
+    letter-spacing: 0.16em;
+    font-size: 0.58rem;
+    gap: 0.55rem;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &::before,
+    &::after {
+      width: 1.1rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -925,7 +990,7 @@ const HeroLine = styled.h1`
   color: ${tokens.ivory};
   font-family: ${tokens.serif};
   font-weight: 400;
-  font-size: clamp(1.35rem, 2.8vw, 2.1rem);
+  font-size: clamp(1.2rem, 4.6vw, 2.1rem);
   line-height: 1.25;
   letter-spacing: 0.02em;
   max-width: 34ch;
@@ -946,7 +1011,7 @@ const HeroLine = styled.h1`
 const HeroScroll = styled.div`
   position: absolute;
   z-index: 3;
-  bottom: 1.6rem;
+  bottom: max(1.2rem, env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -954,7 +1019,7 @@ const HeroScroll = styled.div`
   align-items: center;
   gap: 0.7rem;
   font-size: 0.6rem;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: ${tokens.lilac};
   opacity: 0;
@@ -1123,9 +1188,15 @@ const AboutMedia = styled.div`
   &::after {
     content: '';
     position: absolute;
-    inset: 1.1rem;
+    inset: 0.7rem;
     border: 1px solid rgba(211, 191, 219, 0.35);
     pointer-events: none;
+  }
+
+  @media (min-width: 700px) {
+    &::after {
+      inset: 1.1rem;
+    }
   }
 
   .frame {
@@ -1146,10 +1217,14 @@ const AboutMedia = styled.div`
 const Stats = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2.6rem 1.6rem;
+  gap: 1.6rem 1rem;
   margin-top: 3.2rem;
   border-top: 1px solid rgba(211, 191, 219, 0.2);
   padding-top: 2.6rem;
+
+  @media (max-width: 639px) {
+    gap: 1.4rem 0.8rem;
+  }
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(4, 1fr);
@@ -1161,7 +1236,7 @@ const StatBlock = styled.div`
     display: block;
     font-family: ${tokens.serif};
     font-weight: 500;
-    font-size: clamp(2.3rem, 4vw, 3.4rem);
+    font-size: clamp(1.45rem, 7vw, 3.4rem);
     color: ${tokens.ivory};
     line-height: 1;
 
@@ -1179,6 +1254,11 @@ const StatBlock = styled.div`
     letter-spacing: 0.26em;
     text-transform: uppercase;
     color: ${tokens.lilacDeep};
+
+    @media (max-width: 639px) {
+      letter-spacing: 0.08em;
+      font-size: 0.58rem;
+    }
   }
 `;
 
@@ -1378,6 +1458,10 @@ const WorkBand = styled.section<{ $light: boolean }>`
   padding-block: ${tokens.sectionY};
   border-top: 1px solid ${({ $light }) =>
     $light ? 'rgba(42, 13, 19, 0.12)' : 'rgba(211, 191, 219, 0.12)'};
+
+  @media (max-width: 700px) {
+    padding-block: 4.25rem;
+  }
 `;
 
 const WorkInner = styled.div`
@@ -1389,6 +1473,10 @@ const WorkInner = styled.div`
   @media (max-width: 1023px) {
     grid-template-columns: 1fr;
     gap: 2.2rem;
+
+    > * {
+      min-width: 0;
+    }
   }
 `;
 
@@ -1402,12 +1490,13 @@ const WorkRole = styled.p<{ $light: boolean }>`
 
 const WorkTitle = styled.h3<{ $light: boolean }>`
   font-family: ${tokens.sans};
-  font-size: clamp(2.1rem, 4.8vw, 3.75rem);
+  font-size: clamp(1.65rem, 8.5vw, 3.75rem);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   line-height: 1.02;
   margin-bottom: 0.45rem;
+  overflow-wrap: anywhere;
   color: ${({ $light }) => ($light ? tokens.ink : tokens.ivory)};
 `;
 
@@ -1426,8 +1515,8 @@ const WorkPoints = styled.div`
 
 const WorkPoint = styled.div`
   display: grid;
-  grid-template-columns: 3.2rem 1fr;
-  gap: 0.85rem;
+  grid-template-columns: 2.6rem 1fr;
+  gap: 0.7rem;
 `;
 
 const WorkNum = styled.span<{ $light: boolean }>`
@@ -1459,10 +1548,12 @@ const WorkVisual = styled.div`
   flex-direction: column;
   gap: 1.25rem;
   align-items: center;
+  min-width: 0;
+  width: 100%;
 `;
 
 const WorkLogoFrame = styled.div<{ $tile: string }>`
-  width: min(280px, 70%);
+  width: min(280px, 100%);
   aspect-ratio: 1.35 / 1;
   display: flex;
   align-items: center;
@@ -1480,15 +1571,18 @@ const WorkLogo = styled.img<{ $fit: string }>`
 const WorkPhones = styled.div`
   display: flex;
   justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  width: 100%;
 `;
 
 const WorkPhone = styled.button`
-  width: 132px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 132px;
   aspect-ratio: 9 / 19;
-  border-radius: 22px;
-  border: 8px solid #0b0b0b;
+  border-radius: 18px;
+  border: 6px solid #0b0b0b;
   overflow: hidden;
   background: #0b0b0b;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
@@ -1502,8 +1596,10 @@ const WorkPhone = styled.button`
     display: block;
   }
 
-  @media (max-width: 700px) {
-    width: 110px;
+  @media (min-width: 701px) {
+    flex: 0 0 132px;
+    border-width: 8px;
+    border-radius: 22px;
   }
 `;
 
@@ -1579,9 +1675,13 @@ export function EditorialWork({ projects }: { projects: Project[] }) {
 
 const Works = styled.ul`
   display: grid;
-  gap: clamp(1.1rem, 2.4vw, 2.2rem);
-  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.85rem, 2.4vw, 2.2rem);
+  grid-template-columns: 1fr;
   list-style: none;
+
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(12, 1fr);
@@ -1775,7 +1875,7 @@ const BrandCell = styled.div<{ $fit: string }>`
   background: ${tokens.noir};
   display: grid;
   place-items: center;
-  padding: clamp(2rem, 4vw, 3.4rem) 1.4rem;
+  padding: clamp(1.4rem, 4vw, 3.4rem) clamp(0.75rem, 3vw, 1.4rem);
   transition: background 0.6s;
 
   img {
@@ -1805,9 +1905,10 @@ const BrandCell = styled.div<{ $fit: string }>`
     display: block;
   }
   @media (min-width: 1024px) {
+    &.filler.f1,
     &.filler.f2,
     &.filler.f3 {
-      display: block;
+      display: none;
     }
   }
 `;
@@ -1868,7 +1969,7 @@ const ContactGrid = styled.div`
 
 const ContactCard = styled.div`
   background: color-mix(in srgb, ${tokens.noir} 88%, transparent);
-  padding: clamp(2.2rem, 4.5vw, 3.8rem);
+  padding: clamp(1.5rem, 4.5vw, 3.8rem);
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -1884,12 +1985,14 @@ const ContactCard = styled.div`
 
   a.mail {
     font-family: ${tokens.serif};
-    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    font-size: clamp(1.05rem, 4.8vw, 2.2rem);
     color: ${tokens.ivory};
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.9rem;
-    width: fit-content;
+    gap: 0.55rem 0.9rem;
+    max-width: 100%;
+    overflow-wrap: anywhere;
 
     svg {
       width: 1.1rem;
@@ -1974,7 +2077,7 @@ export function ContactSectionView({
 const SiteFooter = styled.footer`
   background: ${tokens.noir};
   border-top: 1px solid rgba(211, 191, 219, 0.12);
-  padding: clamp(3rem, 6vw, 5rem) 0 2.2rem;
+  padding: clamp(3rem, 6vw, 5rem) 0 max(2.2rem, env(safe-area-inset-bottom));
 `;
 
 const FooterGrid = styled.div`
@@ -1995,11 +2098,11 @@ const FooterNav = styled.nav`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.6rem 2.2rem;
+  gap: 0.85rem 1.35rem;
 
   a {
     font-size: 0.68rem;
-    letter-spacing: 0.26em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: ${tokens.lilac};
     opacity: 0.8;
@@ -2047,19 +2150,20 @@ const FooterFine = styled.div`
   border-top: 1px solid rgba(211, 191, 219, 0.1);
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem 1rem;
   justify-content: space-between;
-  font-size: 0.66rem;
-  letter-spacing: 0.18em;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: color-mix(in srgb, ${tokens.lilac} 55%, transparent);
+  overflow-wrap: anywhere;
 `;
 
 const WaFloat = styled.a`
   position: fixed;
   z-index: 180;
-  right: clamp(1rem, 3vw, 2rem);
-  bottom: clamp(1rem, 3vw, 2rem);
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
   width: 3.6rem;
   height: 3.6rem;
   border-radius: 50%;

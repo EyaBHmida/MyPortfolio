@@ -4,14 +4,14 @@ import content from '../data/content.json';
 
 const Hero = styled.section`
   position: relative;
-  min-height: 100vh;
+  min-height: 100svh;
   background: ${theme.colors.black};
 `;
 
 const PhotoGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  min-height: 100vh;
+  min-height: 100svh;
 
   @media (max-width: ${theme.breakpoints.md}) {
     grid-template-columns: 1fr;
@@ -20,14 +20,14 @@ const PhotoGrid = styled.div`
 `;
 
 const Photo = styled.div<{ $src: string }>`
-  min-height: 100vh;
+  min-height: 100svh;
   background-image: url(${({ $src }) => $src});
   background-size: cover;
   background-position: center 20%;
   filter: grayscale(1) contrast(1.05);
 
   @media (max-width: ${theme.breakpoints.md}) {
-    min-height: 70vh;
+    min-height: 100svh;
 
     &:nth-child(2), &:nth-child(3) {
       display: none;
@@ -44,6 +44,8 @@ const Overlay = styled.div`
   justify-content: center;
   text-align: center;
   padding: 32px;
+  padding-top: max(96px, calc(env(safe-area-inset-top) + 72px));
+  padding-bottom: 88px;
   background: linear-gradient(
     to bottom,
     rgba(17,17,17,0.15) 0%,
@@ -51,37 +53,50 @@ const Overlay = styled.div`
     rgba(17,17,17,0.45) 100%
   );
   pointer-events: none;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding-inline: 16px;
+  }
 `;
 
 const Name = styled.h1`
   font-family: ${theme.fonts.display};
   font-weight: 500;
-  font-size: clamp(42px, 8.4vw, 118px);
+  font-size: clamp(2rem, 11vw, 118px);
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #E9E8E9;
   line-height: 0.92;
+  max-width: 100%;
 `;
 
 const Headline = styled.p`
   margin-top: 16px;
-  font-size: clamp(13px, 1.5vw, 18px);
+  font-size: clamp(12px, 3.4vw, 18px);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${theme.colors.white};
+  max-width: 36ch;
+  line-height: 1.45;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    letter-spacing: 0.08em;
+  }
 `;
 
 const Email = styled.a`
   position: absolute;
-  bottom: 36px;
+  bottom: max(20px, env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   font-size: 15px;
   color: ${theme.colors.white};
   pointer-events: auto;
+  max-width: calc(100% - 32px);
+  overflow-wrap: anywhere;
+  text-align: center;
 
   @media (max-width: ${theme.breakpoints.md}) {
-    bottom: 20px;
     font-size: 13px;
   }
 `;
