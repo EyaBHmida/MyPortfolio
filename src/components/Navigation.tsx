@@ -177,7 +177,7 @@ export const Navigation = () => {
         <li><LinkItem href="#about">About</LinkItem></li>
         <li><LinkItem href="#work">Work</LinkItem></li>
         <li><LinkItem href="#do">What I do</LinkItem></li>
-        <li><LinkItem href="/second">Editorial</LinkItem></li>
+        <li><LinkItem href="/">Editorial</LinkItem></li>
         <li><Cta href={`mailto:${personal.email}`}>{content.contact.cta}</Cta></li>
       </Links>
       <Burger
@@ -195,7 +195,7 @@ export const Navigation = () => {
         <a href="#about" onClick={close}>About</a>
         <a href="#work" onClick={close}>Work</a>
         <a href="#do" onClick={close}>What I do</a>
-        <a href="/second" onClick={close}>Editorial</a>
+        <a href="/" onClick={close}>Editorial</a>
         <MobileCta href={`mailto:${personal.email}`} onClick={close}>
           {content.contact.cta}
         </MobileCta>

@@ -808,7 +808,7 @@ export function EditorialHeader({
             </a>
           ))}
           <Link
-            to="/"
+            to="/second"
             onClick={closeMenu}
             style={{
               color: 'inherit',
@@ -2253,7 +2253,7 @@ export function EditorialFooter({
                 {item.label}
               </a>
             ))}
-            <Link to="/">Main site</Link>
+            <Link to="/second">Main site</Link>
           </FooterNav>
           <Socials>
             <a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">

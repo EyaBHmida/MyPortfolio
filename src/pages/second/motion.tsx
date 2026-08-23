@@ -380,53 +380,53 @@ const LbCount = styled.span`
 
 const LbBtn = styled.button`
   position: absolute;
+  z-index: 2;
   display: grid;
   place-items: center;
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  margin: 0;
   border-radius: 50%;
-  border: 1px solid rgba(211, 191, 219, 0.35);
+  border: 1px solid rgba(245, 239, 242, 0.88);
+  background: transparent;
   color: ${tokens.ivory};
-  transition: background 0.3s, color 0.3s;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none;
+  transition: background 0.35s ${tokens.easeOut}, border-color 0.35s;
 
-  &:hover {
-    background: ${tokens.lilac};
-    color: ${tokens.ink};
+  &:hover,
+  &:focus-visible {
+    background: rgba(245, 239, 242, 0.1);
+    border-color: ${tokens.ivory};
   }
 
   svg {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 0.95rem;
+    height: 0.95rem;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.35;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
   }
 
   &.lb-close {
-    top: max(1rem, env(safe-area-inset-top));
-    right: max(1rem, env(safe-area-inset-right));
+    top: max(1.25rem, env(safe-area-inset-top));
+    right: max(1.25rem, env(safe-area-inset-right));
   }
   &.lb-prev {
-    left: 1.2rem;
+    left: max(1.25rem, env(safe-area-inset-left));
     top: 50%;
-    translate: 0 -50%;
+    transform: translateY(-50%);
   }
   &.lb-next {
-    right: 1.2rem;
+    right: max(1.25rem, env(safe-area-inset-right));
     top: 50%;
-    translate: 0 -50%;
-  }
-
-  @media (max-width: 640px) {
-    &.lb-prev,
-    &.lb-next {
-      top: auto;
-      bottom: 5rem;
-      translate: 0 0;
-    }
-    &.lb-prev {
-      left: 22%;
-    }
-    &.lb-next {
-      right: 22%;
-    }
+    transform: translateY(-50%);
   }
 `;
 
@@ -536,8 +536,8 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
               aria-label="Close gallery"
               onClick={close}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M6 6l12 12M18 6L6 18" />
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" />
               </svg>
             </LbBtn>
             <LbBtn
@@ -546,8 +546,8 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
               aria-label="Previous image"
               onClick={() => show(index - 1)}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M15 5l-7 7 7 7" />
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14.5 5.5L8 12l6.5 6.5" />
               </svg>
             </LbBtn>
             <LbBtn
@@ -556,8 +556,8 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
               aria-label="Next image"
               onClick={() => show(index + 1)}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M9 5l7 7-7 7" />
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.5 5.5L16 12l-6.5 6.5" />
               </svg>
             </LbBtn>
           </LightboxRoot>,
