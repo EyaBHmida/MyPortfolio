@@ -36,7 +36,7 @@ type Stat = {
   label: string;
   display?: string;
 };
-type Client = { name: string; logo: string; fit: string };
+type Client = { name: string; logo: string; fit: string; tile: string };
 type ProjectPoint = { num: string; title: string; body: string };
 type Project = {
   id: string;
@@ -170,6 +170,11 @@ export const EditorialGlobal = createGlobalStyle`
     letter-spacing: 0.015em;
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   body.has-cursor,
@@ -485,9 +490,9 @@ const HeaderIn = styled.div`
 `;
 
 const BrandImg = styled.img`
-  width: clamp(72px, 22vw, 128px);
+  width: clamp(26px, 4.6vw, 36px);
   height: auto;
-  filter: brightness(0) invert(1);
+  display: block;
 `;
 
 const SiteNav = styled.nav`
@@ -535,11 +540,14 @@ const SiteNav = styled.nav`
 `;
 
 const HeaderCta = styled.a`
-  font-size: 0.7rem;
-  letter-spacing: 0.24em;
+  font-family: ${tokens.sans};
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-weight: 400;
-  border: 1px solid rgba(211, 191, 219, 0.45);
+  color: ${tokens.ivory};
+  text-decoration: none;
+  border: 1px solid rgba(245, 239, 242, 0.7);
   padding: 0.78rem 1.6rem;
   border-radius: 99px;
   transition: background 0.4s, color 0.4s, border-color 0.4s;
@@ -652,15 +660,24 @@ const MobileMenu = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 1rem 1.6rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: ${tokens.lilac};
     opacity: 0;
     transition: opacity 0.6s 0.4s;
   }
   &.is-open .mm-foot {
     opacity: 1;
+  }
+
+  .mm-foot a {
+    font-family: ${tokens.sans};
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: ${tokens.ivory};
+    text-decoration: none;
+    border: 1px solid rgba(245, 239, 242, 0.7);
+    padding: 0.78rem 1.6rem;
+    border-radius: 99px;
   }
 `;
 
@@ -1859,55 +1876,66 @@ export function StageSectionView({ data }: { data: Editorial['stage'] }) {
 const BrandWall = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: rgba(211, 191, 219, 0.13);
-  border: 1px solid rgba(211, 191, 219, 0.13);
+  gap: 0.7rem;
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
   }
   @media (min-width: 1024px) {
     grid-template-columns: repeat(5, 1fr);
   }
 `;
 
-const BrandCell = styled.div<{ $fit: string }>`
-  background: ${tokens.noir};
+const BrandCell = styled.div<{ $fit: string; $tile: string }>`
+  position: relative;
+  aspect-ratio: 1;
   display: grid;
   place-items: center;
-  padding: clamp(1.4rem, 4vw, 3.4rem) clamp(0.75rem, 3vw, 1.4rem);
-  transition: background 0.6s;
+  padding: clamp(1.1rem, 2.4vw, 1.8rem);
+  background: ${({ $tile }) => $tile};
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: inset 0 0 0 1px rgba(211, 191, 219, 0.16);
+  transition:
+    transform 0.55s ${tokens.easeOut},
+    box-shadow 0.55s;
 
   img {
-    max-height: clamp(2rem, 3.2vw, 2.9rem);
-    width: auto;
-    max-width: 78%;
-    height: auto;
+    width: 78%;
+    height: 78%;
     object-fit: ${({ $fit }) => $fit};
-    opacity: 0.62;
-    filter: saturate(0);
-    transition: opacity 0.5s, transform 0.5s ${tokens.easeOut};
+    display: block;
+    transition: transform 0.7s ${tokens.easeLuxe};
   }
 
-  &:hover {
-    background: ${tokens.bordeaux};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        inset 0 0 0 1px rgba(211, 191, 219, 0.4),
+        0 18px 36px rgba(21, 5, 7, 0.45);
+    }
+    &:hover img {
+      transform: scale(1.06);
+    }
   }
-  &:hover img {
-    opacity: 1;
-    transform: scale(1.05);
-  }
+`;
 
-  &.filler {
-    pointer-events: none;
-    display: none;
-  }
-  &.filler.f1 {
+const BrandFiller = styled.div`
+  display: none;
+  aspect-ratio: 1;
+  background: ${tokens.bordeaux};
+  box-shadow: inset 0 0 0 1px rgba(211, 191, 219, 0.1);
+
+  &.f1 {
     display: block;
   }
+
   @media (min-width: 1024px) {
-    &.filler.f1,
-    &.filler.f2,
-    &.filler.f3 {
+    &.f1,
+    &.f2,
+    &.f3 {
       display: none;
     }
   }
@@ -1934,13 +1962,13 @@ export function PartnersSection({
         </SectionHead>
         <BrandWall>
           {clients.map((c) => (
-            <BrandCell key={c.name} $fit={c.fit} className="brand-cell">
+            <BrandCell key={c.name} $fit={c.fit} $tile={c.tile} className="brand-cell">
               <img src={c.logo} alt={c.name} />
             </BrandCell>
           ))}
-          <BrandCell $fit="contain" className="brand-cell filler f1" aria-hidden />
-          <BrandCell $fit="contain" className="brand-cell filler f2" aria-hidden />
-          <BrandCell $fit="contain" className="brand-cell filler f3" aria-hidden />
+          <BrandFiller className="f1" aria-hidden />
+          <BrandFiller className="f2" aria-hidden />
+          <BrandFiller className="f3" aria-hidden />
         </BrandWall>
       </Wrap>
     </Section>

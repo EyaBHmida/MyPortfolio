@@ -130,20 +130,37 @@ const PreloaderRoot = styled.div`
 const PreloaderInner = styled.div`
   display: grid;
   place-items: center;
-  gap: 2.2rem;
+  gap: 1.6rem;
   text-align: center;
+  padding-inline: 1.25rem;
 `;
 
-const PreloaderSig = styled.img`
-  width: min(58vw, 340px);
+const PreloaderSigStack = styled.div`
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: 0.15rem;
   opacity: 0;
   transform: translateY(14px);
   animation: ${sigIn} 1.4s ${tokens.easeOut} 0.15s forwards;
+`;
+
+const PreloaderSig = styled.img`
+  display: block;
+  height: auto;
   filter: brightness(0) invert(1);
+
+  &.is-eya {
+    width: min(38vw, 168px);
+  }
+
+  &.is-rest {
+    width: min(72vw, 280px);
+  }
 `;
 
 const PreloaderLine = styled.div`
-  width: min(58vw, 340px);
+  width: min(72vw, 280px);
   height: 1px;
   background: rgba(211, 191, 219, 0.18);
   overflow: hidden;
@@ -169,7 +186,15 @@ const PreloaderWord = styled.p`
   overflow-wrap: anywhere;
 `;
 
-export function Preloader({ signatureSrc, word }: { signatureSrc: string; word: string }) {
+export function Preloader({
+  signatureTopSrc,
+  signatureBottomSrc,
+  word,
+}: {
+  signatureTopSrc: string;
+  signatureBottomSrc: string;
+  word: string;
+}) {
   const reduced = usePrefersReducedMotion();
   const [visible, setVisible] = useState(!reduced);
   const [done, setDone] = useState(false);
@@ -215,7 +240,10 @@ export function Preloader({ signatureSrc, word }: { signatureSrc: string; word: 
   return createPortal(
     <PreloaderRoot className={done ? 'is-done' : undefined} aria-hidden="true">
       <PreloaderInner>
-        <PreloaderSig src={signatureSrc} alt="" width={480} height={243} />
+        <PreloaderSigStack>
+          <PreloaderSig className="is-eya" src={signatureTopSrc} alt="" width={445} height={488} />
+          <PreloaderSig className="is-rest" src={signatureBottomSrc} alt="" width={1091} height={431} />
+        </PreloaderSigStack>
         <PreloaderLine>
           <i ref={barRef} />
         </PreloaderLine>

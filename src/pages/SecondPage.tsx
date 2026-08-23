@@ -23,13 +23,14 @@ export const SecondPage = () => {
   return (
     <EditorialShell>
       <Preloader
-        signatureSrc="/eya-signature.png"
+        signatureTopSrc="/eya-signature-eya.png"
+        signatureBottomSrc="/eya-signature-ben-hmida.png"
         word="Marketing · Content · Partnerships"
       />
       <EditorialHeader
         nav={editorial.nav}
         cta={editorial.cta}
-        signatureSrc="/eya-signature.png"
+        signatureSrc="/eya-mark.svg"
         name={personal.fullName}
       />
       <main id="main">

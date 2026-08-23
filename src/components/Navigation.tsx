@@ -34,12 +34,9 @@ const Brand = styled.a`
 `;
 
 const Mark = styled.img`
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 30px;
   object-fit: contain;
-  background: ${theme.colors.white};
-  border-radius: 4px;
-  padding: 3px;
 `;
 
 const Initials = styled.span`
@@ -170,7 +167,7 @@ export const Navigation = () => {
   return (
     <Nav $scrolled={scrolled || open}>
       <Brand href="#hero" onClick={close}>
-        <Mark src="/brands/mark.jpeg" alt={personal.fullName} />
+        <Mark src="/eya-mark.svg" alt={personal.fullName} />
         <Initials>{personal.initials}</Initials>
       </Brand>
       <Links>
