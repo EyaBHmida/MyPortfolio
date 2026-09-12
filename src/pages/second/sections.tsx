@@ -117,8 +117,8 @@ export type SecondPageData = {
 };
 
 const kenburns = keyframes`
-  from { transform: scale(1.09) translateY(-0.6%); }
-  to { transform: scale(1.02) translateY(0.6%); }
+  from { transform: scale(1) translateY(0); }
+  to { transform: scale(1.04) translateY(-0.4%); }
 `;
 
 const scrollHint = keyframes`
@@ -490,9 +490,10 @@ const HeaderIn = styled.div`
 `;
 
 const BrandImg = styled.img`
-  width: clamp(26px, 4.6vw, 36px);
+  width: clamp(92px, 26vw, 148px);
   height: auto;
   display: block;
+  filter: brightness(0) invert(1);
 `;
 
 const SiteNav = styled.nav`
@@ -893,9 +894,8 @@ const HeroSlides = styled.div`
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 50% 22%;
-      transform: scale(1.02);
-      will-change: transform;
+      object-position: 50% 18%;
+      image-rendering: auto;
     }
 
     &.is-active img {
@@ -1606,7 +1606,8 @@ const WorkPhone = styled.button`
   padding: 0;
   cursor: pointer;
 
-  img {
+  img,
+  video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1620,6 +1621,10 @@ const WorkPhone = styled.button`
   }
 `;
 
+function isVideoSrc(src: string) {
+  return /\.mp4($|\?)/i.test(src);
+}
+
 function WorkBandView({ project }: { project: Project }) {
   const light = project.theme === 'light';
   const { open } = useLightbox();
@@ -1627,7 +1632,7 @@ function WorkBandView({ project }: { project: Project }) {
   const phoneItems = project.phones.map((src) => ({
     src,
     caption: project.title,
-    kind: 'image' as const,
+    kind: (isVideoSrc(src) ? 'video' : 'image') as 'image' | 'video',
   }));
 
   return (
@@ -1665,7 +1670,11 @@ function WorkBandView({ project }: { project: Project }) {
                     aria-label={`${project.title} mockup ${i + 1}`}
                     onClick={() => open(phoneItems, i)}
                   >
-                    <img src={src} alt="" loading="lazy" />
+                    {isVideoSrc(src) ? (
+                      <video src={src} muted loop playsInline autoPlay />
+                    ) : (
+                      <img src={src} alt="" loading="lazy" />
+                    )}
                   </WorkPhone>
                 ))}
               </WorkPhones>
@@ -1882,9 +1891,6 @@ const BrandWall = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 0.8rem;
   }
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
 `;
 
 const BrandCell = styled.div<{ $fit: string; $tile: string }>`
@@ -1922,25 +1928,6 @@ const BrandCell = styled.div<{ $fit: string; $tile: string }>`
   }
 `;
 
-const BrandFiller = styled.div`
-  display: none;
-  aspect-ratio: 1;
-  background: ${tokens.bordeaux};
-  box-shadow: inset 0 0 0 1px rgba(211, 191, 219, 0.1);
-
-  &.f1 {
-    display: block;
-  }
-
-  @media (min-width: 1024px) {
-    &.f1,
-    &.f2,
-    &.f3 {
-      display: none;
-    }
-  }
-`;
-
 export function PartnersSection({
   data,
   clients,
@@ -1966,9 +1953,6 @@ export function PartnersSection({
               <img src={c.logo} alt={c.name} />
             </BrandCell>
           ))}
-          <BrandFiller className="f1" aria-hidden />
-          <BrandFiller className="f2" aria-hidden />
-          <BrandFiller className="f3" aria-hidden />
         </BrandWall>
       </Wrap>
     </Section>

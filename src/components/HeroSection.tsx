@@ -25,11 +25,12 @@ const Photo = styled.div<{ $src: string }>`
   background-size: cover;
   background-position: center 20%;
   filter: grayscale(1) contrast(1.05);
+  image-rendering: auto;
 
   @media (max-width: ${theme.breakpoints.md}) {
     min-height: 100svh;
 
-    &:nth-child(2), &:nth-child(3) {
+    &:not(:first-child) {
       display: none;
     }
   }
@@ -103,11 +104,12 @@ const Email = styled.a`
 
 export const HeroSection = () => {
   const { personal, hero } = content;
+  const photos = hero.images.slice(0, 3);
 
   return (
     <Hero id="hero">
       <PhotoGrid>
-        {hero.images.map((src) => (
+        {photos.map((src) => (
           <Photo key={src} $src={src} />
         ))}
       </PhotoGrid>

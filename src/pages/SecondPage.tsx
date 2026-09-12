@@ -30,7 +30,7 @@ export const SecondPage = () => {
       <EditorialHeader
         nav={editorial.nav}
         cta={editorial.cta}
-        signatureSrc="/eya-mark.svg"
+        signatureSrc="/eya-signature.png"
         name={personal.fullName}
       />
       <main id="main">

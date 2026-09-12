@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local content dump (do not publish)
+Eya-20260912T002640Z-1-001/
+

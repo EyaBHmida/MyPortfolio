@@ -98,7 +98,7 @@ const ClientsTitle = styled.h2`
 
 const LogoRow = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   max-width: 1100px;
   margin: 0 auto;
@@ -106,12 +106,6 @@ const LogoRow = styled.div`
   @media (max-width: ${theme.breakpoints.md}) {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-
-    > *:nth-child(5) {
-      grid-column: 1 / -1;
-      max-width: 50%;
-      justify-self: center;
-    }
   }
 `;
 

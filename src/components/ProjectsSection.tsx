@@ -126,7 +126,8 @@ const Phone = styled.div`
   background: #0b0b0b;
   box-shadow: 0 18px 40px rgba(0,0,0,0.28);
 
-  img {
+  img,
+  video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -138,6 +139,10 @@ const Phone = styled.div`
     border-radius: 22px;
   }
 `;
+
+function isVideoSrc(src: string) {
+  return /\.mp4($|\?)/i.test(src);
+}
 
 export const ProjectsSection = () => {
   return (
@@ -173,7 +178,11 @@ export const ProjectsSection = () => {
                   <Phones>
                     {project.phones.map((src) => (
                       <Phone key={src}>
-                        <img src={src} alt="" />
+                        {isVideoSrc(src) ? (
+                          <video src={src} muted loop playsInline autoPlay />
+                        ) : (
+                          <img src={src} alt="" />
+                        )}
                       </Phone>
                     ))}
                   </Phones>

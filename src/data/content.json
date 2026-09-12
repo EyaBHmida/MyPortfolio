@@ -19,6 +19,7 @@
   },
   "hero": {
     "images": [
+      "/photo2-professional.jpg",
       "/cv-photo.jpg",
       "/main-pic.jpg",
       "/background-pic.jpg"
@@ -39,6 +40,7 @@
     { "name": "Pharmavie", "logo": "/brands/pharmavie.jpeg", "fit": "contain", "tile": "#F4F4F4" },
     { "name": "Pitstop Motorsports", "logo": "/brands/pitstop.jpeg", "fit": "cover", "tile": "#000000" },
     { "name": "Tachafy", "logo": "/brands/tachafy.jpeg", "fit": "contain", "tile": "#111111" },
+    { "name": "Healix", "logo": "/brands/healix.jpg", "fit": "contain", "tile": "#F3EDE4" },
     { "name": "Ba9chich", "logo": "/brands/bakchich.jpeg", "fit": "cover", "tile": "#2B6CB0" },
     { "name": "Buzz To Win", "logo": "/brands/b2w.png", "fit": "cover", "tile": "#F4A024" }
   ],
@@ -128,17 +130,61 @@
       "logo": "/brands/tachafy.jpeg",
       "logoFit": "contain",
       "logoTile": "#111111",
-      "phones": [],
+      "phones": [
+        "/Work/tachafy-1.webp",
+        "/Work/tachafy-2.webp",
+        "/Work/tachafy-3.webp",
+        "/Work/tachafy-4.webp"
+      ],
       "points": [
         {
           "num": "01",
           "title": "Go-to-market",
-          "body": "Owned content strategy for a digital mental-healthcare platform, translating clinical concepts into accessible content for patients and providers."
+          "body": "Developed the content and social media strategy for a digital mental-healthcare platform, managing Instagram and LinkedIn and creating brand content that translated complex clinical concepts into accessible communication."
         },
         {
           "num": "02",
           "title": "Partner acquisition",
-          "body": "Sourced and engaged clinics and healthcare providers; built pitch decks and business cases backed by market and competitor research."
+          "body": "Researched and approached clinics and healthcare providers, developing pitch decks and business cases supported by market and competitor analysis."
+        },
+        {
+          "num": "03",
+          "title": "Content & Social Media",
+          "body": "Managed Tachafy’s Instagram and LinkedIn presence, from content planning and creative concepts to post creation and publishing."
+        }
+      ]
+    },
+    {
+      "id": "healix",
+      "theme": "light",
+      "featured": false,
+      "kicker": "Marketing & Creative Strategy · Powered by Tachafy",
+      "title": "Healix",
+      "dates": "Sep 2024",
+      "logo": "/brands/healix.jpg",
+      "logoFit": "contain",
+      "logoTile": "#F3EDE4",
+      "phones": [
+        "/Work/healix-1.mp4",
+        "/Work/healix-2.mp4",
+        "/Work/healix-3.mp4",
+        "/Work/healix-4.mp4"
+      ],
+      "points": [
+        {
+          "num": "01",
+          "title": "Marketing & Creative Strategy",
+          "body": "Defined the marketing and creative strategy for Healix, a digital mental-healthcare brand powered by Tachafy."
+        },
+        {
+          "num": "02",
+          "title": "Social Media Strategy",
+          "body": "Built the social media strategy covering platform positioning, content pillars, and channel direction."
+        },
+        {
+          "num": "03",
+          "title": "Creative Direction",
+          "body": "Owned creative concept, scenario, and creative direction for the brand’s social storytelling."
         }
       ]
     },
