@@ -3,6 +3,8 @@ import {
   AboutSectionView,
   CampaignsSection,
   ContactSectionView,
+  CredentialsSectionView,
+  ExpertiseSectionView,
   EditorialFooter,
   EditorialHeader,
   EditorialHero,
@@ -18,7 +20,7 @@ import {
 const data = content as typeof content & { editorial: SecondPageData['editorial'] };
 
 export const SecondPage = () => {
-  const { editorial, personal, about, clients, hero, projects } = data;
+  const { editorial, personal, about, clients, hero, projects, education } = data;
 
   return (
     <EditorialShell>
@@ -46,12 +48,18 @@ export const SecondPage = () => {
           editorial={editorial.about}
           about={about}
           personal={personal}
-          portraitSrc="/cv-photo.jpg"
+          portraitSrc="/photo2-professional.jpg"
         />
+        <ExpertiseSectionView data={editorial.expertise} />
         <EditorialWork projects={projects} />
         <CampaignsSection data={editorial.campaigns} />
         <StageSectionView data={editorial.stage} />
         <PartnersSection data={editorial.partners} clients={clients} />
+        <CredentialsSectionView
+          data={editorial.credentials}
+          education={education}
+          languages={personal.languages}
+        />
         <ContactSectionView data={editorial.contactSection} personal={personal} />
       </main>
       <EditorialFooter

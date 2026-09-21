@@ -26,6 +26,7 @@ type GalleryItem = {
   featured?: boolean;
   span?: string;
   push?: boolean;
+  ar?: string;
   title?: string;
   meta?: string;
 };
@@ -36,7 +37,7 @@ type Stat = {
   label: string;
   display?: string;
 };
-type Client = { name: string; logo: string; fit: string; tile: string };
+type Client = { name: string; logo: string; fit: string; tile: string; tone?: string };
 type ProjectPoint = { num: string; title: string; body: string };
 type Project = {
   id: string;
@@ -60,6 +61,26 @@ type Editorial = {
     titleEm: string;
     titleAfter: string;
     stats: Stat[];
+  };
+  expertise: {
+    kicker: string;
+    title: string;
+    titleEm: string;
+    titleAfter: string;
+    index: string;
+    lede: string;
+    services: { title: string; body: string }[];
+    processKicker: string;
+    process: { title: string; body: string }[];
+  };
+  credentials: {
+    kicker: string;
+    title: string;
+    titleEm: string;
+    titleAfter: string;
+    index: string;
+    toolGroups: { label: string; items: string[] }[];
+    certifications: string[];
   };
   campaigns: {
     kicker: string;
@@ -98,6 +119,7 @@ type Editorial = {
 
 type Personal = {
   fullName: string;
+  headline: string;
   email: string;
   phone: string;
   linkedin: string;
@@ -116,29 +138,10 @@ export type SecondPageData = {
   heroImages: string[];
 };
 
-const kenburns = keyframes`
-  from { transform: scale(1) translateY(0); }
-  to { transform: scale(1.04) translateY(-0.4%); }
-`;
-
-const scrollHint = keyframes`
-  0% { transform: scaleY(0); transform-origin: top; }
-  45% { transform: scaleY(1); transform-origin: top; }
-  55% { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-`;
-
-const grain = keyframes`
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-4%, -6%); }
-  20% { transform: translate(-10%, 4%); }
-  30% { transform: translate(6%, -8%); }
-  40% { transform: translate(-4%, 12%); }
-  50% { transform: translate(-10%, 6%); }
-  60% { transform: translate(10%, 0); }
-  70% { transform: translate(0, 8%); }
-  80% { transform: translate(-12%, 0); }
-  90% { transform: translate(8%, 4%); }
+/** Endila live-site hero fade: opacity only, ~1.851s, cubic-bezier(0.4, 0.8, 0.74, 1) */
+const endilaFade = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
 `;
 
 const marqueeAnim = keyframes`
@@ -162,6 +165,7 @@ export const EditorialGlobal = createGlobalStyle`
   }
 
   body {
+    margin: 0;
     font-family: ${tokens.sans};
     font-weight: 300;
     background: ${tokens.noir};
@@ -260,7 +264,7 @@ const Section = styled.section<{ $pad?: boolean }>`
   padding-block: ${({ $pad = true }) => ($pad ? tokens.sectionY : 0)};
 
   @media (max-width: 700px) {
-    padding-block: ${({ $pad = true }) => ($pad ? '4.25rem' : 0)};
+    padding-block: ${({ $pad = true }) => ($pad ? '3.25rem' : 0)};
   }
 `;
 
@@ -353,8 +357,8 @@ const Count = styled.p<{ $light?: boolean; $lilac?: boolean }>`
 const SectionHead = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
-  margin-bottom: clamp(2.6rem, 6vw, 5rem);
+  gap: 1rem;
+  margin-bottom: clamp(1.75rem, 3.5vw, 3rem);
   max-width: 64rem;
 `;
 
@@ -498,7 +502,9 @@ const BrandImg = styled.img`
 
 const SiteNav = styled.nav`
   display: flex;
-  gap: clamp(1.1rem, 2.2vw, 2.4rem);
+  align-items: center;
+  gap: clamp(0.45rem, 1vw, 1.15rem);
+  min-width: 0;
 
   @media (max-width: 1023px) {
     display: none;
@@ -506,13 +512,14 @@ const SiteNav = styled.nav`
 
   a {
     position: relative;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 400;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: ${tokens.ivory};
     opacity: 0.82;
     padding-block: 0.5rem;
+    white-space: nowrap;
     transition: opacity 0.3s;
 
     &::after {
@@ -549,7 +556,7 @@ const HeaderCta = styled.a`
   color: ${tokens.ivory};
   text-decoration: none;
   border: 1px solid rgba(245, 239, 242, 0.7);
-  padding: 0.78rem 1.6rem;
+  padding: 0.62rem 1.15rem;
   border-radius: 99px;
   transition: background 0.4s, color 0.4s, border-color 0.4s;
   white-space: nowrap;
@@ -572,6 +579,10 @@ const Burger = styled.button`
   place-items: center;
   position: relative;
   z-index: 250;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
 
   @media (max-width: 1023px) {
     display: grid;
@@ -864,90 +875,74 @@ export function EditorialHeader({
 /* ---------- Hero ---------- */
 
 const Hero = styled(Section)`
+  position: relative;
   min-height: 100svh;
-  display: grid;
   padding: 0;
   overflow: clip;
   isolation: isolate;
+  background: ${tokens.noir};
 
   @media (max-width: 700px) {
     padding-block: 0;
   }
 `;
 
-const HeroSlides = styled.div`
-  position: absolute;
-  inset: 0;
+const HeroGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  min-height: 100svh;
 
-  .slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 2.2s ${tokens.easeLuxe};
-    will-change: opacity;
-
-    &.is-active {
-      opacity: 1;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 50% 18%;
-      image-rendering: auto;
-    }
-
-    &.is-active img {
-      animation: ${kenburns} 8.5s ${tokens.easeOut} forwards;
-    }
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
   }
 `;
 
-const HeroVeil = styled.div`
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(21, 5, 7, 0.45) 0%,
-      rgba(21, 5, 7, 0.12) 34%,
-      rgba(21, 5, 7, 0.22) 62%,
-      rgba(21, 5, 7, 0.88) 100%
-    ),
-    radial-gradient(120% 90% at 50% 108%, rgba(46, 12, 17, 0.75) 0%, transparent 60%);
-`;
+const HeroPhoto = styled.div<{ $delay: number }>`
+  min-height: 100svh;
+  overflow: hidden;
+  opacity: 0;
+  animation: ${endilaFade} 1.851s cubic-bezier(0.4, 0.8, 0.74, 1) both;
+  animation-delay: ${({ $delay }) => `${$delay}s`};
 
-const HeroGrain = styled.div`
-  position: absolute;
-  inset: -100%;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
-  animation: ${grain} 9s steps(10) infinite;
+  img {
+    width: 100%;
+    height: 100svh;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
+  }
+
+  @media (max-width: 700px) {
+    img {
+      object-position: 22% 16%;
+    }
+
+    &:not(:first-child) {
+      display: none;
+    }
+  }
 
   @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
     animation: none;
   }
 `;
 
 const HeroContent = styled.div`
-  position: relative;
-  z-index: 3;
-  align-self: end;
-  justify-self: center;
-  text-align: center;
-  padding: 0 ${tokens.gutter} clamp(6.5rem, 14vh, 11rem);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: grid;
+  align-content: end;
   justify-items: center;
-  gap: 1.5rem;
-  width: 100%;
+  text-align: center;
+  gap: 0.85rem;
+  padding: 0 ${tokens.gutter} clamp(2.4rem, 6vh, 4.25rem);
+  pointer-events: none;
 
   @media (max-width: 700px) {
-    padding-bottom: 6.5rem;
-    gap: 1rem;
+    padding-bottom: 2.75rem;
+    gap: 0.7rem;
   }
 `;
 
@@ -955,6 +950,7 @@ const HeroKicker = styled.p`
   display: inline-flex;
   align-items: center;
   gap: 1rem;
+  font-family: ${tokens.sans};
   font-size: 0.72rem;
   letter-spacing: 0.42em;
   text-transform: uppercase;
@@ -992,7 +988,7 @@ const HeroKicker = styled.p`
 `;
 
 const HeroSig = styled.img`
-  width: min(74vw, 560px);
+  width: min(68vw, 440px);
   opacity: 0;
   animation: ${riseIn} 1.4s ${tokens.easeOut} 0.45s forwards;
   filter: brightness(0) invert(1) drop-shadow(0 8px 40px rgba(21, 5, 7, 0.55));
@@ -1025,65 +1021,6 @@ const HeroLine = styled.h1`
   }
 `;
 
-const HeroScroll = styled.div`
-  position: absolute;
-  z-index: 3;
-  bottom: max(1.2rem, env(safe-area-inset-bottom));
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.7rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: ${tokens.lilac};
-  opacity: 0;
-  animation: ${riseIn} 1.2s ${tokens.easeOut} 1.4s forwards;
-
-  &::after {
-    content: '';
-    width: 1px;
-    height: 3.4rem;
-    background: linear-gradient(${tokens.lilac}, transparent);
-    animation: ${scrollHint} 2.4s ${tokens.easeLuxe} infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    opacity: 1;
-    animation: none;
-    &::after {
-      animation: none;
-    }
-  }
-`;
-
-const HeroIndex = styled.div`
-  position: absolute;
-  z-index: 3;
-  right: ${tokens.gutter};
-  bottom: 1.9rem;
-  display: none;
-  gap: 0.5rem;
-
-  @media (min-width: 768px) {
-    display: flex;
-  }
-
-  button {
-    width: 2.2rem;
-    height: 2px;
-    background: rgba(211, 191, 219, 0.28);
-    transition: background 0.4s;
-    padding: 0;
-
-    &.is-active {
-      background: ${tokens.lilac};
-    }
-  }
-`;
-
 export function EditorialHero({
   images,
   kicker,
@@ -1099,40 +1036,17 @@ export function EditorialHero({
   lineAfter: string;
   signatureSrc: string;
 }) {
-  const [slide, setSlide] = useState(0);
-  const reduced = usePrefersReducedMotion();
-  const timer = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (images.length < 2 || reduced) return;
-    const play = () => {
-      timer.current = window.setInterval(() => {
-        setSlide((n) => (n + 1) % images.length);
-      }, 6500);
-    };
-    play();
-    const onVis = () => {
-      if (document.hidden && timer.current) window.clearInterval(timer.current);
-      else play();
-    };
-    document.addEventListener('visibilitychange', onVis);
-    return () => {
-      if (timer.current) window.clearInterval(timer.current);
-      document.removeEventListener('visibilitychange', onVis);
-    };
-  }, [images.length, reduced]);
+  const photos = images.slice(0, 3);
 
   return (
     <Hero className="editorial-hero" id="top">
-      <HeroSlides aria-hidden="true">
-        {images.map((src, i) => (
-          <div key={src} className={`slide ${i === slide ? 'is-active' : ''}`}>
+      <HeroGrid aria-hidden="true">
+        {photos.map((src, i) => (
+          <HeroPhoto key={src} $delay={0.1 + i * 0.05}>
             <img src={src} alt="" decoding="async" />
-          </div>
+          </HeroPhoto>
         ))}
-      </HeroSlides>
-      <HeroVeil />
-      <HeroGrain />
+      </HeroGrid>
       <HeroContent>
         <HeroKicker>{kicker}</HeroKicker>
         <HeroSig src={signatureSrc} alt="" />
@@ -1142,26 +1056,6 @@ export function EditorialHero({
           {lineAfter}
         </HeroLine>
       </HeroContent>
-      <HeroScroll>Scroll</HeroScroll>
-      <HeroIndex>
-        {images.map((src, i) => (
-          <button
-            key={src}
-            type="button"
-            className={i === slide ? 'is-active' : undefined}
-            aria-label={`Slide ${i + 1}`}
-            onClick={() => {
-              if (timer.current) window.clearInterval(timer.current);
-              setSlide(i);
-              if (!reduced) {
-                timer.current = window.setInterval(() => {
-                  setSlide((n) => (n + 1) % images.length);
-                }, 6500);
-              }
-            }}
-          />
-        ))}
-      </HeroIndex>
     </Hero>
   );
 }
@@ -1174,7 +1068,7 @@ const AboutSection = styled(Section)`
 
 const AboutGrid = styled.div`
   display: grid;
-  gap: clamp(3rem, 6vw, 6rem);
+  gap: clamp(2rem, 4vw, 3.5rem);
   align-items: start;
 
   @media (min-width: 1024px) {
@@ -1184,7 +1078,7 @@ const AboutGrid = styled.div`
 
 const AboutCopyCol = styled.div`
   .h2 {
-    margin: 1.4rem 0 2.2rem;
+    margin: 1rem 0 1.4rem;
     max-width: 16ch;
   }
 `;
@@ -1234,10 +1128,10 @@ const AboutMedia = styled.div`
 const Stats = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.6rem 1rem;
-  margin-top: 3.2rem;
+  gap: 1.2rem 1rem;
+  margin-top: 2.2rem;
   border-top: 1px solid rgba(211, 191, 219, 0.2);
-  padding-top: 2.6rem;
+  padding-top: 1.75rem;
 
   @media (max-width: 639px) {
     gap: 1.4rem 0.8rem;
@@ -1350,7 +1244,7 @@ export function AboutSectionView({
               <BodyCopy>{about.lead}</BodyCopy>
               <BodyCopy>{about.body}</BodyCopy>
               <BodyCopy>
-                {personal.fullName} — {personal.title}. {personal.location},{' '}
+                {personal.fullName}, {personal.title}. {personal.location},{' '}
                 {personal.availability.toLowerCase()}.
               </BodyCopy>
             </Reveal>
@@ -1368,6 +1262,325 @@ export function AboutSectionView({
         </AboutGrid>
       </Wrap>
     </AboutSection>
+  );
+}
+
+/* ---------- Expertise: services + process ---------- */
+
+const ExpertiseSectionEl = styled(Section)`
+  background: linear-gradient(180deg, ${tokens.bordeaux} 0%, ${tokens.noir} 100%);
+`;
+
+const ServiceGrid = styled.ol`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1px;
+  background: rgba(211, 191, 219, 0.16);
+  border: 1px solid rgba(211, 191, 219, 0.16);
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const ServiceCard = styled.li`
+  background: ${tokens.noir};
+  padding: clamp(1.15rem, 2.4vw, 1.85rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  transition: background 0.6s;
+
+  &:hover {
+    background: ${tokens.wine};
+  }
+
+  .num {
+    font-family: ${tokens.serif};
+    font-style: italic;
+    font-size: 1.1rem;
+    color: ${tokens.lilacDeep};
+  }
+
+  h3 {
+    font-family: ${tokens.serif};
+    font-weight: 500;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    line-height: 1.15;
+    color: ${tokens.ivory};
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: color-mix(in srgb, ${tokens.ivory} 78%, ${tokens.lilac});
+  }
+`;
+
+const ProcessHead = styled.div`
+  margin: clamp(2.4rem, 4.5vw, 3.5rem) 0 clamp(1.25rem, 2.5vw, 1.75rem);
+`;
+
+const ProcessList = styled.ol`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.35rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+`;
+
+const ProcessStep = styled.li`
+  position: relative;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(211, 191, 219, 0.28);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: ${tokens.lilac};
+  }
+
+  .step {
+    font-size: 0.64rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: ${tokens.lilacDeep};
+  }
+
+  h4 {
+    font-family: ${tokens.serif};
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    margin: 0.4rem 0 0.35rem;
+    color: ${tokens.ivory};
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: ${tokens.lilac};
+    max-width: 24ch;
+  }
+`;
+
+export function ExpertiseSectionView({ data }: { data: Editorial['expertise'] }) {
+  return (
+    <ExpertiseSectionEl id="expertise">
+      <Wrap>
+        <SectionHead>
+          <Reveal>
+            <Kicker>{data.kicker}</Kicker>
+          </Reveal>
+          <HeadRow>
+            <SplitTitle before={data.title} em={data.titleEm} after={data.titleAfter} />
+            <Count>{data.index}</Count>
+          </HeadRow>
+          <Reveal>
+            <Lede>{data.lede}</Lede>
+          </Reveal>
+        </SectionHead>
+        <Reveal>
+          <ServiceGrid>
+            {data.services.map((s, i) => (
+              <ServiceCard key={s.title}>
+                <span className="num">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </ServiceCard>
+            ))}
+          </ServiceGrid>
+        </Reveal>
+        <ProcessHead>
+          <Reveal>
+            <Kicker>{data.processKicker}</Kicker>
+          </Reveal>
+        </ProcessHead>
+        <Reveal>
+          <ProcessList>
+            {data.process.map((p, i) => (
+              <ProcessStep key={p.title}>
+                <span className="step">Step {String(i + 1).padStart(2, '0')}</span>
+                <h4>{p.title}</h4>
+                <p>{p.body}</p>
+              </ProcessStep>
+            ))}
+          </ProcessList>
+        </Reveal>
+      </Wrap>
+    </ExpertiseSectionEl>
+  );
+}
+
+/* ---------- Credentials: tools, certifications, education ---------- */
+
+const CredentialsSectionEl = styled(Section)`
+  background: ${tokens.ivory};
+  color: ${tokens.ink};
+`;
+
+const CredGrid = styled.div`
+  display: grid;
+  gap: clamp(1.75rem, 3.5vw, 2.75rem);
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+`;
+
+const CredLabel = styled.h3`
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: ${tokens.crimson};
+  margin-bottom: 0.7rem;
+`;
+
+const ToolGroup = styled.div`
+  & + & {
+    margin-top: 1.4rem;
+  }
+`;
+
+const Chips = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+
+  li {
+    font-size: 0.88rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(42, 13, 19, 0.2);
+    border-radius: 99px;
+    color: ${tokens.ink};
+    transition: background 0.4s, color 0.4s, border-color 0.4s;
+  }
+
+  li:hover {
+    background: ${tokens.wine};
+    border-color: ${tokens.wine};
+    color: ${tokens.ivory};
+  }
+`;
+
+const CredList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+
+  li {
+    padding: 0.7rem 0;
+    border-top: 1px solid rgba(42, 13, 19, 0.14);
+  }
+
+  li:last-child {
+    border-bottom: 1px solid rgba(42, 13, 19, 0.14);
+  }
+
+  b {
+    display: block;
+    font-family: ${tokens.serif};
+    font-weight: 500;
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    line-height: 1.25;
+    color: ${tokens.ink};
+  }
+
+  span {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.86rem;
+    color: color-mix(in srgb, ${tokens.ink} 70%, ${tokens.crimson});
+  }
+`;
+
+type Education = { degree: string; school: string; dates: string };
+type Language = { code: string; level: string };
+
+export function CredentialsSectionView({
+  data,
+  education,
+  languages,
+}: {
+  data: Editorial['credentials'];
+  education: Education[];
+  languages: Language[];
+}) {
+  return (
+    <CredentialsSectionEl id="credentials">
+      <Wrap>
+        <SectionHead>
+          <Reveal>
+            <Kicker $light>{data.kicker}</Kicker>
+          </Reveal>
+          <HeadRow>
+            <SplitTitle light before={data.title} em={data.titleEm} after={data.titleAfter} />
+            <Count $light>{data.index}</Count>
+          </HeadRow>
+        </SectionHead>
+        <CredGrid>
+          <Reveal>
+            {data.toolGroups.map((g) => (
+              <ToolGroup key={g.label}>
+                <CredLabel>{g.label}</CredLabel>
+                <Chips>
+                  {g.items.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </Chips>
+              </ToolGroup>
+            ))}
+          </Reveal>
+          <Reveal delay="0.1s">
+            <CredLabel>Certifications</CredLabel>
+            <CredList>
+              {data.certifications.map((c) => (
+                <li key={c}>
+                  <b>{c}</b>
+                </li>
+              ))}
+            </CredList>
+            <CredLabel>Education</CredLabel>
+            <CredList>
+              {education.map((e) => (
+                <li key={e.degree}>
+                  <b>{e.degree}</b>
+                  {(e.school || e.dates) && (
+                    <span>{[e.school, e.dates].filter(Boolean).join(' · ')}</span>
+                  )}
+                </li>
+              ))}
+            </CredList>
+            <CredLabel>Languages</CredLabel>
+            <Chips>
+              {languages.map((l) => (
+                <li key={l.code}>
+                  {l.code} · {l.level}
+                </li>
+              ))}
+            </Chips>
+          </Reveal>
+        </CredGrid>
+      </Wrap>
+    </CredentialsSectionEl>
   );
 }
 
@@ -1452,7 +1665,7 @@ function GalleryMedia({
         onOpen();
       }}
     >
-      <figure style={{ aspectRatio: 'var(--ar, 4/5)', position: 'relative', overflow: 'hidden', margin: 0 }}>
+      <figure style={{ aspectRatio: item.ar ?? 'var(--ar, 4/5)', position: 'relative', overflow: 'hidden', margin: 0 }}>
         {item.kind === 'video' ? (
           <video src={item.src} muted loop playsInline autoPlay />
         ) : (
@@ -1477,19 +1690,19 @@ const WorkBand = styled.section<{ $light: boolean }>`
     $light ? 'rgba(42, 13, 19, 0.12)' : 'rgba(211, 191, 219, 0.12)'};
 
   @media (max-width: 700px) {
-    padding-block: 4.25rem;
+    padding-block: 3.25rem;
   }
 `;
 
 const WorkInner = styled.div`
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: clamp(2.4rem, 5vw, 3.5rem);
+  gap: clamp(1.6rem, 3.5vw, 2.6rem);
   align-items: center;
 
   @media (max-width: 1023px) {
     grid-template-columns: 1fr;
-    gap: 2.2rem;
+    gap: 1.6rem;
 
     > * {
       min-width: 0;
@@ -1519,7 +1732,7 @@ const WorkTitle = styled.h3<{ $light: boolean }>`
 
 const WorkDates = styled.p<{ $light: boolean }>`
   font-size: 0.88rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
   opacity: 0.7;
   color: ${({ $light }) => ($light ? tokens.ink : tokens.lilac)};
 `;
@@ -1527,7 +1740,7 @@ const WorkDates = styled.p<{ $light: boolean }>`
 const WorkPoints = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1rem;
 `;
 
 const WorkPoint = styled.div`
@@ -1576,7 +1789,7 @@ const WorkLogoFrame = styled.div<{ $tile: string }>`
   align-items: center;
   justify-content: center;
   background: ${({ $tile }) => $tile};
-  padding: 1rem;
+  padding: ${({ $tile }) => ($tile === 'transparent' ? '1rem' : '0.85rem')};
 `;
 
 const WorkLogo = styled.img<{ $fit: string }>`
@@ -1606,6 +1819,8 @@ const WorkPhone = styled.button`
   padding: 0;
   cursor: pointer;
 
+  position: relative;
+
   img,
   video {
     width: 100%;
@@ -1614,12 +1829,156 @@ const WorkPhone = styled.button`
     display: block;
   }
 
+  container-type: inline-size;
+
   @media (min-width: 701px) {
     flex: 0 0 132px;
     border-width: 8px;
     border-radius: 22px;
   }
 `;
+
+/* Instagram-style feed screen: the whole post is visible, never cropped or stretched */
+const Feed = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  color: #111;
+  text-align: left;
+
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 4cqw;
+    padding: 9cqw 5cqw 4cqw;
+  }
+
+  .avatar {
+    flex: none;
+    width: 13cqw;
+    height: 13cqw;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 0 1.2cqw #fff, 0 0 0 2cqw #d62976;
+    display: grid;
+    place-items: center;
+  }
+
+  .avatar img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+
+  .handle {
+    flex: 1;
+    min-width: 0;
+    font-size: 6.5cqw;
+    font-weight: 600;
+    letter-spacing: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .post {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .actions {
+    display: flex;
+    gap: 5cqw;
+    padding: 4cqw 5cqw 2cqw;
+
+    svg {
+      width: 9cqw;
+      height: 9cqw;
+    }
+
+    svg:last-child {
+      margin-left: auto;
+    }
+  }
+
+  .caption {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    padding: 1cqw 5cqw;
+
+    i {
+      display: block;
+      height: 3.2cqw;
+      margin: 2.6cqw 0;
+      border-radius: 2cqw;
+      background: #e6e6e6;
+    }
+
+    i:first-child {
+      width: 40%;
+      background: #cfcfcf;
+    }
+    i:nth-child(2) {
+      width: 92%;
+    }
+    i:nth-child(3) {
+      width: 70%;
+    }
+    i:nth-child(4) {
+      width: 30%;
+      background: #f0f0f0;
+    }
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 4cqw 3cqw 7cqw;
+    border-top: 1px solid #eee;
+
+    svg {
+      width: 9cqw;
+      height: 9cqw;
+    }
+  }
+`;
+
+const ig = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, viewBox: '0 0 24 24' };
+
+function FeedScreen({ src, logo, handle }: { src: string; logo: string; handle: string }) {
+  return (
+    <Feed>
+      <div className="top">
+        <span className="avatar">
+          <img src={logo} alt="" />
+        </span>
+        <span className="handle">{handle}</span>
+      </div>
+      <img className="post" src={src} alt="" loading="lazy" />
+      <div className="actions" aria-hidden="true">
+        <svg {...ig}><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></svg>
+        <svg {...ig}><path d="M20 12a8 8 0 1 1-3.2-6.4L21 4l-1.2 4.2A8 8 0 0 1 20 12z" /></svg>
+        <svg {...ig}><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z" /></svg>
+        <svg {...ig}><path d="M6 3h12v18l-6-4-6 4z" /></svg>
+      </div>
+      <div className="caption" aria-hidden="true">
+        <i /><i /><i /><i />
+      </div>
+      <div className="nav" aria-hidden="true">
+        <svg {...ig}><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z" /></svg>
+        <svg {...ig}><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg>
+        <svg {...ig}><rect x="3" y="3" width="18" height="18" rx="5" /><path d="M12 8v8M8 12h8" /></svg>
+        <svg {...ig}><rect x="3" y="3" width="18" height="18" rx="5" /><path d="m10 8 6 4-6 4z" /></svg>
+        <svg {...ig}><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
+      </div>
+    </Feed>
+  );
+}
 
 function isVideoSrc(src: string) {
   return /\.mp4($|\?)/i.test(src);
@@ -1673,7 +2032,11 @@ function WorkBandView({ project }: { project: Project }) {
                     {isVideoSrc(src) ? (
                       <video src={src} muted loop playsInline autoPlay />
                     ) : (
-                      <img src={src} alt="" loading="lazy" />
+                      <FeedScreen
+                        src={src}
+                        logo={project.logo}
+                        handle={project.title.toLowerCase().replace(/[^a-z0-9]+/g, '')}
+                      />
                     )}
                   </WorkPhone>
                 ))}
@@ -1700,6 +2063,8 @@ export function EditorialWork({ projects }: { projects: Project[] }) {
 /* ---------- Campaigns staggered ---------- */
 
 const Works = styled.ul`
+  padding: 0;
+  margin: 0;
   display: grid;
   gap: clamp(0.85rem, 2.4vw, 2.2rem);
   grid-template-columns: 1fr;
@@ -1728,7 +2093,7 @@ const Works = styled.ul`
       grid-column: span 3;
     }
     > li.push {
-      margin-top: clamp(1.5rem, 4vw, 4rem);
+      margin-top: clamp(0.75rem, 2vw, 2rem);
     }
   }
 `;
@@ -1832,9 +2197,9 @@ const Marquee = styled.div`
 const MarqueeTrack = styled.div`
   display: flex;
   align-items: center;
-  gap: clamp(4rem, 9vw, 9rem);
+  gap: clamp(2.25rem, 5vw, 4.5rem);
   width: max-content;
-  padding-inline: clamp(2rem, 4.5vw, 4.5rem);
+  padding-inline: clamp(1.25rem, 3vw, 2.5rem);
   animation: ${marqueeAnim} var(--speed) linear infinite;
 
   span {
@@ -1873,7 +2238,7 @@ export function StageSectionView({ data }: { data: Editorial['stage'] }) {
       </Marquee>
       <Wrap>
         <Reveal>
-          <Lede style={{ marginTop: '2.6rem' }}>{data.lede}</Lede>
+          <Lede style={{ marginTop: '1.5rem' }}>{data.lede}</Lede>
         </Reveal>
       </Wrap>
     </StageSection>
@@ -1882,46 +2247,49 @@ export function StageSectionView({ data }: { data: Editorial['stage'] }) {
 
 /* ---------- Partners ---------- */
 
-const BrandWall = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.7rem;
+const PartnersSectionEl = styled(Section)`
+  background: #767676;
 
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.8rem;
+  .h2 {
+    color: #fff;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 7vw, 5.6rem);
+    margin-bottom: clamp(1.5rem, 3vw, 2.4rem);
   }
 `;
 
-const BrandCell = styled.div<{ $fit: string; $tile: string }>`
-  position: relative;
-  aspect-ratio: 1;
+const BrandWall = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem 1rem;
+  align-items: center;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem 1.25rem;
+  }
+`;
+
+const BrandCell = styled.li<{ $white: boolean }>`
   display: grid;
   place-items: center;
-  padding: clamp(1.1rem, 2.4vw, 1.8rem);
-  background: ${({ $tile }) => $tile};
-  overflow: hidden;
-  isolation: isolate;
-  box-shadow: inset 0 0 0 1px rgba(211, 191, 219, 0.16);
-  transition:
-    transform 0.55s ${tokens.easeOut},
-    box-shadow 0.55s;
+  min-height: clamp(88px, 12vw, 132px);
 
   img {
-    width: 78%;
-    height: 78%;
-    object-fit: ${({ $fit }) => $fit};
+    width: min(100%, 340px);
+    max-height: clamp(72px, 12vw, 120px);
+    height: auto;
+    object-fit: contain;
     display: block;
+    filter: ${({ $white }) => ($white ? 'brightness(0) invert(1)' : 'none')};
     transition: transform 0.7s ${tokens.easeLuxe};
   }
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      transform: translateY(-6px);
-      box-shadow:
-        inset 0 0 0 1px rgba(211, 191, 219, 0.4),
-        0 18px 36px rgba(21, 5, 7, 0.45);
-    }
     &:hover img {
       transform: scale(1.06);
     }
@@ -1936,26 +2304,20 @@ export function PartnersSection({
   clients: Client[];
 }) {
   return (
-    <Section id="clients">
+    <PartnersSectionEl id="clients">
       <Wrap>
-        <SectionHead>
-          <Reveal>
-            <Kicker>{data.kicker}</Kicker>
-          </Reveal>
-          <HeadRow>
-            <SplitTitle before={data.title} em={data.titleEm} after={data.titleAfter} />
-            <Count>{data.index}</Count>
-          </HeadRow>
-        </SectionHead>
-        <BrandWall>
-          {clients.map((c) => (
-            <BrandCell key={c.name} $fit={c.fit} $tile={c.tile} className="brand-cell">
-              <img src={c.logo} alt={c.name} />
-            </BrandCell>
-          ))}
-        </BrandWall>
+        <SplitTitle className="h2" before={data.title} em={data.titleEm} after={data.titleAfter} />
+        <Reveal>
+          <BrandWall>
+            {clients.map((c) => (
+              <BrandCell key={c.name} $white={c.tone === 'white'}>
+                <img src={c.logo} alt={c.name} loading="lazy" />
+              </BrandCell>
+            ))}
+          </BrandWall>
+        </Reveal>
       </Wrap>
-    </Section>
+    </PartnersSectionEl>
   );
 }
 
@@ -1972,7 +2334,7 @@ const ContactGrid = styled.div`
   gap: 1px;
   background: rgba(211, 191, 219, 0.16);
   border: 1px solid rgba(211, 191, 219, 0.16);
-  margin-top: clamp(3rem, 6vw, 5rem);
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -1981,10 +2343,10 @@ const ContactGrid = styled.div`
 
 const ContactCard = styled.div`
   background: color-mix(in srgb, ${tokens.noir} 88%, transparent);
-  padding: clamp(1.5rem, 4.5vw, 3.8rem);
+  padding: clamp(1.25rem, 3vw, 2.4rem);
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 0.85rem;
   transition: background 0.6s;
 
   &:hover {
@@ -2089,12 +2451,12 @@ export function ContactSectionView({
 const SiteFooter = styled.footer`
   background: ${tokens.noir};
   border-top: 1px solid rgba(211, 191, 219, 0.12);
-  padding: clamp(3rem, 6vw, 5rem) 0 max(2.2rem, env(safe-area-inset-bottom));
+  padding: clamp(2rem, 4vw, 3.25rem) 0 max(1.5rem, env(safe-area-inset-bottom));
 `;
 
 const FooterGrid = styled.div`
   display: grid;
-  gap: 2.6rem;
+  gap: 1.5rem;
   align-items: center;
   text-align: center;
 `;

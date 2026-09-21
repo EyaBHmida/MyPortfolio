@@ -15,7 +15,7 @@ export const tokens = {
   easeLuxe: 'cubic-bezier(.65,.05,0,1)',
   dur: '1.1s',
   gutter: 'clamp(1.25rem, 4vw, 4.5rem)',
-  sectionY: 'clamp(5.5rem, 12vw, 11rem)',
+  sectionY: 'clamp(4rem, 8vw, 7.5rem)',
   headerH: '5.25rem',
 } as const;
 

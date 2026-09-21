@@ -19,7 +19,6 @@
   },
   "hero": {
     "images": [
-      "/photo2-professional.jpg",
       "/cv-photo.jpg",
       "/main-pic.jpg",
       "/background-pic.jpg"
@@ -27,8 +26,8 @@
   },
   "about": {
     "heading": "About Eya",
-    "lead": "Hi, I’m Eya — Marketing Manager, Business Developer, content strategist, and partnership closer. I move between a regulated healthcare platform one week and a motorsport brand built from zero the next.",
-    "body": "Over the last four years I’ve grown a brand community by 165%, built social and content systems from scratch, and sourced and closed influencer and agency partnerships — the full business-development cycle, not just the marketing half of it. I work well with ambiguity, bridge technical and business teams, and report results in numbers, not adjectives.",
+    "lead": "Hi, I’m Eya: Marketing Manager, Business Developer, content strategist, and partnership closer. I move between a regulated healthcare platform one week and a motorsport brand built from zero the next.",
+    "body": "Over the last four years I’ve grown a brand community by 165%, built social and content systems from scratch, and sourced and closed influencer and agency partnerships. The full business-development cycle, not just the marketing half of it. I work well with ambiguity, bridge technical and business teams, and report results in numbers, not adjectives.",
     "grid": [
       { "src": "/Work/2.jpg", "type": "image" },
       { "src": "/Work/16.mp4", "type": "video" },
@@ -37,12 +36,12 @@
     ]
   },
   "clients": [
-    { "name": "Pharmavie", "logo": "/brands/pharmavie.jpeg", "fit": "contain", "tile": "#F4F4F4" },
-    { "name": "Pitstop Motorsports", "logo": "/brands/pitstop.jpeg", "fit": "cover", "tile": "#000000" },
-    { "name": "Tachafy", "logo": "/brands/tachafy.jpeg", "fit": "contain", "tile": "#111111" },
-    { "name": "Healix", "logo": "/brands/healix.jpg", "fit": "contain", "tile": "#F3EDE4" },
-    { "name": "Ba9chich", "logo": "/brands/bakchich.jpeg", "fit": "cover", "tile": "#2B6CB0" },
-    { "name": "Buzz To Win", "logo": "/brands/b2w.png", "fit": "cover", "tile": "#F4A024" }
+    { "name": "Pharmavie", "logo": "/brands/pharmavie-clean.png", "fit": "contain", "tile": "transparent" },
+    { "name": "Pitstop Motorsports", "logo": "/brands/pitstop-clean.png", "fit": "contain", "tile": "transparent" },
+    { "name": "Tachafy", "logo": "/brands/tachafy-clean.png", "fit": "contain", "tile": "transparent" },
+    { "name": "Healix", "logo": "/brands/healix-clean.png", "fit": "contain", "tile": "transparent", "tone": "white" },
+    { "name": "Ba9chich", "logo": "/brands/bakchich-clean.png", "fit": "contain", "tile": "transparent" },
+    { "name": "Buzz To Win", "logo": "/brands/b2w-clean.png", "fit": "contain", "tile": "transparent" }
   ],
   "workGallery": [
     { "id": 1, "src": "/Work/1.jpg", "type": "image" },
@@ -73,7 +72,7 @@
       "featured": true,
       "kicker": "Marketing & Digital Communication Lead",
       "title": "Pharmavie",
-      "dates": "May 2023 – Present",
+      "dates": "May 2023 - Present",
       "logo": "/brands/pharmavie.jpeg",
       "logoFit": "contain",
       "logoTile": "#F4F4F4",
@@ -93,6 +92,11 @@
           "num": "03",
           "title": "Results",
           "body": "Community grew from 20K to 53K followers (+165%). AI-powered skin-diagnosis feature shipped through sustained cross-functional collaboration."
+        },
+        {
+          "num": "04",
+          "title": "Data & enablement",
+          "body": "Turned Google Analytics and Meta Insights data into reporting that shapes strategy, and built the pitch decks and business cases behind sales conversations and partner negotiations."
         }
       ]
     },
@@ -102,7 +106,7 @@
       "featured": false,
       "kicker": "Marketing Coordinator & Creative Lead For:",
       "title": "Pitstop Motorsports",
-      "dates": "Mar 2023 – Sep 2024",
+      "dates": "Mar 2023 - Sep 2024",
       "logo": "/brands/pitstop.jpeg",
       "logoFit": "cover",
       "logoTile": "#000000",
@@ -116,7 +120,12 @@
         {
           "num": "02",
           "title": "Creative system",
-          "body": "Directed briefs, scripts, and visual direction; partnered with creators on reels, stories, and posts — building the social strategy from the ground up."
+          "body": "Directed briefs, scripts, and visual direction; partnered with creators on reels, stories, and posts, building the social strategy from the ground up."
+        },
+        {
+          "num": "03",
+          "title": "Results",
+          "body": "A cohesive, premium feed aesthetic across platforms and significant engagement growth in saves, shares, and comments."
         }
       ]
     },
@@ -127,12 +136,12 @@
       "kicker": "Marketing Specialist & Business Developer For:",
       "title": "Tachafy",
       "dates": "Sep 2024",
-      "logo": "/brands/tachafy.jpeg",
+      "logo": "/brands/tachafy-clean.png",
       "logoFit": "contain",
-      "logoTile": "#111111",
+      "logoTile": "transparent",
       "phones": [
-        "/Work/tachafy-1.webp",
         "/Work/tachafy-2.webp",
+        "/Work/tachafy-1.webp",
         "/Work/tachafy-3.webp",
         "/Work/tachafy-4.webp"
       ],
@@ -140,7 +149,7 @@
         {
           "num": "01",
           "title": "Go-to-market",
-          "body": "Developed the content and social media strategy for a digital mental-healthcare platform, managing Instagram and LinkedIn and creating brand content that translated complex clinical concepts into accessible communication."
+          "body": "Owned go-to-market and content strategy for a digital mental-healthcare platform, translating complex clinical concepts into accessible communication for patients and providers."
         },
         {
           "num": "02",
@@ -149,8 +158,8 @@
         },
         {
           "num": "03",
-          "title": "Content & Social Media",
-          "body": "Managed Tachafy’s Instagram and LinkedIn presence, from content planning and creative concepts to post creation and publishing."
+          "title": "Trust in a regulated category",
+          "body": "Ran Tachafy’s Instagram and LinkedIn end to end (planning, creative concepts, and publishing), building brand trust in a sensitive healthcare space."
         }
       ]
     },
@@ -161,13 +170,12 @@
       "kicker": "Marketing & Creative Strategy · Powered by Tachafy",
       "title": "Healix",
       "dates": "Sep 2024",
-      "logo": "/brands/healix.jpg",
+      "logo": "/brands/healix-clean.png",
       "logoFit": "contain",
-      "logoTile": "#F3EDE4",
+      "logoTile": "transparent",
       "phones": [
         "/Work/healix-1.mp4",
-        "/Work/healix-2.mp4",
-        "/Work/healix-3.mp4",
+        "/Work/21.mp4",
         "/Work/healix-4.mp4"
       ],
       "points": [
@@ -194,7 +202,7 @@
       "featured": false,
       "kicker": "Community Manager Intern For:",
       "title": "Ba9chich",
-      "dates": "Aug – Oct 2022",
+      "dates": "Aug - Oct 2022",
       "logo": "/brands/bakchich.jpeg",
       "logoFit": "cover",
       "logoTile": "#2B6CB0",
@@ -218,7 +226,7 @@
       "featured": false,
       "kicker": "Community Manager Intern For:",
       "title": "Buzz To Win",
-      "dates": "Jun – Jul 2022",
+      "dates": "Jun - Jul 2022",
       "logo": "/brands/b2w.png",
       "logoFit": "cover",
       "logoTile": "#F4A024",
@@ -240,7 +248,7 @@
   "services": {
     "headingLeft": "What I",
     "headingRight": "do",
-    "intro": "I am a bilingual marketing manager with 4+ years across healthcare, lifestyle, D2C, and startup brands — looking to expand yours.",
+    "intro": "I am a bilingual marketing manager with 4+ years across healthcare, lifestyle, D2C, and startup brands, looking to expand yours.",
     "items": [
       "Go-To-Market Strategy",
       "Content & Social Strategy",
@@ -272,7 +280,7 @@
     {
       "degree": "Master's Degree in Marketing",
       "school": "Higher Institute of Management of Tunis (ISG)",
-      "dates": "2020 – 2022"
+      "dates": "2020 - 2022"
     },
     {
       "degree": "Bachelor's Degree in Economics: Currency, Finance and Banking",
@@ -289,14 +297,16 @@
     "heading": "Build your next launch",
     "cta": "Work with me",
     "entity": "Eya Ben Hmida",
-    "city": "Tunis, Tunisia — open to remote / global"
+    "city": "Tunis, Tunisia · Open to remote / global"
   },
   "editorial": {
     "nav": [
       { "href": "#about", "label": "About" },
+      { "href": "#expertise", "label": "Expertise" },
       { "href": "#projects", "label": "Work" },
       { "href": "#campaigns", "label": "Gallery" },
       { "href": "#clients", "label": "Clients" },
+      { "href": "#credentials", "label": "Toolkit" },
       { "href": "#contact", "label": "Contact" }
     ],
     "cta": { "href": "#contact", "label": "Book Eya" },
@@ -318,6 +328,43 @@
         { "value": 1, "suffix": "", "label": "Google Ads certified", "display": "Ads ✓" }
       ]
     },
+    "expertise": {
+      "kicker": "What I do",
+      "title": "Six levers I pull to ",
+      "titleEm": "grow",
+      "titleAfter": " a brand.",
+      "index": "( Expertise )",
+      "lede": "From the first strategy deck to the final performance report: one owner across the whole go-to-market cycle.",
+      "services": [
+        { "title": "Go-To-Market Strategy", "body": "Campaign and product-launch planning (channel mix, creative direction, and budget) tied to lead-generation and growth KPIs." },
+        { "title": "Content & Social Strategy", "body": "Content pillars, editorial calendars, creative briefs, and brand voice, built from zero or scaled from existing." },
+        { "title": "Business Development", "body": "Sourcing, pitching, and closing influencer, agency, and provider partnerships, backed by pitch decks and business cases." },
+        { "title": "Performance & Paid Media", "body": "Meta and Google Ads campaigns, tracked in Google Analytics and Meta Insights and reported against real business outcomes." },
+        { "title": "SEO & Web", "body": "SEO audits, optimized copy, product listings, and UX upkeep for lasting organic visibility." },
+        { "title": "Bilingual Content", "body": "Native-quality campaigns in English, French, and Arabic, increasingly accelerated with AI tools like ChatGPT and Canva AI." }
+      ],
+      "processKicker": "How I work",
+      "process": [
+        { "title": "Discover", "body": "Brand, audience, competitors, and goals." },
+        { "title": "Strategize", "body": "Channels, content, partners, tone, and visuals." },
+        { "title": "Produce", "body": "Reels, stories, and designs with creators." },
+        { "title": "Launch", "body": "Publish campaigns and activate partners." },
+        { "title": "Optimize", "body": "Read the data, report, and improve." }
+      ]
+    },
+    "credentials": {
+      "kicker": "Toolkit & Credentials",
+      "title": "The tools behind the ",
+      "titleEm": "results",
+      "titleAfter": ".",
+      "index": "( Certified )",
+      "toolGroups": [
+        { "label": "Advertising & Analytics", "items": ["Google Ads", "Google Analytics", "Meta Business Suite", "TikTok for Business", "SEO / SEA", "SPSS / Amos"] },
+        { "label": "Design & Content", "items": ["Canva / Canva AI", "Figma", "Adobe Creative Suite", "CapCut", "WordPress", "ChatGPT & AI tools"] },
+        { "label": "Management", "items": ["Notion", "Trello", "CRM", "Microsoft Office"] }
+      ],
+      "certifications": ["Google Ads Certification", "Search Engine Optimisation (SEO) Certification"]
+    },
     "campaigns": {
       "kicker": "Selected work",
       "title": "Frames the feeds ",
@@ -334,17 +381,16 @@
         { "src": "/Work/7.jpg", "kind": "image", "caption": "Campaign", "index": "№ 06", "span": "4" },
         { "src": "/Work/8.jpg", "kind": "image", "caption": "Campaign", "index": "№ 07", "span": "4", "push": true },
         { "src": "/Work/9.jpg", "kind": "image", "caption": "Campaign", "index": "№ 08", "span": "4" },
-        { "src": "/Work/10.jpg", "kind": "image", "caption": "Campaign", "index": "№ 09", "span": "4" },
-        { "src": "/Work/11.jpg", "kind": "image", "caption": "Campaign", "index": "№ 10", "span": "6" },
-        { "src": "/Work/12.jpg", "kind": "image", "caption": "Campaign", "index": "№ 11", "span": "6" },
-        { "src": "/Work/13.jpg", "kind": "image", "caption": "Campaign", "index": "№ 12", "span": "4", "push": true },
-        { "src": "/Work/14.jpg", "kind": "image", "caption": "Campaign", "index": "№ 13", "span": "4" },
-        { "src": "/Work/15.jpg", "kind": "image", "caption": "Campaign", "index": "№ 14", "span": "4" },
-        { "src": "/Work/16.mp4", "kind": "video", "caption": "Reel", "index": "№ 15", "span": "5" },
-        { "src": "/Work/17.mp4", "kind": "video", "caption": "Reel", "index": "№ 16", "span": "7" },
-        { "src": "/Work/20.jpg", "kind": "image", "caption": "Campaign", "index": "№ 17", "span": "6" },
-        { "src": "/Work/21.mp4", "kind": "video", "caption": "Reel", "index": "№ 18", "span": "6" },
-        { "src": "/Work/22.jpg", "kind": "image", "caption": "Campaign", "index": "№ 19", "span": "4" }
+        { "src": "/Work/16.mp4", "kind": "video", "caption": "Reel", "index": "№ 09", "span": "3", "ar": "9/16" },
+        { "src": "/Work/22.jpg", "kind": "image", "caption": "Campaign", "index": "№ 10", "span": "6", "ar": "1/1" },
+        { "src": "/Work/17.mp4", "kind": "video", "caption": "Reel", "index": "№ 11", "span": "3", "ar": "9/16" },
+        { "src": "/Work/10.jpg", "kind": "image", "caption": "Campaign", "index": "№ 12", "span": "4" },
+        { "src": "/Work/11.jpg", "kind": "image", "caption": "Campaign", "index": "№ 13", "span": "4", "push": true },
+        { "src": "/Work/12.jpg", "kind": "image", "caption": "Campaign", "index": "№ 14", "span": "4" },
+        { "src": "/Work/13.jpg", "kind": "image", "caption": "Campaign", "index": "№ 15", "span": "6" },
+        { "src": "/Work/14.jpg", "kind": "image", "caption": "Campaign", "index": "№ 16", "span": "6" },
+        { "src": "/Work/15.jpg", "kind": "image", "caption": "Campaign", "index": "№ 17", "span": "5" },
+        { "src": "/Work/20.jpg", "kind": "image", "caption": "Campaign", "index": "№ 18", "span": "7" }
       ]
     },
     "stage": {
@@ -352,8 +398,8 @@
       "title": "Industries & ",
       "titleEm": "channels",
       "titleAfter": ".",
-      "index": "( 06 — Worldwide )",
-      "lede": "Healthcare, motorsport, mental health, D2C, and performance — one marketer across every stage.",
+      "index": "( 06 · Worldwide )",
+      "lede": "Healthcare, motorsport, mental health, D2C, and performance: one marketer across every stage.",
       "items": [
         "Healthcare",
         "Motorsport",
@@ -368,7 +414,7 @@
       "title": "Brands I’ve created ",
       "titleEm": "for",
       "titleAfter": ".",
-      "index": "( 07 — Partners )"
+      "index": "( 07 · Partners )"
     },
     "contactSection": {
       "kicker": "Bookings & Collaborations",
@@ -384,12 +430,12 @@
         {
           "kicker": "WhatsApp",
           "kind": "whatsapp",
-          "body": "Tunis, Tunisia — open to remote / global."
+          "body": "Based in Tunis, Tunisia. Open to remote / global."
         }
       ]
     },
     "footer": {
-      "tagline": "Marketing · Content · Partnerships — open to remote / global."
+      "tagline": "Marketing · Content · Partnerships · Open to remote / global."
     }
   }
 }
