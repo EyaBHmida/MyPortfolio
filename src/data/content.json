@@ -110,7 +110,7 @@
       "logo": "/brands/pitstop.jpeg",
       "logoFit": "cover",
       "logoTile": "#000000",
-      "phones": ["/Work/23.jpg", "/Work/24.jpg"],
+      "phones": ["/Work/22.jpg", "/Work/23.jpg", "/Work/24.jpg"],
       "points": [
         {
           "num": "01",
