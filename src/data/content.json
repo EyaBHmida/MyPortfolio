@@ -19,9 +19,9 @@
   },
   "hero": {
     "images": [
-      "/cv-photo.jpg",
-      "/main-pic.jpg",
-      "/background-pic.jpg"
+      "/hero-1.jpg",
+      "/hero-2.jpg",
+      "/hero-3.jpg"
     ]
   },
   "about": {
@@ -73,9 +73,9 @@
       "kicker": "Marketing & Digital Communication Lead",
       "title": "Pharmavie",
       "dates": "May 2023 - Present",
-      "logo": "/brands/pharmavie.jpeg",
+      "logo": "/brands/pharmavie-clean.png",
       "logoFit": "contain",
-      "logoTile": "#F4F4F4",
+      "logoTile": "transparent",
       "phones": ["/Work/2.jpg", "/Work/18.jpg", "/Work/19.jpg"],
       "points": [
         {
