@@ -882,6 +882,21 @@ const Hero = styled(Section)`
   isolation: isolate;
   background: ${tokens.noir};
 
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      color-mix(in srgb, ${tokens.noir} 88%, transparent) 0%,
+      color-mix(in srgb, ${tokens.noir} 62%, transparent) 22%,
+      color-mix(in srgb, ${tokens.noir} 18%, transparent) 46%,
+      transparent 64%
+    );
+  }
+
   @media (max-width: 700px) {
     padding-block: 0;
   }
@@ -955,6 +970,7 @@ const HeroKicker = styled.p`
   letter-spacing: 0.42em;
   text-transform: uppercase;
   color: ${tokens.lilac};
+  text-shadow: 0 1px 12px color-mix(in srgb, ${tokens.noir} 80%, transparent);
   opacity: 0;
   animation: ${riseIn} 1.2s ${tokens.easeOut} 0.25s forwards;
 
@@ -991,7 +1007,7 @@ const HeroSig = styled.img`
   width: min(68vw, 440px);
   opacity: 0;
   animation: ${riseIn} 1.4s ${tokens.easeOut} 0.45s forwards;
-  filter: brightness(0) invert(1) drop-shadow(0 8px 40px rgba(21, 5, 7, 0.55));
+  filter: brightness(0) invert(1) drop-shadow(0 10px 28px rgba(21, 5, 7, 0.85));
 
   @media (prefers-reduced-motion: reduce) {
     opacity: 1;
@@ -1007,6 +1023,7 @@ const HeroLine = styled.h1`
   line-height: 1.25;
   letter-spacing: 0.02em;
   max-width: 34ch;
+  text-shadow: 0 2px 16px color-mix(in srgb, ${tokens.noir} 75%, transparent);
   opacity: 0;
   animation: ${riseIn} 1.4s ${tokens.easeOut} 0.7s forwards;
 
